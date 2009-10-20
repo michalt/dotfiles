@@ -1,0 +1,145 @@
+#
+# offlineimap + msmtp
+#
+
+# basic info
+set realname="Michal Terepeta"
+set from="michal.terepeta@gmail.com"
+
+# some info about the mail folder
+set folder="${HOME}/mail"
+set mbox_type=Maildir
+set spoolfile=+main
+set postponed=+drafts
+
+# cache the headers, no maildir unaware programs modify the headers
+set header_cache="${HOME}/.mutt/cache/headers"
+set maildir_header_cache_verify=no
+set header_cache_pagesize=32768
+
+# temporary directory
+set tmpdir="${HOME}/.mutt/tmp"
+
+# no pause when changing folders
+set sleep_time=0
+
+# don't wait when sending a message
+set sendmail="${HOME}/local/bin/msmtpQ"
+set sendmail_wait=-1
+
+# don't beep when new mail arrives
+set beep_new=no
+
+# do not show help
+set help=no
+
+# status bar
+set status_format=" %f   |   new: %n   |   all: %m   |   ~F %F   |   %?V?%V&all?   |   %P "
+set status_on_top=yes
+
+# don't show the info about the status of reading and writing a mailbox
+set read_inc=0
+set write_inc=0
+
+# generate the From: field
+set use_from=yes
+
+# sort by strict threads and then by the date of sending
+set sort=threads
+set sort_aux=date-sent
+set strict_threads=yes
+
+# don't move read messages
+set move=no
+
+# when to ask
+set postpone=ask-yes
+set print=ask-no
+set quit=yes
+set delete=ask-yes
+set abort_nosubject=ask-no
+set abort_unmodified=ask-yes
+set bounce=ask-yes
+
+# allow 8 bit data in messages
+set allow_8bit=yes
+
+# use utf8
+set charset="utf-8"
+set send_charset="utf-8"
+
+# basic format information
+set attribution="On %d, %n wrote:"
+set forward_format="Fwd: %s"
+set date_format="%d.%m %R"
+set index_format="%D %Z %-25.25F  %2M %s"
+
+# tilde like in vim ;)
+set tilde
+
+# no need to copy sent messages
+# gmail takes care of that
+set copy=no
+set record=""
+
+# when forwarding output the message in the body
+set mime_forward=no
+
+# send attachments when forwarding
+set fcc_attach=yes
+
+# don't ask for recipients and subject when replying,
+# and subject when forwarding
+set fast_reply=yes
+
+# include the copy of the message i'm replying to
+set include=yes
+
+# simple
+set indent_string="> "
+
+# much more comfortable than page down/up
+set menu_scroll=yes
+
+# don't move to the next message automatically
+set pager_stop=yes
+
+# show some context
+set pager_index_lines=7
+set pager_context=3
+
+# obviously
+set editor="/usr/bin/vim '+/^$'"
+set edit_headers=yes
+
+# address book
+set query_command="abook --mutt-query '%s'"
+
+# don't collapse threads with unread messages
+set collapse_unread=no
+
+# no need to show markers when wrapping lines
+set markers=no
+
+# who cares if the message is old
+set nomark_old
+
+# decode when piping
+set pipe_decode=yes
+
+# collapse threads
+folder-hook . "push <ESC>V"
+
+# additional gpg options
+set pgp_sign_as=FFF88461
+set crypt_use_gpgme=yes
+set crypt_autosign=no
+set pgp_use_gpg_agent=yes
+set pgp_autoinline=no
+set pgp_replyinline=no
+
+ignore *
+unignore From Subject Date To Cc Reply-To Mail-Followup-To User-Agent X-Mailer X-Operating-System
+
+unhdr_order *
+hdr_order From To Cc Subject Date Reply-To Mail-Followup-To User-Agent X-Mailer X-Operating-System
