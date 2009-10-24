@@ -15,7 +15,6 @@ set postponed=+drafts
 # cache the headers, no maildir unaware programs modify the headers
 set header_cache="${HOME}/.mutt/cache/headers"
 set maildir_header_cache_verify=no
-set header_cache_pagesize=32768
 
 # temporary directory
 set tmpdir="${HOME}/.mutt/tmp"

@@ -155,7 +155,7 @@ autocmd BufRead * match URL /\(http\:\/\/\|ftp\:\/\/\|www\.\)\S*/
 autocmd BufNewFile * match URL /\(http\:\/\/\|ftp\:\/\/\|www\.\)\S*/
 
 " mail specific stuff
-autocmd BufRead $HOME/enc/.mutt/tmp/mutt*	:source $VIMHOME/vimrc_mail
+autocmd BufRead $HOME/enc/.mutt/tmp/mutt* set ft=mail textwidth=72 spell
 
 " issues with latex
 autocmd BufRead *.tex	:set syntax=tex
