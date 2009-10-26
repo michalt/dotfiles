@@ -238,9 +238,4 @@ imap <F11> <ESC>=i{
 nmap <F12> gg=G
 imap <F12> <ESC>gg=G
 
-" automatically add matching parens
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap " ""<left>
-
 imap <c-t> <right>
