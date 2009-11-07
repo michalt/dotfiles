@@ -136,6 +136,7 @@ let Tlist_Use_Right_Window=1
 let Tlist_Enable_Fold_Column=0
 let Tlist_Compact_Format=1
 let Tlist_Exit_Only_Window=1
+let Tlist_Inc_Winwidth=0
 
 " NERD commenter
 let NERDSpaceDelims=1
@@ -217,7 +218,7 @@ nnoremap <c-k> :FufBuffer<cr>
 nnoremap <c-x> :FufFile<cr>
 
 " ...
-nmap <C-g> :pop<cr>
+nmap <C-p> :pop<cr>
 map <c-g><c-t> :TlistToggle<cr>
 map <c-c> :w<cr>
 imap <c-c> <esc>:w<cr>a
