@@ -128,6 +128,11 @@ let g:haddock_browser="/usr/bin/firefox"
 let g:haddock_docdir="/usr/share/doc/ghc-6.10.4/"
 let g:haddock_indexfiledir = "/home/m/.vim/"
 
+" haskell indent
+" http://www.vim.org/scripts/script.php?script_id=1968
+let g:haskell_indent_if=2
+let g:haskell_indent_case=2
+
 " sane asm syntax
 let asmsyntax="nasm"
 
