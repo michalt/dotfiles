@@ -1,4 +1,5 @@
 " use my own color scheme
+" colorscheme inkpot
 colorscheme m256
 
 " no vi compatibility
@@ -47,8 +48,10 @@ set viminfo='1000,f1,:1000,/1000,n~/enc/.viminfo
 set history=500
 
 " syntax based folding, not by default
-set nofoldenable
-set foldmethod=syntax
+if has("folding")
+    set nofoldenable
+    set foldmethod=syntax
+endif
 
 " by default use spaces instead of tabs
 set expandtab
@@ -156,24 +159,24 @@ highlight link WhitespaceEOL Error
 autocmd Syntax * syn match WhitespaceEOL /\s\+$\| \+\ze\t/
 
 " url handling
-highlight URL	cterm=none	ctermfg=21	ctermbg=none
-autocmd BufRead * match URL /\(http\:\/\/\|ftp\:\/\/\|www\.\)\S*/
-autocmd BufNewFile * match URL /\(http\:\/\/\|ftp\:\/\/\|www\.\)\S*/
+" highlight URL	cterm=none	ctermfg=21	ctermbg=none
+" autocmd BufRead * match URL /\(http\:\/\/\|ftp\:\/\/\|www\.\)\S*/
+" autocmd BufNewFile * match URL /\(http\:\/\/\|ftp\:\/\/\|www\.\)\S*/
 
 " mail specific stuff
 autocmd BufRead $HOME/enc/.mutt/tmp/mutt* set ft=mail textwidth=72 spell
 
 " issues with latex
-autocmd BufRead *.tex	:set syntax=tex
-autocmd BufNewFile *.tex	:set syntax=tex
+autocmd BufRead,BufNewFile *.tex :set syntax=tex
 
 " for hsc2hs (writing bindings for haskell)
-autocmd BufRead *.hsc	:set ft=haskell
-autocmd BufNewFile *.hsc	:set ft=haskell
+autocmd BufRead,BufNewFile *.hsc :set ft=haskell
 
 " for markdown
-autocmd BufRead *.mkd	:set ft=mkd
-autocmd BufNewFile *.markdown	:set ft=mkd
+autocmd BufRead,BufNewFile *.mkd :set ft=mkd
+
+" for coq
+autocmd BufRead,BufNewFile *.v :set ft=coq
 
 autocmd FileType perl	set keywordprg=perldoc
 
