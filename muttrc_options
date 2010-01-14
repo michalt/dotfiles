@@ -108,7 +108,7 @@ set pager_index_lines=7
 set pager_context=3
 
 # obviously
-set editor="/usr/bin/vim"
+set editor="/usr/bin/vim +"
 set edit_headers=yes
 
 # address book
