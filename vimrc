@@ -57,8 +57,8 @@ endif
 set expandtab
 
 " and make the default indent 4
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 
 " allow buffers to be hidden
 set hidden
