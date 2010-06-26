@@ -1,6 +1,6 @@
 " use my own color scheme
 " colorscheme inkpot
-colorscheme m256
+colorscheme m
 
 " no vi compatibility
 set nocompatible
@@ -12,14 +12,14 @@ set fsync
 set incsearch
 set hlsearch
 
-" line numbering, off by default
-set nonumber
+" line numbering
+set number
 
 " show the command line
 set showcmd
 
 " don't jump to any brackets
-set noshowmatch
+set showmatch
 
 " sane case settings
 set ignorecase
@@ -36,15 +36,15 @@ set laststatus=2
 set statusline=
 set statusline+=\ %t\ \ %M\ %R\ %H
 set statusline+=%=%03.3b
-set statusline+=\ \ \ \|\ \ \ 0x\%02.2B
-set statusline+=\ \ \ \|\ \ \ %04lx%04v
-set statusline+=\ \ \ \|\ \ \ %L\ 
+set statusline+=\ \ \ \ \ \ 0x\%02.2B
+set statusline+=\ \ \ \ \ \ %04lx%04v
+set statusline+=\ \ \ \ \ \ %L\ 
 
 " redraw only when needed
 set lazyredraw
 
 " big nice viminfo
-set viminfo='1000,f1,:1000,/1000,n~/enc/.viminfo
+set viminfo='1000,f1,:1000,/1000,n~/.viminfo
 set history=500
 
 " syntax based folding, not by default
@@ -128,7 +128,7 @@ set t_AF=[38;5;%dm
 autocmd BufEnter *.hs compiler ghc
 let g:ghc="/usr/bin/ghc"
 let g:haddock_browser="/usr/bin/firefox"
-let g:haddock_docdir="/usr/share/doc/ghc-6.10.4/"
+let g:haddock_docdir="/usr/share/doc/ghc/html"
 let g:haddock_indexfiledir = "/home/m/.vim/"
 
 " haskell indent
@@ -149,6 +149,7 @@ let Tlist_Inc_Winwidth=0
 " NERD commenter
 let NERDSpaceDelims=1
 let NERDRemoveExtraSpaces=1
+let NERD_haskell_alt_style=1
 
 " LocateOpen settings
 :let g:locateopen_ignorecase=1
@@ -164,7 +165,7 @@ autocmd Syntax * syn match WhitespaceEOL /\s\+$\| \+\ze\t/
 " autocmd BufNewFile * match URL /\(http\:\/\/\|ftp\:\/\/\|www\.\)\S*/
 
 " mail specific stuff
-autocmd BufRead $HOME/enc/.mutt/tmp/mutt* set ft=mail textwidth=72 spell
+autocmd BufRead $HOME/.mutt/tmp/mutt* set ft=mail textwidth=72 spell
 
 " issues with latex
 autocmd BufRead,BufNewFile *.tex :set syntax=tex
@@ -177,6 +178,9 @@ autocmd BufRead,BufNewFile *.mkd :set ft=mkd
 
 " for coq
 autocmd BufRead,BufNewFile *.v :set ft=coq
+
+" for go
+autocmd BufRead,BufNewFile *.go :set ft=go
 
 autocmd FileType perl	set keywordprg=perldoc
 
@@ -210,33 +214,45 @@ map <F7> :call Browser ()<cr>
 
 
 " l on Dvorak is pain to type
-map t l
+noremap t l
+noremap l t
 
 " make it more consistent
-map Y y$
+nmap Y y$
 
 " buffers
-nmap <c-h> <esc>:bprev<cr>
-nmap <c-t> <ESC>:bnext<CR>
-nnoremap <c-j> :buffers<cr>
+nmap <C-p> <esc>:bprev<cr>
+nmap <C-n> <ESC>:bnext<CR>
+nmap <C-j> :buffers<cr>
+nmap <C-_> :A<cr> " Ctrl-7
 
 " fuzzyfinder
 " http://www.vim.org/scripts/script.php?script_id=1984
-nnoremap <c-k> :FufBuffer<cr>
-nnoremap <c-x> :FufFile<cr>
+nnoremap <C-k> :FufBuffer<cr>
+nnoremap <C-x> :FufFile<cr>
+
+" Align plugin
+" http://www.vim.org/scripts/script.php?script_id=294
+vmap <C-i> :Align 
 
 " ...
-nmap <C-p> :pop<cr>
-map <c-g><c-t> :TlistToggle<cr>
-map <c-c> :w<cr>
-imap <c-c> <esc>:w<cr>a
+nmap <C-y> :pop<cr>
+nmap <C-g><c-t> :TlistToggle<cr>
+nmap <C-c> :update<cr>
+imap <C-c> <esc>:update<cr>a
+
+" Copy/paste with X11
+nmap ,y "+y
+nmap ,p "+p
+vmap ,y "+y
+vmap ,p "+p
 
 " mappings for F keys
 nmap <F8> :nohl<cr>
 imap <F8> <ESC>:nohl<cr>a
 
-nmap <F9> :%s/[ ,\t]*$//g<cr>:nohl<cr>
-imap <F9> <ESC>:%s/[ ,\t]*//g<cr>:nohl<cr>
+nmap <F9> :%s/\s\+$//g<cr>:nohl<cr>
+imap <F9> <ESC>:%s/\s\+//g<cr>:nohl<cr>
 
 nmap <F10> '[=']
 imap <F10> <ESC>'[=']
@@ -247,4 +263,4 @@ imap <F11> <ESC>=i{
 nmap <F12> gg=G
 imap <F12> <ESC>gg=G
 
-imap <c-t> <right>
+imap <C-t> <right>
