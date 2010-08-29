@@ -67,7 +67,7 @@ set hidden
 set showtabline=1
 
 " the line width
-set textwidth=78
+set textwidth=80
 
 " one space is enough
 set nojoinspaces
@@ -75,6 +75,12 @@ set nojoinspaces
 " wrapping is convenient
 set wrap
 set sidescroll=4
+
+" persistent undo
+set undodir=~/.vim/undodir
+set undofile
+set undolevels=100
+set undoreload=1000
 
 " tags, or tags in upper directory
 set tags=tags;
@@ -111,6 +117,11 @@ inoremap # X<BS>#
 
 " no need for term title
 set notitle
+
+" no bell
+set noerrorbells
+set visualbell
+set t_vb=
 
 " filetype settings
 if has("eval")
@@ -170,19 +181,17 @@ autocmd BufRead $HOME/.mutt/tmp/mutt* set ft=mail textwidth=72 spell
 " issues with latex
 autocmd BufRead,BufNewFile *.tex :set syntax=tex
 
-" for hsc2hs (writing bindings for haskell)
-autocmd BufRead,BufNewFile *.hsc :set ft=haskell
+" set the right filetype
+autocmd BufRead,BufNewFile *.hsc set ft=haskell
+autocmd BufRead,BufNewFile *.mkd set ft=mkd
+autocmd BufRead,BufNewFile *.v set ft=coq
+autocmd BufRead,BufNewFile *.go set ft=go
 
-" for markdown
-autocmd BufRead,BufNewFile *.mkd :set ft=mkd
-
-" for coq
-autocmd BufRead,BufNewFile *.v :set ft=coq
-
-" for go
-autocmd BufRead,BufNewFile *.go :set ft=go
-
-autocmd FileType perl	set keywordprg=perldoc
+autocmd FileType haskell set sts=2 sw=2
+autocmd FileType c set sts=8 sw=8 noet
+autocmd FileType cpp set sts=4 sw=4
+autocmd FileType python set sts=4 sw=4
+autocmd FileType ruby set sts=4 sw=4
 
 " Omni-completion
 if has("autocmd") && exists("+omnifunc")
