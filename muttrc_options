@@ -4,13 +4,14 @@
 
 # basic info
 set realname="Michal Terepeta"
-set from="michal.terepeta@gmail.com"
 
 # some info about the mail folder
 set folder="${HOME}/mail"
 set mbox_type=Maildir
-set spoolfile=+main
-set postponed=+drafts
+set spoolfile=+gmail/main
+
+# default settings
+source ~/.mutt/muttrc_gmail
 
 # cache the headers, no maildir unaware programs modify the headers
 set header_cache="${HOME}/.mutt/cache/headers"
@@ -21,10 +22,6 @@ set tmpdir="${HOME}/.mutt/tmp"
 
 # no pause when changing folders
 set sleep_time=0
-
-# don't wait when sending a message
-set sendmail="${HOME}/local/bin/msmtpQ"
-set sendmail_wait=-1
 
 # don't beep when new mail arrives
 set beep_new=no
@@ -75,11 +72,6 @@ set index_format="%D %Z %-25.25F  %2M %s"
 
 # tilde like in vim ;)
 set tilde
-
-# no need to copy sent messages
-# gmail takes care of that
-set copy=no
-set record=""
 
 # when forwarding output the message in the body
 set mime_forward=no
@@ -142,3 +134,7 @@ unignore From Subject Date To Cc Reply-To Mail-Followup-To User-Agent X-Mailer X
 
 unhdr_order *
 hdr_order From To Cc Subject Date Reply-To Mail-Followup-To User-Agent X-Mailer X-Operating-System
+
+# source the right settings for each account
+folder-hook gmail/* source ~/.mutt/muttrc_gmail
+folder-hook dtu/*   source ~/.mutt/muttrc_dtu
