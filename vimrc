@@ -56,8 +56,8 @@ endif
 " by default use spaces instead of tabs
 set expandtab
 
-" and make the default indent 4
-set tabstop=2
+" and make the default indent 2
+set softtabstop=2
 set shiftwidth=2
 
 " allow buffers to be hidden
@@ -188,7 +188,7 @@ autocmd BufRead,BufNewFile *.v set ft=coq
 autocmd BufRead,BufNewFile *.go set ft=go
 
 autocmd FileType haskell set sts=2 sw=2
-autocmd FileType c set sts=8 sw=8 noet
+autocmd FileType c set sts=0 sw=8 noet
 autocmd FileType cpp set sts=4 sw=4
 autocmd FileType python set sts=4 sw=4
 autocmd FileType ruby set sts=4 sw=4
