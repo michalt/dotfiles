@@ -243,10 +243,6 @@ nmap <C-_> :A<cr> " Ctrl-7
 nnoremap <C-k> :FufBuffer<cr>
 nnoremap <C-x> :FufFile<cr>
 
-" Align plugin
-" http://www.vim.org/scripts/script.php?script_id=294
-vmap <C-i> :Align 
-
 " ...
 nmap <C-y> :pop<cr>
 nmap <C-g><c-t> :TlistToggle<cr>
