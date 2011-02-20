@@ -142,7 +142,6 @@ let mapleader=","
 autocmd BufEnter *.hs compiler ghc
 let g:ghc="/usr/bin/ghc"
 let g:haddock_browser="/usr/bin/firefox"
-let g:haddock_docdir="/usr/share/doc/ghc/html"
 let g:haddock_indexfiledir = "/home/m/.vim/"
 
 " haskell indent
@@ -192,7 +191,7 @@ autocmd BufRead,BufNewFile *.go set ft=go
 
 autocmd FileType haskell set sts=2 sw=2
 autocmd FileType c set sts=0 sw=8 noet
-autocmd FileType cpp set sts=4 sw=4
+autocmd FileType cpp set sts=2 sw=2
 autocmd FileType python set sts=4 sw=4
 autocmd FileType ruby set sts=4 sw=4
 
@@ -241,7 +240,7 @@ nmap <C-_> :A<cr> " Ctrl-7
 " fuzzyfinder
 " http://www.vim.org/scripts/script.php?script_id=1984
 nnoremap <C-k> :FufBuffer<cr>
-nnoremap <C-x> :FufFile<cr>
+nnoremap <C-j> :FufFile<cr>
 
 " ...
 nmap <C-y> :pop<cr>
