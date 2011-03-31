@@ -135,6 +135,9 @@ set t_Co=256
 set t_AB=[48;5;%dm
 set t_AF=[38;5;%dm
 
+" set leader
+let mapleader=","
+
 " haskellmode settings
 autocmd BufEnter *.hs compiler ghc
 let g:ghc="/usr/bin/ghc"
@@ -159,8 +162,8 @@ let Tlist_Inc_Winwidth=0
 
 " NERD commenter
 let NERDSpaceDelims=1
+let NERDCompactSexyComs=1
 let NERDRemoveExtraSpaces=1
-let NERD_haskell_alt_style=1
 
 " LocateOpen settings
 :let g:locateopen_ignorecase=1

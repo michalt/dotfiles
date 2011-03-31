@@ -92,7 +92,7 @@ function create_prompt() {
     DIR=${PWD##/*/}
     DIR=${DIR/\//}
     REST=${PWD%/*}
-    REST=${REST/$HOME/\~}
+    REST=${REST/"$HOME/"/"~/"}
     if [[ ${#REST} -gt 10 ]]; then
       REST="..${REST:$((${#REST} - 10))}"
     fi
