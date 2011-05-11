@@ -131,9 +131,11 @@ if has("eval")
 endif
 
 " 256 colors are cool
-set t_Co=256
-set t_AB=[48;5;%dm
-set t_AF=[38;5;%dm
+if ($TERM == "xterm-256color")
+  set t_Co=256
+  set t_AB=[48;5;%dm
+  set t_AF=[38;5;%dm
+endif
 
 " set leader
 let mapleader=","
