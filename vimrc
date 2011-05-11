@@ -86,9 +86,9 @@ set undoreload=1000
 set tags=tags;
 
 " spell checking
+set spell
 set spelllang=en,pl
 set spellsuggest=10
-syntax spell toplevel
 
 " the dictionary.. ;)
 set dictionary=/usr/share/dict/words
@@ -131,9 +131,11 @@ if has("eval")
 endif
 
 " 256 colors are cool
-set t_Co=256
-set t_AB=[48;5;%dm
-set t_AF=[38;5;%dm
+if ($TERM == "xterm-256color")
+  set t_Co=256
+  set t_AB=[48;5;%dm
+  set t_AF=[38;5;%dm
+endif
 
 " set leader
 let mapleader=","
@@ -182,6 +184,8 @@ autocmd BufRead $HOME/.mutt/tmp/mutt* set ft=mail textwidth=72 spell
 
 " issues with latex
 autocmd BufRead,BufNewFile *.tex :set syntax=tex
+autocmd BufRead,BufNewFile *.tex :syntax spell toplevel
+autocmd BufRead,BufNewFile *.tex :set spell
 
 " set the right filetype
 autocmd BufRead,BufNewFile *.hsc set ft=haskell
