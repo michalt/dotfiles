@@ -1,6 +1,9 @@
-" use my own color scheme
-" colorscheme inkpot
-colorscheme m
+syntax enable
+set background=light
+let g:solarized_contrast="high"
+let g:solarized_visibility="high"
+let g:solarized_italic=0
+colorscheme solarized
 
 " no vi compatibility
 set nocompatible
@@ -101,11 +104,6 @@ set sidescrolloff=8
 set wildmenu
 set wildmode=full
 set wildignore=*.o,*.obj,*.hi,*.aux,*.toc,*.pdf,*.doc,*.class
-
-"syntax highlighting
-if has("syntax")
-	syntax on
-endif
 
 " virtual editing in block mode
 set virtualedit=block
