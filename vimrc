@@ -89,7 +89,6 @@ set undoreload=1000
 set tags=tags;
 
 " spell checking
-set spell
 set spelllang=en,pl
 set spellsuggest=10
 
