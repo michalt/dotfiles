@@ -37,7 +37,7 @@ set backspace=indent,eol,start
 " status line always on
 set laststatus=2
 set statusline=
-set statusline+=\ %t\ \ %M\ %R\ %H
+set statusline+=\ %f\ \ %M\ %R\ %H
 set statusline+=%=%03.3b
 set statusline+=\ \ \ \ \ \ 0x\%02.2B
 set statusline+=\ \ \ \ \ \ %04lx%04v
