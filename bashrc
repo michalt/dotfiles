@@ -1,6 +1,6 @@
 if [[ $- != *i* ]] ; then
-	# Shell is non-interactive. Bye, bye..
-	return
+  # Shell is non-interactive. Bye, bye..
+  return
 fi
 
 
@@ -11,12 +11,14 @@ fi
 set -o notify
 set -o vi
 
+shopt -s autocd
 shopt -s cdspell
 shopt -s cdable_vars
+shopt -s cmdhist
 shopt -s extglob
 shopt -s globstar
+shopt -s no_empty_cmd_completion
 shopt -s histappend
-shopt -s checkwinsize
 
 
 #
@@ -124,7 +126,8 @@ then
 fi
 
 export HISTCONTROL=ignoreboth
-export HISTFILESIZE=16384
+export HISTSIZE=16384
+export HISTFILESIZE=32768
 
 export EDITOR=/usr/bin/vim
 export VIMHOME="${HOME}/.vim"

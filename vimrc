@@ -82,8 +82,7 @@ set sidescroll=4
 " persistent undo
 set undodir=~/.vim/undodir
 set undofile
-set undolevels=100
-set undoreload=1000
+set undolevels=1000
 
 " tags, or tags in upper directory
 set tags=tags;

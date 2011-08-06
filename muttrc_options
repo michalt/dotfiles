@@ -119,7 +119,7 @@ set nomark_old
 set pipe_decode=yes
 
 # collapse threads
-folder-hook . "push <ESC>V"
+folder-hook . 'push <limit>~d<7d\n<collapse-all>'
 
 # additional gpg options
 set pgp_sign_as=FFF88461
