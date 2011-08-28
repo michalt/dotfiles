@@ -1,3 +1,5 @@
+call pathogen#infect()
+
 syntax enable
 set background=light
 let g:solarized_contrast="high"
