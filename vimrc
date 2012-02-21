@@ -1,4 +1,34 @@
-call pathogen#infect()
+" no vi compatibility
+set nocompatible
+
+" required for vundle
+filetype off
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+Bundle 'gmarik/vundle'
+
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'Shougo/neocomplcache'
+Bundle 'Twinside/vim-haskellFold'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'godlygeek/tabular'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/syntastic'
+Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-surround'
+Bundle 'ujihisa/neco-ghc'
+Bundle 'kana/vim-filetype-haskell'
+
+Bundle 'a.vim'
+Bundle 'YankRing.vim'
+
+" filetype settings (required for vundle)
+filetype on
+filetype indent on
+filetype plugin on
 
 syntax enable
 set background=light
@@ -7,11 +37,11 @@ let g:solarized_visibility="high"
 let g:solarized_italic=0
 colorscheme solarized
 
-" no vi compatibility
-set nocompatible
-
 " fsync doesn't hurt on ext4 :)
 set fsync
+
+" automatically change directory
+set autochdir
 
 " search: incremental, highlight
 set incsearch
@@ -93,9 +123,6 @@ set tags=tags;
 set spelllang=en,pl
 set spellsuggest=10
 
-" the dictionary.. ;)
-set dictionary=/usr/share/dict/words
-
 " additional context when scrolling
 set scrolloff=4
 set sidescrolloff=8
@@ -121,58 +148,9 @@ set noerrorbells
 set visualbell
 set t_vb=
 
-" filetype settings
-if has("eval")
-    filetype on
-    filetype plugin on
-    filetype indent on
-endif
-
 if !has("gui_running")
   set t_Co=16
 endif
-
-" set leader
-let mapleader=","
-
-" haskellmode settings
-autocmd BufEnter *.hs compiler ghc
-let g:ghc="/usr/bin/ghc"
-let g:haddock_browser="/usr/bin/firefox"
-let g:haddock_indexfiledir = "/home/m/.vim/"
-
-" haskell indent
-" http://www.vim.org/scripts/script.php?script_id=1968
-let g:haskell_indent_if=2
-let g:haskell_indent_case=2
-
-" sane asm syntax
-let asmsyntax="nasm"
-
-" taglist plugin
-let Tlist_Use_Right_Window=1
-let Tlist_Enable_Fold_Column=0
-let Tlist_Compact_Format=1
-let Tlist_Exit_Only_Window=1
-let Tlist_Inc_Winwidth=0
-
-" NERD commenter
-let NERDSpaceDelims=1
-let NERDCompactSexyComs=1
-let NERDRemoveExtraSpaces=1
-
-" LocateOpen settings
-:let g:locateopen_ignorecase=1
-:let g:locateopen_smartcase=1
-
-" show the trailing whitespace as error
-highlight link WhitespaceEOL Error
-autocmd Syntax * syn match WhitespaceEOL /\s\+$\| \+\ze\t/
-
-" url handling
-" highlight URL	cterm=none	ctermfg=21	ctermbg=none
-" autocmd BufRead * match URL /\(http\:\/\/\|ftp\:\/\/\|www\.\)\S*/
-" autocmd BufNewFile * match URL /\(http\:\/\/\|ftp\:\/\/\|www\.\)\S*/
 
 " mail specific stuff
 autocmd BufRead $HOME/.mutt/tmp/mutt* set ft=mail textwidth=72 spell
@@ -202,26 +180,16 @@ if has("autocmd") && exists("+omnifunc")
         \ endif
 endif
 
+" show the trailing whitespace in red
+highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+" but not in instert mode
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 
-" easy link opening in firefox
-function! Browser ()
-    let line0 = getline (".")
-    let line = matchstr (line0, "http://[^ ]*")
-    :if line==""
-        let line = matchstr (line0, "www\.[^ ]*\.[^ ]*")
-    :endif
-    :if line==""
-        let line = matchstr (line0, "ftp://[^ ]*")
-    :endif
-    :if line==""
-        let line = matchstr (line0, "file://[^ ]*")
-    :endif
-    let line = escape (line, "#?&;|%")
-    exec "!firefox ".line
-endfunction
-
-map <F7> :call Browser ()<cr>
-
+" set leader
+let mapleader=","
 
 " l on Dvorak is pain to type
 noremap t l
@@ -236,22 +204,16 @@ nmap <C-n> <ESC>:bnext<CR>
 nmap <C-j> :buffers<cr>
 nmap <C-_> :A<cr> " Ctrl-7
 
-" fuzzyfinder
-" http://www.vim.org/scripts/script.php?script_id=1984
-nnoremap <C-k> :FufBuffer<cr>
-nnoremap <C-j> :FufFile<cr>
-
 " ...
 nmap <C-y> :pop<cr>
-nmap <C-g><c-t> :TlistToggle<cr>
 nmap <C-c> :update<cr>
 imap <C-c> <esc>:update<cr>a
 
 " Copy/paste with X11
-nmap ,y "+y
-nmap ,p "+p
-vmap ,y "+y
-vmap ,p "+p
+nmap <Leader>y "+y
+nmap <Leader>p "+p
+vmap <Leader>y "+y
+vmap <Leader>p "+p
 
 " mappings for F keys
 nmap <F8> :nohl<cr>
@@ -270,3 +232,61 @@ nmap <F12> gg=G
 imap <F12> <ESC>gg=G
 
 imap <C-t> <right>
+
+" enable neocomplcache
+let g:neocomplcache_enable_at_startup=1
+let g:neocomplcache_enable_smart_case=1
+let g:neocomplcache_enable_camel_case_completion=1
+let g:neocomplcache_enable_underbar_completion=1
+let g:neocomplcache_min_syntax_length=4
+
+" neocomplcache key mappings
+imap <C-k> <Plug>(neocomplcache_snippets_expand)
+smap <C-k> <Plug>(neocomplcache_snippets_expand)
+inoremap <expr><C-g> neocomplcache#undo_completion()
+inoremap <expr><C-l> neocomplcache#complete_common_string()
+
+" <CR>: close popup and save indent.
+inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
+" <TAB>: completion.
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y> neocomplcache#close_popup()
+inoremap <expr><C-e> neocomplcache#cancel_popup()
+
+" Yank Ring
+let yankring_replace_n_pkey='<A-p>'
+let yankring_replace_n_nkey='<A-n>'
+
+" NERD commenter
+let NERDSpaceDelims=1
+let NERDCompactSexyComs=1
+let NERDRemoveExtraSpaces=1
+
+" EasyMotion
+hi link EasyMotionTarget Special
+hi link EasyMotionShade Comment
+
+" fuzzyfinder
+" http://www.vim.org/scripts/script.php?script_id=1984
+nnoremap <C-k> :FufBuffer<cr>
+nnoremap <C-j> :FufFile<cr>
+
+" easy link opening in firefox
+function! Browser ()
+  let line0 = getline (".")
+  let line = matchstr (line0, "http[^ ]*")
+  :if line==""
+  let line = matchstr (line0, "ftp[^ ]*")
+  :endif
+  :if line==""
+  let line = matchstr (line0, "file[^ ]*")
+  :endif
+  let line = escape (line, "#?&;|%")
+  " echo line
+  exec ":silent !firefox ".line
+endfunction
+
+map <F7> :call Browser ()<cr>
