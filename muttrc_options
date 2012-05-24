@@ -42,7 +42,7 @@ set use_from=yes
 
 # sort by strict threads and then by the date of sending
 set sort=threads
-set sort_aux=date-sent
+set sort_aux=last-date-sent
 set strict_threads=yes
 
 # don't move read messages
