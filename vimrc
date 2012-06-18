@@ -23,7 +23,6 @@ Bundle 'ujihisa/neco-ghc'
 Bundle 'kana/vim-filetype-haskell'
 
 Bundle 'a.vim'
-Bundle 'YankRing.vim'
 
 " filetype settings (required for vundle)
 filetype on
@@ -103,6 +102,7 @@ set showtabline=1
 
 " the line width
 set textwidth=80
+set colorcolumn=84
 
 " one space is enough
 set nojoinspaces
@@ -169,16 +169,10 @@ autocmd BufRead,BufNewFile *.go set ft=go
 autocmd FileType haskell set sts=2 sw=2
 autocmd FileType c set sts=0 sw=8 noet
 autocmd FileType cpp set sts=2 sw=2
+autocmd FileType cpp let g:syntastic_cpp_compiler_options='-std=c++11'
 autocmd FileType python set sts=4 sw=4
 autocmd FileType ruby set sts=4 sw=4
 
-" Omni-completion
-if has("autocmd") && exists("+omnifunc")
-    autocmd Filetype *
-        \ if &omnifunc == "" |
-        \ setlocal omnifunc=syntaxcomplete#Complete |
-        \ endif
-endif
 
 " show the trailing whitespace in red
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -241,8 +235,6 @@ let g:neocomplcache_enable_underbar_completion=1
 let g:neocomplcache_min_syntax_length=4
 
 " neocomplcache key mappings
-imap <C-k> <Plug>(neocomplcache_snippets_expand)
-smap <C-k> <Plug>(neocomplcache_snippets_expand)
 inoremap <expr><C-g> neocomplcache#undo_completion()
 inoremap <expr><C-l> neocomplcache#complete_common_string()
 
@@ -255,10 +247,6 @@ inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y> neocomplcache#close_popup()
 inoremap <expr><C-e> neocomplcache#cancel_popup()
-
-" Yank Ring
-let yankring_replace_n_pkey='<A-p>'
-let yankring_replace_n_nkey='<A-n>'
 
 " NERD commenter
 let NERDSpaceDelims=1
