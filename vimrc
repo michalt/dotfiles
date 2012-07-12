@@ -15,12 +15,13 @@ Bundle 'Shougo/neocomplcache'
 Bundle 'Twinside/vim-haskellFold'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'godlygeek/tabular'
+Bundle 'kana/vim-filetype-haskell'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-surround'
 Bundle 'ujihisa/neco-ghc'
-Bundle 'kana/vim-filetype-haskell'
+Bundle 'wincent/Command-T'
 
 Bundle 'a.vim'
 
@@ -185,10 +186,6 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 " set leader
 let mapleader=","
 
-" l on Dvorak is pain to type
-noremap t l
-noremap l t
-
 " make it more consistent
 nmap Y y$
 
@@ -256,11 +253,6 @@ let NERDRemoveExtraSpaces=1
 " EasyMotion
 hi link EasyMotionTarget Special
 hi link EasyMotionShade Comment
-
-" fuzzyfinder
-" http://www.vim.org/scripts/script.php?script_id=1984
-nnoremap <C-k> :FufBuffer<cr>
-nnoremap <C-j> :FufFile<cr>
 
 " easy link opening in firefox
 function! Browser ()
