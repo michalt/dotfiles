@@ -43,7 +43,8 @@ colorscheme solarized
 set fsync
 
 " automatically change directory
-set autochdir
+" doesn't work nicely with Command-T
+" set autochdir
 
 " search: incremental, highlight
 set incsearch
@@ -225,6 +226,10 @@ nmap <F12> gg=G
 imap <F12> <ESC>gg=G
 
 imap <C-t> <right>
+
+" Command-T
+nmap <Leader>t :CommandTBuffer<CR>
+nmap <Leader>n :CommandT<CR>
 
 " enable neocomplcache
 let g:neocomplcache_enable_at_startup=1
