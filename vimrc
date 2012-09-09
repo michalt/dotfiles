@@ -108,9 +108,6 @@ set showtabline=1
 set textwidth=80
 set colorcolumn=84
 
-" one space is enough
-set nojoinspaces
-
 " wrapping is convenient
 set wrap
 set sidescroll=4
