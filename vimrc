@@ -223,6 +223,9 @@ imap <C-t> <right>
 " ctrlp
 let g:ctrlp_map='<Leader>t'
 let g:ctrlp_cmd='CtrlPBuffer'
+let g:ctrlp_match_window_bottom=0
+let g:ctrlp_match_window_reversed=0
+highlight link CtrlPMatch IncSearch
 
 " enable neocomplcache
 let g:neocomplcache_enable_at_startup=1
