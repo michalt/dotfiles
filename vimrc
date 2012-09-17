@@ -23,7 +23,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-surround'
 Bundle 'ujihisa/neco-ghc'
-Bundle 'wincent/Command-T'
+Bundle 'kien/ctrlp.vim'
 
 Bundle 'a.vim'
 
@@ -41,10 +41,6 @@ colorscheme solarized
 
 " fsync doesn't hurt on ext4 :)
 set fsync
-
-" automatically change directory
-" doesn't work nicely with Command-T
-" set autochdir
 
 " search: incremental, highlight
 set incsearch
@@ -224,9 +220,9 @@ imap <F12> <ESC>gg=G
 
 imap <C-t> <right>
 
-" Command-T
-nmap <Leader>t :CommandTBuffer<CR>
-nmap <Leader>n :CommandT<CR>
+" ctrlp
+let g:ctrlp_map='<Leader>t'
+let g:ctrlp_cmd='CtrlPBuffer'
 
 " enable neocomplcache
 let g:neocomplcache_enable_at_startup=1
