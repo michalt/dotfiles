@@ -17,13 +17,13 @@ Bundle 'Twinside/vim-haskellFold'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'godlygeek/tabular'
 Bundle 'kana/vim-filetype-haskell'
+Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-surround'
 Bundle 'ujihisa/neco-ghc'
-Bundle 'kien/ctrlp.vim'
 
 Bundle 'a.vim'
 
@@ -232,6 +232,8 @@ let g:neocomplcache_enable_at_startup=1
 let g:neocomplcache_enable_smart_case=1
 let g:neocomplcache_enable_camel_case_completion=1
 let g:neocomplcache_enable_underbar_completion=1
+let g:neocomplcache_auto_completion_start_length=4
+let g:neocomplcache_min_keyword=4
 let g:neocomplcache_min_syntax_length=4
 
 " neocomplcache key mappings
@@ -257,7 +259,7 @@ let NERDRemoveExtraSpaces=1
 hi link EasyMotionTarget Special
 hi link EasyMotionShade Comment
 
-" easy link opening in firefox
+" easy link opening in a browser
 function! Browser ()
   let line0 = getline (".")
   let line = matchstr (line0, "http[^ ]*")
@@ -269,7 +271,7 @@ function! Browser ()
   :endif
   let line = escape (line, "#?&;|%")
   " echo line
-  exec ":silent !firefox ".line
+  exec ":silent !chromium ".line
 endfunction
 
 map <F7> :call Browser ()<cr>
