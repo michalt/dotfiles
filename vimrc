@@ -36,10 +36,12 @@ syntax enable
 set background=light
 let g:solarized_contrast="high"
 let g:solarized_visibility="high"
-let g:solarized_italic=0
 colorscheme solarized
 
-" fsync doesn't hurt on ext4 :)
+let g:Powerline_theme="solarized256"
+let g:Powerline_colorscheme="solarized256"
+
+" fsync doesn't hurt on a modern fs :)
 set fsync
 
 " search: incremental, highlight
