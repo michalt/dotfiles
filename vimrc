@@ -38,7 +38,6 @@ let g:solarized_contrast="high"
 let g:solarized_visibility="high"
 colorscheme solarized
 
-let g:Powerline_theme="solarized256"
 let g:Powerline_colorscheme="solarized256"
 
 " fsync doesn't hurt on a modern fs :)
@@ -227,7 +226,6 @@ let g:ctrlp_map='<Leader>t'
 let g:ctrlp_cmd='CtrlPBuffer'
 let g:ctrlp_match_window_bottom=0
 let g:ctrlp_match_window_reversed=0
-highlight link CtrlPMatch IncSearch
 
 " enable neocomplcache
 let g:neocomplcache_enable_at_startup=1
