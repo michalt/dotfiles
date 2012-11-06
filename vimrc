@@ -15,6 +15,7 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'Shougo/neocomplcache'
 Bundle 'Twinside/vim-haskellFold'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'feuerbach/vim-hs-module-name'
 Bundle 'godlygeek/tabular'
 Bundle 'kana/vim-filetype-haskell'
 Bundle 'kien/ctrlp.vim'
@@ -258,6 +259,9 @@ let NERDRemoveExtraSpaces=1
 " EasyMotion
 hi link EasyMotionTarget Special
 hi link EasyMotionShade Comment
+
+" Haskell module name
+let g:hs_module_no_mappings=1
 
 " easy link opening in a browser
 function! Browser ()
