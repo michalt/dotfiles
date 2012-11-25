@@ -12,15 +12,16 @@ Bundle 'gmarik/vundle'
 
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-powerline'
-Bundle 'Shougo/neocomplcache'
 Bundle 'Twinside/vim-haskellFold'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'ervandew/supertab'
 Bundle 'feuerbach/vim-hs-module-name'
 Bundle 'godlygeek/tabular'
 Bundle 'kana/vim-filetype-haskell'
 Bundle 'kien/ctrlp.vim'
-Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/syntastic'
+Bundle 'sjl/gundo.vim'
+Bundle 'tomtom/tcomment_vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-surround'
@@ -40,6 +41,9 @@ let g:solarized_visibility="high"
 colorscheme solarized
 
 let g:Powerline_colorscheme="solarized256"
+
+" omnicompletion
+set omnifunc=syntaxcomplete#Complete
 
 " fsync doesn't hurt on a modern fs :)
 set fsync
@@ -172,6 +176,7 @@ autocmd FileType cpp let g:syntastic_cpp_compiler_options='-std=c++11'
 autocmd FileType python set sts=4 sw=4
 autocmd FileType ruby set sts=4 sw=4
 
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
 " show the trailing whitespace in red
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -185,42 +190,45 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 let mapleader=","
 
 " make it more consistent
-nmap Y y$
+nnoremap Y y$
 
 " buffers
-nmap <C-p> <esc>:bprev<cr>
-nmap <C-n> <ESC>:bnext<CR>
-nmap <C-j> :buffers<cr>
-nmap <C-_> :A<cr> " Ctrl-7
+nnoremap <C-p> <ESC>:bprev<CR>
+nnoremap <C-n> <ESC>:bnext<CR>
+nnoremap <C-j> :buffers<CR>
+nnoremap <C-_> :A<CR> " Ctrl-7
+
+" omnicompletion
+inoremap <C-g><C-o> <C-x><C-o>
 
 " ...
-nmap <C-y> :pop<cr>
-nmap <C-c> :update<cr>
-imap <C-c> <esc>:update<cr>a
+nnoremap <C-y> :pop<cr>
+nnoremap <C-c> :update<cr>
+inoremap <C-c> <esc>:update<cr>a
 
 " Copy/paste with X11
-nmap <Leader>y "+y
-nmap <Leader>p "+p
-vmap <Leader>y "+y
-vmap <Leader>p "+p
+nnoremap <Leader>y "+y
+nnoremap <Leader>p "+p
+vnoremap <Leader>y "+y
+vnoremap <Leader>p "+p
 
 " mappings for F keys
-nmap <F8> :nohl<cr>
-imap <F8> <ESC>:nohl<cr>a
+nnoremap <F8> :nohl<cr>
+inoremap <F8> <ESC>:nohl<cr>a
 
-nmap <F9> :%s/\s\+$//g<cr>:nohl<cr>
-imap <F9> <ESC>:%s/\s\+//g<cr>:nohl<cr>
+nnoremap <F9> :%s/\s\+$//g<cr>:nohl<cr>
+inoremap <F9> <ESC>:%s/\s\+//g<cr>:nohl<cr>
 
-nmap <F10> '[=']
-imap <F10> <ESC>'[=']
+nnoremap <F10> '[=']
+inoremap <F10> <ESC>'[=']
 
-nmap <F11> =i{
-imap <F11> <ESC>=i{
+nnoremap <F11> =i{
+inoremap <F11> <ESC>=i{
 
-nmap <F12> gg=G
-imap <F12> <ESC>gg=G
+nnoremap <F12> gg=G
+inoremap <F12> <ESC>gg=G
 
-imap <C-t> <right>
+inoremap <C-t> <right>
 
 " ctrlp
 let g:ctrlp_map='<Leader>t'
@@ -228,33 +236,17 @@ let g:ctrlp_cmd='CtrlPBuffer'
 let g:ctrlp_match_window_bottom=0
 let g:ctrlp_match_window_reversed=0
 
-" enable neocomplcache
-let g:neocomplcache_enable_at_startup=1
-let g:neocomplcache_enable_smart_case=1
-let g:neocomplcache_enable_camel_case_completion=1
-let g:neocomplcache_enable_underbar_completion=1
-let g:neocomplcache_auto_completion_start_length=4
-let g:neocomplcache_min_keyword=4
-let g:neocomplcache_min_syntax_length=4
+" supertab
+let g:SuperTabDefaultCompletionType='<c-n>'
+let g:SuperTabContextDefaultCompletionType='<c-n>'
 
-" neocomplcache key mappings
-inoremap <expr><C-g> neocomplcache#undo_completion()
-inoremap <expr><C-l> neocomplcache#complete_common_string()
+" gundo
+let g:gundo_right=1
+nnoremap <Leader>u :GundoToggle<CR>
 
-" <CR>: close popup and save indent.
-inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
-" <TAB>: completion.
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y> neocomplcache#close_popup()
-inoremap <expr><C-e> neocomplcache#cancel_popup()
-
-" NERD commenter
-let NERDSpaceDelims=1
-let NERDCompactSexyComs=1
-let NERDRemoveExtraSpaces=1
+" tcomment
+let g:tcommentMapLeaderOp1='<Leader>c'
+let g:tcommentMapLeaderOp2='<Leader>C'
 
 " EasyMotion
 hi link EasyMotionTarget Special
@@ -278,4 +270,4 @@ function! Browser ()
   exec ":silent !chromium ".line
 endfunction
 
-map <F7> :call Browser ()<cr>
+nnoremap <F7> :call Browser ()<cr>
