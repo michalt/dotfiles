@@ -237,7 +237,7 @@ let g:ctrlp_match_window_bottom=0
 let g:ctrlp_match_window_reversed=0
 
 " supertab
-let g:SuperTabDefaultCompletionType='<c-n>'
+let g:SuperTabDefaultCompletionType='context'
 let g:SuperTabContextDefaultCompletionType='<c-n>'
 
 " gundo
