@@ -245,6 +245,7 @@ let g:gundo_right=1
 nnoremap <Leader>u :GundoToggle<CR>
 
 " tcomment
+let g:tcommentBlankLines=0
 let g:tcommentMapLeaderOp1='<Leader>c'
 let g:tcommentMapLeaderOp2='<Leader>C'
 
