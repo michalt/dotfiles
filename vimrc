@@ -17,7 +17,8 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'ervandew/supertab'
 Bundle 'feuerbach/vim-hs-module-name'
 Bundle 'godlygeek/tabular'
-Bundle 'kana/vim-filetype-haskell'
+Bundle 'jhenahan/idris-vim'
+Bundle 'travitch/hasksyn'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'sjl/gundo.vim'
@@ -235,6 +236,7 @@ let g:ctrlp_map='<Leader>t'
 let g:ctrlp_cmd='CtrlPBuffer'
 let g:ctrlp_match_window_bottom=0
 let g:ctrlp_match_window_reversed=0
+let g:ctrlp_max_height=16
 
 " supertab
 let g:SuperTabDefaultCompletionType='<c-n>'
