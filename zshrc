@@ -152,6 +152,6 @@ alias reboot="sudo /sbin/reboot"
 alias poweroff="sudo /sbin/poweroff"
 alias shutdown="sudo /sbin/shutdown"
 
-if [[ -f $HOME/.profile ]] ; then
+if [[ -f $HOME/.zshrc_local ]] ; then
   source $HOME/.zshrc_local
 fi
