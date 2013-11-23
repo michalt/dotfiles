@@ -27,7 +27,7 @@ zstyle ':vcs_info:*' formats "$fg[green]%s %b $fg[red]%u %c$reset_color"
 zstyle ':vcs_info:*' stagedstr 's'
 zstyle ':vcs_info:*' unstagedstr 'u'
 
-HISTFILE=~/.histfile
+HISTFILE=$HOME/.histfile
 HISTSIZE=16384
 SAVEHIST=8192
 
@@ -59,7 +59,7 @@ precmd () {
 ULCORNER="┌"
 LLCORNER="└"
 HBAR="─"
-PROMPT='%{$fg[red]%}${ULCORNER}%{$reset_color%} %{$fg[cyan]%}%48<..<%~%<<%(1j.  %j  .  )%{$reset_color%}${vcs_info_msg_0_}
+PROMPT='%{$fg[red]%}${ULCORNER}%{$reset_color%} %{$fg[yellow]%}%m %{$fg[cyan]%}%48<..<%~%<<%(1j.  %j  .  )%{$reset_color%}${vcs_info_msg_0_}
 %{$fg[red]%}${LLCORNER}%{$reset_color%} '
 
 #
@@ -80,7 +80,7 @@ then
   export TERM=xterm-256color
 fi
 
-export EDITOR=/usr/bin/vim
+export EDITOR=vim
 export VIMHOME="${HOME}/.vim"
 export GREP_OPTIONS="--color"
 
@@ -143,6 +143,7 @@ alias tmux0="tmux new -s0"
 alias tmux1="tmux new -s1"
 alias tmux2="tmux new -s2"
 alias tmux3="tmux new -s3"
+alias tmux4="tmux new -s4"
 alias gvim1="gvim --servername 1"
 alias gvim2="gvim --servername 2"
 alias gvim3="gvim --servername 3"
@@ -150,3 +151,7 @@ alias bell="echo -e \"\a\""
 alias reboot="sudo /sbin/reboot"
 alias poweroff="sudo /sbin/poweroff"
 alias shutdown="sudo /sbin/shutdown"
+
+if [[ -f $HOME/.profile ]] ; then
+  source $HOME/.zshrc_local
+fi
