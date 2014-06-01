@@ -13,19 +13,19 @@ Bundle 'gmarik/vundle'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'Twinside/vim-haskellFold'
+Bundle 'Valloric/YouCompleteMe'
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'ervandew/supertab'
 Bundle 'feuerbach/vim-hs-module-name'
 Bundle 'godlygeek/tabular'
-Bundle 'jhenahan/idris-vim'
-Bundle 'travitch/hasksyn'
+Bundle 'idris-hackers/idris-vim'
 Bundle 'kien/ctrlp.vim'
-Bundle 'scrooloose/syntastic'
+Bundle 'nbouscal/vim-stylish-haskell'
 Bundle 'sjl/gundo.vim'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-surround'
+Bundle 'travitch/hasksyn'
 Bundle 'ujihisa/neco-ghc'
 
 Bundle 'a.vim'
@@ -71,6 +71,9 @@ set ttymouse=xterm2
 
 " powerful backspace
 set backspace=indent,eol,start
+
+" split window below (preview, help, etc.)
+set splitbelow
 
 " status line always on
 set laststatus=2
@@ -170,7 +173,7 @@ autocmd BufRead,BufNewFile *.mkd set ft=mkd
 autocmd BufRead,BufNewFile *.v set ft=coq
 autocmd BufRead,BufNewFile *.go set ft=go
 
-autocmd FileType haskell set sts=2 sw=2
+autocmd FileType haskell set sts=4 sw=4
 autocmd FileType c set sts=0 sw=8 noet
 autocmd FileType cpp set sts=2 sw=2
 autocmd FileType cpp let g:syntastic_cpp_compiler_options='-std=c++11'
@@ -178,6 +181,14 @@ autocmd FileType python set sts=4 sw=4
 autocmd FileType ruby set sts=4 sw=4
 
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+
+" YouCompleteMe with neco-ghc
+let g:ycm_semantic_triggers={'haskell' : ['.']}
+let g:ycm_autoclose_preview_window_after_insertion=1
+let g:ycm_autoclose_preview_window_after_completion=1
+
+" Make eclim work nicely with YouCompleteMe
+let g:EclimCompletionMethod='omnifunc'
 
 " show the trailing whitespace in red
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -189,6 +200,10 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 
 " set leader
 let mapleader=","
+
+" Make syntastic populate list of errors (but don't open it by default)
+let g:syntastic_auto_loc_list=0
+let g:syntastic_always_populate_loc_list=1
 
 " make it more consistent
 nnoremap Y y$
@@ -203,7 +218,7 @@ nnoremap <C-_> :A<CR> " Ctrl-7
 inoremap <C-g><C-o> <C-x><C-o>
 
 " ...
-nnoremap <C-y> :pop<cr>
+nnoremap <C-[> :pop<cr>
 nnoremap <C-c> :update<cr>
 inoremap <C-c> <esc>:update<cr>a
 
@@ -230,6 +245,9 @@ nnoremap <F12> gg=G
 inoremap <F12> <ESC>gg=G
 
 inoremap <C-t> <right>
+
+nnoremap <C-i> :lnext<CR>
+nnoremap <C-y> :lprev<CR>
 
 " ctrlp
 let g:ctrlp_map='<Leader>t'
