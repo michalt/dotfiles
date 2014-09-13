@@ -1,0 +1,135 @@
+default_orientation vertical
+font pango:Ubuntu Mono 10
+
+set $alt Mod1
+set $win Mod4
+
+# mouse+$alt to drag floating windows
+floating_modifier $alt
+
+# terminal
+bindsym $win+t exec i3-sensible-terminal
+
+# kill focused window
+bindsym $win+Shift+w kill
+
+# dmenu
+bindsym $win+r exec --no-startup-id i3-dmenu-desktop
+
+# change focus
+bindsym $alt+h focus left
+bindsym $alt+l focus right
+bindsym $alt+j focus down
+bindsym $alt+k focus up
+
+# same but with cursor keys
+bindsym $alt+Left focus left
+bindsym $alt+Down focus down
+bindsym $alt+Up focus up
+bindsym $alt+Right focus right
+
+# move focused window
+bindsym $win+Shift+h move left
+bindsym $win+Shift+l move right
+bindsym $win+Shift+j move down
+bindsym $win+Shift+k move up
+
+# same but with cursor keys
+bindsym $alt+Shift+Left move left
+bindsym $alt+Shift+Down move down
+bindsym $alt+Shift+Up move up
+bindsym $alt+Shift+Right move right
+
+# vertical split
+bindsym $win+v split h
+
+# horizontal split
+bindsym $win+d split v
+
+# fullscreen mode
+bindsym $alt+Shift+u fullscreen
+
+# container layout (stacked, tabbed, toggle split)
+bindsym $win+o layout stacking
+bindsym $win+e layout tabbed
+bindsym $win+u layout default
+
+# toggle tiling / floating
+bindsym $alt+Shift+space floating toggle
+
+# toggle focus between tiling / floating windows
+bindsym $alt+space focus mode_toggle
+
+# focus the parent container
+#bindsym $alt+a focus parent
+
+# focus the child container
+#bindsym $alt+d focus child
+
+# switch to workspace
+bindsym $win+1 workspace 1
+bindsym $win+2 workspace 2
+bindsym $win+3 workspace 3
+bindsym $win+4 workspace 4
+bindsym $win+5 workspace 5
+bindsym $win+6 workspace 6
+bindsym $win+7 workspace 7
+bindsym $win+8 workspace 8
+bindsym $win+9 workspace 9
+bindsym $win+0 workspace 10
+
+# move focused container to workspace
+bindsym $win+Shift+1 move container to workspace 1
+bindsym $win+Shift+2 move container to workspace 2
+bindsym $win+Shift+3 move container to workspace 3
+bindsym $win+Shift+4 move container to workspace 4
+bindsym $win+Shift+5 move container to workspace 5
+bindsym $win+Shift+6 move container to workspace 6
+bindsym $win+Shift+7 move container to workspace 7
+bindsym $win+Shift+8 move container to workspace 8
+bindsym $win+Shift+9 move container to workspace 9
+bindsym $win+Shift+0 move container to workspace 10
+
+# make the currently focused window a scratchpad
+bindsym $win+Shift+minus move scratchpad
+
+# show the first scratchpad window
+bindsym $win+minus scratchpad show
+
+# show specific scratchpad windows (if any)
+bindsym $win+m [title="^ncmpcpp"] scratchpad show
+bindsym $win+h [title="^htop"] scratchpad show
+
+# reload the configuration file
+bindsym $win+Shift+r reload
+
+# restart i3 inplace
+bindsym $win+Shift+p restart
+
+# exit i3 (logs you out of your X session)
+bindsym $win+Shift+q exec "i3-nagbar -t warning -m 'Exit i3?' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+  # active only in resize
+  bindsym t resize grow width 10 px or 10 ppt
+  bindsym w resize shrink width 10 px or 10 ppt
+  bindsym e resize grow height 10 px or 10 ppt
+  bindsym j resize shrink height 10 px or 10 ppt
+
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+bindsym $alt+p mode "resize"
+
+# start i3bar
+bar {
+  position top
+  mode hide
+  hidden_state hide
+  modifier $win
+  status_command i3status --config ~/.i3/status_config
+  font pango:Ubuntu Mono 10
+}
