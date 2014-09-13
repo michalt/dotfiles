@@ -170,7 +170,7 @@ alias ll="ls -lh"
 alias llx="ll -X"
 alias lo="ls -oh"
 alias rm="rm -i"
-alias cp="cp -i"
+alias cp="cp --reflink=auto -i"
 alias mv="mv -i"
 alias cpath="echo \$PWD | xsel -b"
 alias vpath='cd "$(xsel -b)"'

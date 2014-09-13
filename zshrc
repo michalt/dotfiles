@@ -52,9 +52,28 @@ bindkey -M viins '^N' menu-complete
 bindkey -M viins '^P' reverse-menu-complete
 bindkey -M viins '^B' push-line
 
-precmd () {
-  vcs_info
-}
+case $TERM in
+  termite|*xterm*|rxvt|rxvt-unicode|rxvt-256color|rxvt-unicode-256color|(dt|k|E)term)
+    precmd () {
+      vcs_info
+      print -Pn "\e]0;%M %~\a"
+    }
+    preexec () {
+      print -Pn "\e]0;$1 (%M %~)\a"
+    }
+    ;;
+  screen|screen-256color)
+    precmd () {
+      vcs_info
+      print -Pn "\e]83;title $1\a"
+      print -Pn "\e]0;%M %~\a"
+    }
+    preexec () {
+      print -Pn "\e]83;title $1\a"
+      print -Pn "\e]0;%M %~\a"
+    }
+    ;;
+esac
 
 ULCORNER="┌"
 LLCORNER="└"
@@ -83,16 +102,17 @@ fi
 export EDITOR=vim
 export VIMHOME="${HOME}/.vim"
 export GREP_OPTIONS="--color"
+export BROWSER=chromium
 
 # PATH for local bin directory.
 if [ -z "$(echo ${PATH} | grep ${HOME}/local/bin)" ] ; then
-	export PATH="${HOME}/local/bin:${PATH}"
-	export MANPATH="${HOME}/local/man:${MANPATH}"
+  export PATH="${HOME}/local/bin:${PATH}"
+  export MANPATH="${HOME}/local/man:${MANPATH}"
 fi
 
 # PATH for binaries installed by cabal.
 if [ -z "$(echo ${PATH} | grep ${HOME}/.cabal/bin)" ] ; then
-	export PATH="${HOME}/.cabal/bin:${PATH}"
+  export PATH="${HOME}/.cabal/bin:${PATH}"
 fi
 
 #
@@ -106,7 +126,10 @@ fi
 #
 
 function mkcd() {
-  mkdir -p "$1" && cd "$1"
+  if [ ! -d "$1" ]; then
+    mkdir -p "$1"
+  fi
+  cd "$1"
 }
 
 alias pd="pushd"
@@ -120,7 +143,7 @@ alias ll="ls -lh"
 alias llx="ll -X"
 alias lo="ls -oh"
 alias rm="rm -i"
-alias cp="cp -i"
+alias cp="cp --reflink=auto -i"
 alias mv="mv -i"
 alias cpath="echo \$PWD | xsel -b"
 alias vpath='cd "$(xsel -b)"'
