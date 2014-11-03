@@ -61,7 +61,7 @@ bindsym $alt+Shift+space floating toggle
 bindsym $alt+space focus mode_toggle
 
 # focus the parent container
-#bindsym $alt+a focus parent
+bindsym $alt+p focus parent
 
 # focus the child container
 #bindsym $alt+d focus child
@@ -122,7 +122,7 @@ mode "resize" {
   bindsym Escape mode "default"
 }
 
-bindsym $alt+p mode "resize"
+bindsym $alt+r mode "resize"
 
 # start i3bar
 bar {
