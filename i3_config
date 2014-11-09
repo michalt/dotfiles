@@ -1,4 +1,4 @@
-default_orientation vertical
+default_orientation horizontal
 font pango:Ubuntu Mono 10
 
 set $alt Mod1
