@@ -13,11 +13,12 @@ zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:]
 zstyle ':completion:*' original tre
 zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion:*' menu select
-zstyle ':completion::complete:*' use-cache 1
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
 
 zstyle :compinstall filename "${HOME}/.zshrc"
 
-autoload -Uz compinit colors vcs_info
+autoload -Uz compinit colors edit-command-line vcs_info
 colors
 compinit
 
@@ -27,7 +28,7 @@ zstyle ':vcs_info:*' formats "$fg[green]%s %b $fg[red]%u %c$reset_color"
 zstyle ':vcs_info:*' stagedstr 's'
 zstyle ':vcs_info:*' unstagedstr 'u'
 
-HISTFILE=$HOME/.histfile
+HISTFILE=~/.histfile
 HISTSIZE=16384
 SAVEHIST=8192
 
@@ -51,6 +52,9 @@ bindkey -M viins '^R' history-incremental-pattern-search-backward
 bindkey -M viins '^N' menu-complete
 bindkey -M viins '^P' reverse-menu-complete
 bindkey -M viins '^B' push-line
+
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
 
 case $TERM in
   termite|*xterm*|rxvt|rxvt-unicode|rxvt-256color|rxvt-unicode-256color|(dt|k|E)term)
@@ -175,6 +179,6 @@ alias reboot="sudo /sbin/reboot"
 alias poweroff="sudo /sbin/poweroff"
 alias shutdown="sudo /sbin/shutdown"
 
-if [[ -f $HOME/.zshrc_local ]] ; then
+if [ -f ~/.zshrc_local ] ; then
   source $HOME/.zshrc_local
 fi
