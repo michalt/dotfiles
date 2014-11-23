@@ -8,3 +8,4 @@ install:
 	-install -p -m 0640 zshrc $(HOME)/.zshrc
 	-install -p -m 0640 i3_config $(HOME)/.i3/config
 	-install -p -m 0640 i3_status_config $(HOME)/.i3/status_config
+	-install -p -m 0640 Xresources $(HOME)/.Xresources
