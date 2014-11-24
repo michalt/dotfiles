@@ -218,7 +218,7 @@ nnoremap <C-_> :A<CR> " Ctrl-7
 inoremap <C-g><C-o> <C-x><C-o>
 
 " ...
-nnoremap <C-[> :pop<cr>
+nnoremap <C-8> :pop<cr>
 nnoremap <C-c> :update<cr>
 inoremap <C-c> <esc>:update<cr>a
 
