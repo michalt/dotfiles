@@ -6,6 +6,9 @@ set $win Mod4
 # mouse+$alt to drag floating windows
 floating_modifier $alt
 
+# go back to the previous workspace automatically
+workspace_auto_back_and_forth yes
+
 # terminal
 bindsym $win+t exec i3-sensible-terminal
 
@@ -64,6 +67,10 @@ bindsym $alt+p focus parent
 
 # focus the child container
 #bindsym $alt+d focus child
+
+# switch to last workspace
+bindsym $win+a workspace back_and_forth
+bindsym $win+Shift+a move container to workspace back_and_forth
 
 # switch to workspace
 bindsym $win+1 workspace 1
