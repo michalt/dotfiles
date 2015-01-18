@@ -1,10 +1,10 @@
-Xft.autohint: 0
-Xft.lcdfilter: lcdnone
-Xft.hintstyle: hintfull
-Xft.hinting: 1
-Xft.antialias: 1
-Xft.rgba: rgba
-
+! Xft.autohint: 0
+! Xft.lcdfilter:  lcddefault
+! Xft.hintstyle:  hintfull
+! Xft.hinting: 1
+! Xft.antialias: 1
+! Xft.rgba: rgb
+!
 !! drop in Solarized colorscheme for Xresources
 !!
 !! ## Installation
@@ -120,14 +120,14 @@ xterm*VT100.Translations: #override\n\
 ! Work around some problem with highlighting with tmux...
 urxvt*termName: rxvt-256color
 
-urxvt*font: xft:Ubuntu Mono:size=11
-urxvt*boldFont: xft:Ubuntu Mono:size=11
+urxvt*font: xft:Dejavu Sans Mono:size=9
+urxvt*boldFont: xft:Dejavu Sans Mono:size=9:bold
 
 urxvt*scrollBar: false
 urxvt*urgentOnBell: true
 
 urxvt.perl-ext-common:      default,clipboard,url-select
-urxvt.url-select.launcher:  chromium
+URxvt.url-launcher:         google-chrome-beta
 urxvt.url-select.underline: true
 urxvt.keysym.M-u:           perl:url-select:select_next
 urxvt.keysym.M-c:           perl:clipboard:copy

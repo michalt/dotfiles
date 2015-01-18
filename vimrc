@@ -8,25 +8,28 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'Twinside/vim-haskellFold'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'feuerbach/vim-hs-module-name'
-Bundle 'godlygeek/tabular'
-Bundle 'idris-hackers/idris-vim'
-Bundle 'kien/ctrlp.vim'
-Bundle 'scrooloose/syntastic'
-Bundle 'sjl/gundo.vim'
-Bundle 'tomtom/tcomment_vim'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-markdown'
-Bundle 'tpope/vim-surround'
-Bundle 'travitch/hasksyn'
-Bundle 'ujihisa/neco-ghc'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'Twinside/vim-haskellFold'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'feuerbach/vim-hs-module-name'
+Plugin 'godlygeek/tabular'
+Plugin 'idris-hackers/idris-vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'phildawes/racer'
+Plugin 'scrooloose/syntastic'
+Plugin 'sjl/gundo.vim'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-markdown'
+Plugin 'tpope/vim-surround'
+Plugin 'travitch/hasksyn'
+Plugin 'ujihisa/neco-ghc'
+Plugin 'wting/rust.vim'
+Plugin 'bling/vim-airline'
+
 
 Bundle 'a.vim'
 
@@ -77,12 +80,6 @@ set splitbelow
 
 " status line always on
 set laststatus=2
-set statusline=
-set statusline+=\ %f\ \ %M\ %R\ %H
-set statusline+=%=%03.3b
-set statusline+=\ \ \ \ \ \ 0x\%02.2B
-set statusline+=\ \ \ \ \ \ %04lx%04v
-set statusline+=\ \ \ \ \ \ %L\ 
 
 " redraw only when needed
 set lazyredraw
@@ -172,6 +169,7 @@ autocmd BufRead,BufNewFile *.hsc set ft=haskell
 autocmd BufRead,BufNewFile *.mkd set ft=mkd
 autocmd BufRead,BufNewFile *.v set ft=coq
 autocmd BufRead,BufNewFile *.go set ft=go
+autocmd BufRead,BufNewFile *.rs set ft=rust
 
 autocmd FileType haskell set sts=4 sw=4
 autocmd FileType c set sts=0 sw=8 noet
@@ -179,6 +177,7 @@ autocmd FileType cpp set sts=2 sw=2
 autocmd FileType cpp let g:syntastic_cpp_compiler_options='-std=c++11'
 autocmd FileType python set sts=4 sw=4
 autocmd FileType ruby set sts=4 sw=4
+autocmd FileType rust set sts=4 sw=4
 
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
