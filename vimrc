@@ -19,7 +19,6 @@ Plugin 'feuerbach/vim-hs-module-name'
 Plugin 'godlygeek/tabular'
 Plugin 'idris-hackers/idris-vim'
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'kien/ctrlp.vim'
 Plugin 'phildawes/racer'
 Plugin 'scrooloose/syntastic'
 Plugin 'sjl/gundo.vim'
@@ -29,6 +28,7 @@ Plugin 'tpope/vim-markdown'
 Plugin 'tpope/vim-surround'
 Plugin 'travitch/hasksyn'
 Plugin 'ujihisa/neco-ghc'
+Plugin 'wincent/Command-T'
 Plugin 'wting/rust.vim'
 
 Bundle 'a.vim'
@@ -177,7 +177,8 @@ autocmd FileType cpp set sts=2 sw=2
 autocmd FileType cpp let g:syntastic_cpp_compiler_options='-std=c++11'
 autocmd FileType python set sts=4 sw=4
 autocmd FileType ruby set sts=4 sw=4
-autocmd FileType rust set sts=4 sw=4
+autocmd FileType rust set sts=4 sw=4 colorcolumn=101
+autocmd FileType rust let b:AutoPairs={'(':')', '[':']', '{':'}','"':'"', '`':'`'}
 
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
@@ -248,12 +249,9 @@ inoremap <C-t> <right>
 nnoremap <C-i> :lnext<CR>
 nnoremap <C-y> :lprev<CR>
 
-" ctrlp
-let g:ctrlp_map='<Leader>t'
-let g:ctrlp_cmd='CtrlPBuffer'
-let g:ctrlp_match_window_bottom=0
-let g:ctrlp_match_window_reversed=0
-let g:ctrlp_max_height=16
+" CommandT
+nnoremap <silent> <Leader>t :CommandTMRU<CR>
+let g:CommandTMatchWindowAtTop=1
 
 " supertab
 let g:SuperTabDefaultCompletionType='<c-n>'
