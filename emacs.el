@@ -13,6 +13,10 @@
 ;; Scroll one line at a time
 (setq scroll-conservatively 10000)
 
+;; Avoid cluttering the current directory with temp files
+(setq backup-directory-alist `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
+
 (setq package-archives
       '(("gnu" . "http://elpa.gnu.org/packages/")
         ("org" . "http://orgmode.org/elpa/")
@@ -49,6 +53,7 @@
 (require 'evil)
 (evil-mode 1)
 (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
+(define-key evil-normal-state-map (kbd "C-d") 'evil-scroll-down)
 
 (require 'evil-surround)
 (global-evil-surround-mode 1)
@@ -135,12 +140,17 @@
 ;; haskell-mode specific indentation
 (require 'ghc)
 (require 'haskell-mode)
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(require 'shm)
+(require 'hindent)
+(require 'shm-case-split)
+(require 'shm-reformat)
 (autoload 'ghc-init "ghc" nil t)
 (autoload 'ghc-debug "ghc" nil t)
 (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
+(add-hook 'haskell-mode-hook 'structured-haskell-mode)
+(set-face-background 'shm-current-face "#eee8d5")
+(set-face-background 'shm-quarantine-face "lemonchiffon")
+(define-key shm-map (kbd "C-c C-s") 'shm/case-split)
 
 (require 'company-ghc)
 (add-to-list 'company-backends 'company-ghc)
@@ -170,8 +180,8 @@
 ;; Evil nerd-commenter
 (evilnc-default-hotkeys)
 
-;; Enable line numbers on the left.
-(global-linum-mode t)
+;; Enable line numbers on the left (global-linum-mode is super slow, use nlinum instead).
+(global-nlinum-mode t)
 
 ;; y/n vs yes/no
 (fset 'yes-or-no-p 'y-or-n-p)
