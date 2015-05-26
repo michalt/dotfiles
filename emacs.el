@@ -4,6 +4,9 @@
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
 
+;; Automatically reload files changed on disk
+(global-auto-revert-mode 1)
+
 ;; Disable toolbar.
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
@@ -25,8 +28,10 @@
 (setq backup-directory-alist `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
 
-(set-frame-font "DejaVu Sans Mono-10")
-(setq default-frame-alist '((font . "DejaVu Sans Mono-10")))
+; (set-frame-font "DejaVu Sans Mono-10")
+; (setq default-frame-alist '((font . "DejaVu Sans Mono-10")))
+(set-frame-font "Source Code Pro Medium-10")
+(setq default-frame-alist '((font . "Source Code Pro Medium-10")))
 
 ;; Show matching parens (mixed style)
 (show-paren-mode 1)

@@ -219,8 +219,6 @@ inoremap <C-g><C-o> <C-x><C-o>
 
 " ...
 nnoremap <C-8> :pop<cr>
-nnoremap <C-c> :update<cr>
-inoremap <C-c> <esc>:update<cr>a
 
 " Copy/paste with X11
 nnoremap <Leader>y "+y
