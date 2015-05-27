@@ -142,6 +142,7 @@ before layers configuration."
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
+  (define-key global-map (kbd "C-h") 'ahs-highlight-now)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
