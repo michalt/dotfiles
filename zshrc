@@ -105,18 +105,22 @@ fi
 
 export EDITOR=vim
 export VIMHOME="${HOME}/.vim"
-export GREP_OPTIONS="--color"
-export BROWSER=google-chrome-beta
+export BROWSER=google-chrome
 
 # PATH for local bin directory.
-if [ -z "$(echo ${PATH} | grep ${HOME}/local/bin)" ] ; then
+if [ -z "$(echo ${PATH} | grep '^${HOME}/local/bin')" ] ; then
   export PATH="${HOME}/local/bin:${PATH}"
+  export LD_LIBRARY_PATH="${HOME}/local/lib:${LD_LIBRARY_PATH}"
   export MANPATH="${HOME}/local/man:${MANPATH}"
 fi
 
 # PATH for binaries installed by cabal.
-if [ -z "$(echo ${PATH} | grep ${HOME}/.cabal/bin)" ] ; then
+if [ -z "$(echo ${PATH} | grep '^${HOME}/.cabal/bin')" ] ; then
   export PATH="${HOME}/.cabal/bin:${PATH}"
+fi
+
+if [ -d ${HOME}/local/src/rust/src ] ; then
+  export RUST_SRC_PATH=${HOME}/local/src/rust/src
 fi
 
 #
@@ -124,6 +128,12 @@ fi
 #
 
 [[ -s /etc/profile.d/autojump.zsh ]] && source /etc/profile.d/autojump.zsh
+
+#
+# fzf
+#
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 #
 # Functions and aliases
@@ -134,6 +144,14 @@ function mkcd() {
     mkdir -p "$1"
   fi
   cd "$1"
+}
+
+function sswitch() {
+  if [[ -d "$1" && -d "$2" ]]; then
+    stow -D "$1" && stow "$2"
+  else
+    echo "wrong directories"
+  fi
 }
 
 alias pd="pushd"
@@ -161,6 +179,8 @@ alias vi="vim"
 alias gvimr="gvim --remote"
 alias bc="bc -q"
 alias xsel="xsel -b"
+alias makej="make -j8"
+alias makejj="make -j16"
 alias mps="ps -o pid,state,ruser,time,rss,command"
 alias tmuxm="tmux new -sm"
 alias tmuxi="tmux new -si"
@@ -179,6 +199,4 @@ alias reboot="sudo /sbin/reboot"
 alias poweroff="sudo /sbin/poweroff"
 alias shutdown="sudo /sbin/shutdown"
 
-if [ -f ~/.zshrc_local ] ; then
-  source $HOME/.zshrc_local
-fi
+[ -f ~/.zshrc_local ] && source $HOME/.zshrc_local
