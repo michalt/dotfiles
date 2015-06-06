@@ -143,6 +143,15 @@ before layers configuration."
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
   (define-key global-map (kbd "C-h") 'ahs-highlight-now)
+  (autoload 'haskell-indentation-enable-show-indentations "haskell-indentation")
+  (autoload 'haskell-indentation-disable-show-indentations "haskell-indentation")
+  (eval-after-load "helm-ag"
+    '(progn
+       (setq helm-ag-insert-at-point 'symbol)
+       (setq helm-ag-use-grep-ignore-list t)
+       (setq helm-ag-use-grep-ignore-list t)
+       )
+    )
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
