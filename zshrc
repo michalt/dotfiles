@@ -134,6 +134,13 @@ fi
 #
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_OPTS=--no-color
+
+#
+# Nix
+#
+
+[[ -s $HOME/.nix-profile/etc/profile.d/nix.sh ]] && source $HOME/.nix-profile/etc/profile.d/nix.sh
 
 #
 # Functions and aliases
