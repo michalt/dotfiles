@@ -105,7 +105,7 @@ fi
 
 export EDITOR=vim
 export VIMHOME="${HOME}/.vim"
-export BROWSER=google-chrome
+export BROWSER=google-chrome-beta
 
 # PATH for local bin directory.
 if [ -z "$(echo ${PATH} | grep '^${HOME}/local/bin')" ] ; then

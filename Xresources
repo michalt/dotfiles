@@ -118,7 +118,7 @@ xterm*VT100.Translations: #override\n\
   Ctrl Shift <KeyPress> v:insert-selection(CLIPBOARD, PRIMARY) \n\
 
 ! Work around some problem with highlighting with tmux...
-urxvt*termName: rxvt-256color
+urxvt*termName: rxvt
 
 urxvt*font: xft:Dejavu Sans Mono:size=9
 urxvt*boldFont: xft:Dejavu Sans Mono:size=9:bold
@@ -127,7 +127,7 @@ urxvt*scrollBar: false
 urxvt*urgentOnBell: true
 
 urxvt.perl-ext-common:      default,clipboard,url-select
-URxvt.url-launcher:         google-chrome-beta
+URxvt.url-select.launcher:  google-chrome-beta
 urxvt.url-select.underline: true
 urxvt.keysym.M-u:           perl:url-select:select_next
 urxvt.keysym.M-c:           perl:clipboard:copy
