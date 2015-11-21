@@ -28,10 +28,6 @@ zstyle ':vcs_info:*' formats "$fg[green]%s %b $fg[red]%u %c$reset_color"
 zstyle ':vcs_info:*' stagedstr 's'
 zstyle ':vcs_info:*' unstagedstr 'u'
 
-HISTFILE=~/.histfile
-HISTSIZE=16384
-SAVEHIST=8192
-
 setopt appendhistory
 setopt autocd
 setopt autopushd
@@ -91,37 +87,6 @@ PROMPT='%{$fg[red]%}${ULCORNER}%{$reset_color%} %{$fg[yellow]%}%m %{$fg[cyan]%}%
 
 umask u=rwx,g=rx,o=
 
-
-#
-# Exports
-#
-
-export LANG=en_US.UTF8
-
-if [ "$TERM" = "xterm" ]
-then
-  export TERM=xterm-256color
-fi
-
-export EDITOR=vim
-export VIMHOME="${HOME}/.vim"
-export BROWSER=google-chrome-beta
-
-# PATH for local bin directory.
-if [ -z "$(echo ${PATH} | grep '^${HOME}/local/bin')" ] ; then
-  export PATH="${HOME}/local/bin:${PATH}"
-  export LD_LIBRARY_PATH="${HOME}/local/lib:${LD_LIBRARY_PATH}"
-  export MANPATH="${HOME}/local/man:${MANPATH}"
-fi
-
-# PATH for binaries installed by cabal.
-if [ -z "$(echo ${PATH} | grep '^${HOME}/.cabal/bin')" ] ; then
-  export PATH="${HOME}/.cabal/bin:${PATH}"
-fi
-
-if [ -d ${HOME}/local/src/rust/src ] ; then
-  export RUST_SRC_PATH=${HOME}/local/src/rust/src
-fi
 
 #
 # Autojump
