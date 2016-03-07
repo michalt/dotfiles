@@ -1,39 +1,50 @@
-" no vi compatibility
-set nocompatible
+"
+" Plugins
+"
 
-" required for vundle
-filetype off
+call plug#begin('~/.vim/plugged')
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+Plug 'Shougo/neomru.vim'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neoyank.vim'
+Plug 'Shougo/unite-outline'
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'Shougo/vimshell'
+Plug 'Valloric/YouCompleteMe'
+Plug 'airblade/vim-rooter'
+Plug 'altercation/vim-colors-solarized'
+Plug 'bkad/CamelCaseMotion'
+Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
+Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
+Plug 'easymotion/vim-easymotion'
+Plug 'flazz/vim-colorschemes'
+Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'scrooloose/syntastic'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'tsukkee/unite-tag'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-" let Vundle manage Vundle
-Plugin 'gmarik/vundle'
+" Add plugins to &runtimepath
+call plug#end()
 
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'Twinside/vim-haskellFold'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'bling/vim-airline'
-Plugin 'feuerbach/vim-hs-module-name'
-Plugin 'godlygeek/tabular'
-Plugin 'idris-hackers/idris-vim'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'phildawes/racer'
-Plugin 'scrooloose/syntastic'
-Plugin 'sjl/gundo.vim'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-markdown'
-Plugin 'tpope/vim-surround'
-Plugin 'travitch/hasksyn'
-Plugin 'ujihisa/neco-ghc'
-Plugin 'wincent/Command-T'
-Plugin 'wting/rust.vim'
+"
+" General settings
+"
 
-Bundle 'a.vim'
-
-" filetype settings (required for vundle)
+" filetype settings
 filetype on
 filetype indent on
 filetype plugin on
@@ -43,18 +54,13 @@ set background=light
 let g:solarized_contrast="high"
 let g:solarized_visibility="high"
 colorscheme solarized
-
-let g:Powerline_colorscheme="solarized256"
+let g:airline_theme="solarized"
 
 " omnicompletion
 set omnifunc=syntaxcomplete#Complete
 
 " fsync doesn't hurt on a modern fs :)
 set fsync
-
-" search: incremental, highlight
-set incsearch
-set hlsearch
 
 " line numbering
 set number
@@ -69,30 +75,14 @@ set showmatch
 set ignorecase
 set smartcase
 
+" highlight search
+set hlsearch
+
 " better mouse support
 set ttymouse=xterm2
 
-" powerful backspace
-set backspace=indent,eol,start
-
-" split window below (preview, help, etc.)
-set splitbelow
-
-" status line always on
-set laststatus=2
-
-" redraw only when needed
-set lazyredraw
-
 " big nice viminfo
 set viminfo='1000,f1,:1000,/1000,n~/.viminfo
-set history=500
-
-" syntax based folding, not by default
-if has("folding")
-    set nofoldenable
-    set foldmethod=syntax
-endif
 
 " by default use spaces instead of tabs
 set expandtab
@@ -109,32 +99,19 @@ set showtabline=1
 
 " the line width
 set textwidth=80
-set colorcolumn=84
+set colorcolumn=81
 
 " wrapping is convenient
 set wrap
-set sidescroll=4
 
 " persistent undo
 set undodir=~/.vim/undodir
 set undofile
 set undolevels=1000
 
-" tags, or tags in upper directory
-set tags=tags;
-
 " spell checking
 set spelllang=en,pl
 set spellsuggest=10
-
-" additional context when scrolling
-set scrolloff=4
-set sidescrolloff=8
-
-" wild menu for commands
-set wildmenu
-set wildmode=full
-set wildignore=*.o,*.obj,*.hi,*.aux,*.toc,*.pdf,*.doc,*.class
 
 " virtual editing in block mode
 set virtualedit=block
@@ -149,140 +126,85 @@ set notitle
 
 " no bell
 set noerrorbells
-set visualbell
-set t_vb=
+set novisualbell
 
-if !has("gui_running")
-  set t_Co=16
-endif
+" use clipboard
+set clipboard=unnamedplus
 
-" mail specific stuff
-autocmd BufRead $HOME/.mutt/tmp/mutt* set ft=mail textwidth=72 spell
-
-" issues with latex
-autocmd BufRead,BufNewFile *.tex :set syntax=tex
-autocmd BufRead,BufNewFile *.tex :syntax spell toplevel
-autocmd BufRead,BufNewFile *.tex :set spell
-
-" set the right filetype
-autocmd BufRead,BufNewFile *.hsc set ft=haskell
-autocmd BufRead,BufNewFile *.mkd set ft=mkd
-autocmd BufRead,BufNewFile *.v set ft=coq
-autocmd BufRead,BufNewFile *.go set ft=go
-autocmd BufRead,BufNewFile *.rs set ft=rust
-
-autocmd FileType haskell set sts=4 sw=4
-autocmd FileType c set sts=0 sw=8 noet
-autocmd FileType cpp set sts=2 sw=2
-autocmd FileType cpp let g:syntastic_cpp_compiler_options='-std=c++11'
-autocmd FileType python set sts=4 sw=4
-autocmd FileType ruby set sts=4 sw=4
-autocmd FileType rust set sts=4 sw=4 colorcolumn=101
-autocmd FileType rust let b:AutoPairs={'(':')', '[':']', '{':'}','"':'"', '`':'`'}
-
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-
-" YouCompleteMe with neco-ghc
-let g:ycm_semantic_triggers={'haskell' : ['.']}
-let g:ycm_autoclose_preview_window_after_insertion=1
-let g:ycm_autoclose_preview_window_after_completion=1
-
-" Make eclim work nicely with YouCompleteMe
-let g:EclimCompletionMethod='omnifunc'
-
-" show the trailing whitespace in red
-highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-" but not in instert mode
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+" Syntax highlighting gets confused by long comments
+autocmd BufEnter * :syntax sync minlines=256
 
 " set leader
-let mapleader=","
-
-" Make syntastic populate list of errors (but don't open it by default)
-let g:syntastic_auto_loc_list=0
-let g:syntastic_always_populate_loc_list=1
+let mapleader=" "
 
 " make it more consistent
 nnoremap Y y$
 
-" buffers
-nnoremap <C-p> <ESC>:bprev<CR>
-nnoremap <C-n> <ESC>:bnext<CR>
-nnoremap <C-j> :buffers<CR>
-nnoremap <C-_> :A<CR> " Ctrl-7
+" when syntax highlighting goel wrong
+noremap <C-l> <C-l>:syntax sync fromstart<CR>
+inoremap <C-l> <ESC><C-l>:syntax sync fromstart<CR>a
 
-" omnicompletion
-inoremap <C-g><C-o> <C-x><C-o>
+" quickfix
+nnoremap <Leader>qo :copen<CR>
+nnoremap <Leader>qc :cclose<CR>
+nnoremap <Leader>qn :cnext<CR>
+nnoremap <Leader>qp :cprev<CR>
 
-" ...
-nnoremap <C-8> :pop<cr>
+"
+" Plugin configuration
+"
 
-" Copy/paste with X11
-nnoremap <Leader>y "+y
-nnoremap <Leader>p "+p
-vnoremap <Leader>y "+y
-vnoremap <Leader>p "+p
+" FZF
+nnoremap <Leader>F :<C-u>Files<CR>
+nnoremap <Leader>T :<C-u>Tags<CR>
 
-" mappings for F keys
-nnoremap <F8> :nohl<cr>
-inoremap <F8> <ESC>:nohl<cr>a
+" vim-multiple-cursors
 
-nnoremap <F9> :%s/\s\+$//g<cr>:nohl<cr>
-inoremap <F9> <ESC>:%s/\s\+//g<cr>:nohl<cr>
+let g:multi_cursor_use_default_mapping=0
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-h>'
+let g:multi_cursor_quit_key='<Esc>'
 
-nnoremap <F10> '[=']
-inoremap <F10> <ESC>'[=']
+" Unite
 
-nnoremap <F11> =i{
-inoremap <F11> <ESC>=i{
+let g:unite_source_grep_command = 'ag'
+let g:unite_source_grep_default_opts =
+  \ '--line-numbers --nocolor --nogroup --hidden --ignore ' .
+  \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+let g:unite_source_grep_recursive_opt = ''
 
-nnoremap <F12> gg=G
-inoremap <F12> <ESC>gg=G
+let g:unite_source_rec_async_command =
+  \ ['ag', '--follow', '--nocolor', '--nogroup',
+  \  '--hidden', '-g', '']
 
-inoremap <C-t> <right>
+call unite#custom#source('file,file/new,buffer,file_rec,line', 'matchers', 'matcher_fuzzy')
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
 
-nnoremap <C-i> :lnext<CR>
-nnoremap <C-y> :lprev<CR>
+" <C-u>
+nnoremap <Leader>f :<C-u>Unite -input= -resume -start-insert file_rec/async:!<CR>
+nnoremap <Leader>b :<C-u>Unite -start-insert buffer<CR>
+nnoremap <Leader>/ :<C-u>Unite -auto-preview -start-insert grep:.::<C-R><C-w><CR>
+nnoremap <Leader>? :<C-u>Unite -auto-preview -start-insert grep:.::<CR>
+nnoremap <Leader>P :<C-u>Unite -start-insert history/yank<CR>
+nnoremap <Leader>h :<C-u>Unite -start-insert neomru/file<CR>
+nnoremap <Leader>s :<C-u>Unite -auto-preview -input=<C-R><C-w> -start-insert line<CR><right>
+nnoremap <Leader>S :<C-u>Unite -auto-preview -start-insert line<CR>
+nnoremap <Leader>o :<C-u>Unite -start-insert outline<CR>
+nnoremap <Leader>t :<C-u>Unite -auto-preview -start-insert tag<CR>
+nnoremap <Leader>l :<C-u>UniteResume<CR>
 
-" CommandT
-nnoremap <silent> <Leader>t :CommandTMRU<CR>
-let g:CommandTMatchWindowAtTop=1
+" YouCompleteMe
 
-" supertab
-let g:SuperTabDefaultCompletionType='<c-n>'
+let g:ycm_semantic_triggers = {'haskell' : ['.']}
 
-" gundo
-let g:gundo_right=1
-nnoremap <Leader>u :GundoToggle<CR>
+" EasyAlign
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
-" tcomment
-let g:tcommentBlankLines=0
-let g:tcommentMapLeaderOp1='<Leader>c'
-let g:tcommentMapLeaderOp2='<Leader>C'
+" Syntastic
+let g:syntastic_hs_checkers=['ghc_mod']
 
-" EasyMotion
-hi link EasyMotionTarget Special
-hi link EasyMotionShade Comment
-
-" Haskell module name
-let g:hs_module_no_mappings=1
-
-" easy link opening in a browser
-function! Browser ()
-  let line0 = getline (".")
-  let line = matchstr (line0, "http[^ ]*")
-  :if line==""
-  let line = matchstr (line0, "ftp[^ ]*")
-  :endif
-  :if line==""
-  let line = matchstr (line0, "file[^ ]*")
-  :endif
-  let line = escape (line, "#?&;|%")
-  " echo line
-  exec ":silent !chromium ".line
-endfunction
-
-nnoremap <F7> :call Browser ()<cr>
+" CamelCaseMotion
+call camelcasemotion#CreateMotionMappings('')
