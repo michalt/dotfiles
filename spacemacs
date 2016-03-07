@@ -36,12 +36,15 @@ values."
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     ;; spell-checking
+     spell-checking
      syntax-checking
-     ;; version-control
+     version-control
      (haskell
       :variables
+      haskell-enable-ghc-mod-support nil
       haskell-enable-hindent-style "johan-tibell")
+     idris
+     c-c++
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -102,7 +105,7 @@ values."
                                :width normal
                                :powerline-scale 1.1)
    ;; The leader key
-   dotspacemacs-leader-key ","
+   dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
    ;; (default "M-m")
    dotspacemacs-emacs-leader-key "M-m"
@@ -193,6 +196,8 @@ values."
    ;; specified with an installed package.
    ;; Not used for now. (default nil)
    dotspacemacs-default-package-repository nil
+
+   dotspacemacs-whitespace-cleanup 'changed
    ))
 
 (defun dotspacemacs/user-init ()
@@ -220,6 +225,12 @@ user code."
   "Configuration function for user code.
  This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
+  ;; Helps with large projects.
+  (setq projectile-enable-caching t)
+  ;; temporary workaround for helm-projectile-find-file being slow
+  (setq projectile-completion-system 'helm)
+  (spacemacs/set-leader-keys
+    "pf"  'projectile-find-file)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
