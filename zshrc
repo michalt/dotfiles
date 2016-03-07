@@ -78,7 +78,7 @@ esac
 ULCORNER="┌"
 LLCORNER="└"
 HBAR="─"
-PROMPT='%{$fg[red]%}${ULCORNER}%{$reset_color%} %{$fg[yellow]%}%m %{$fg[cyan]%}%48<..<%~%<<%(1j.  %j  .  )%{$reset_color%}${vcs_info_msg_0_}
+PROMPT='%{$fg[red]%}${ULCORNER}%{$reset_color%} %{$fg[yellow]%}%m  %{$fg[cyan]%}%48<..<%~%<<%(1j.  %j  .  )%{$reset_color%}%{$fg[blue]%}${WITHIN_NIX}%{$reset_color%}${vcs_info_msg_0_}
 %{$fg[red]%}${LLCORNER}%{$reset_color%} '
 
 #
@@ -99,7 +99,9 @@ umask u=rwx,g=rx,o=
 #
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_OPTS=--no-color
+export FZF_DEFAULT_OPTS='--no-color'
+export FZF_DEFAULT_COMMAND='ag -l -g ""'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 #
 # Nix
@@ -123,6 +125,34 @@ function sswitch() {
     stow -D "$1" && stow "$2"
   else
     echo "wrong directories"
+  fi
+}
+
+function nix-zsh() {
+  if [[ -z "$1" ]]; then
+    echo "Usage: nix-zsh <env>"
+  elif [[ ! -z "$WITHIN_NIX" ]]; then
+    echo "Nested nix-shells are not supported"
+  else
+    WITHIN_NIX="n:$1  " \
+      nix-shell --command ${SHELL} -A $1 ${HOME}/default.nix $@[2,-1]
+  fi
+}
+
+function nix-zsh2() {
+  local NIX_PROFILE_PATH="$HOME/.nix-profiles/$1"
+  if [[ -z "$1" ]]; then
+    echo "Usage: nix-source <env>"
+  elif [[ ! -z "$WITHIN_NIX" ]]; then
+    echo "Nested nix-shells are not supported"
+  elif [[ ! -d "$NIX_PROFILE_PATH" ]]; then
+    echo "No directory $NIX_PROFILE_PATH"
+  else
+    PATH="$NIX_PROFILE_PATH/bin:$PATH" \
+    LIBRARY_PATH="$NIX_PROFILE_PATH/lib:$LIBRARY_PATH" \
+    C_INCLUDE_PATH="$NIX_PROFILE_PATH/include:$C_INCLUDE_PATH" \
+    WITHIN_NIX="n:$1  " \
+      $SHELL
   fi
 }
 
