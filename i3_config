@@ -137,3 +137,5 @@ bar {
   status_command i3status --config ~/.i3/status_config
   font pango:Monospace 8
 }
+
+exec /usr/libexec/gnome-settings-daemon

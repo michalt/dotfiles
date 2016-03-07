@@ -12,19 +12,38 @@ general {
 }
 
 order += "cpu_usage"
-order += "load"
+order += "cpu_temperature 0"
+order += "cpu_temperature 1"
+order += "cpu_temperature 2"
+order += "cpu_temperature 3"
 order += "tztime local"
 
 tztime local {
-  format = "%Y-%m-%d %H:%M"
+  format = " %Y-%m-%d %H:%M "
 }
 
 cpu_usage {
-  format = "%usage"
+  format = " %usage "
 }
 
-load {
-  format = "%1min %5min %15min"
+cpu_temperature 0 {
+  format = " %degrees°C "
+  path = "/sys/devices/platform/coretemp.0/hwmon/hwmon3/temp1_input"
+}
+
+cpu_temperature 1 {
+  format = " %degrees°C "
+  path = "/sys/devices/platform/coretemp.0/hwmon/hwmon3/temp2_input"
+}
+
+cpu_temperature 2 {
+  format = " %degrees°C "
+  path = "/sys/devices/platform/coretemp.0/hwmon/hwmon3/temp3_input"
+}
+
+cpu_temperature 3 {
+  format = " %degrees°C "
+  path = "/sys/devices/platform/coretemp.0/hwmon/hwmon3/temp4_input"
 }
 
 # wireless wlan0 {
