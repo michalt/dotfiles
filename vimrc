@@ -15,12 +15,13 @@ Plug 'Shougo/vimshell'
 Plug 'Valloric/YouCompleteMe'
 Plug 'airblade/vim-rooter'
 Plug 'altercation/vim-colors-solarized'
-Plug 'bkad/CamelCaseMotion'
+Plug 'chaoren/vim-wordmotion'
 Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
 Plug 'easymotion/vim-easymotion'
 Plug 'flazz/vim-colorschemes'
 Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
+Plug 'itchyny/vim-haskell-indent'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -105,7 +106,7 @@ set colorcolumn=81
 set wrap
 
 " persistent undo
-set undodir=~/.vim/undodir
+set undodir=~/.vim/undo
 set undofile
 set undolevels=1000
 
@@ -186,7 +187,7 @@ call unite#filters#sorter_default#use(['sorter_rank'])
 nnoremap <Leader>f :<C-u>Unite -input= -resume -start-insert file_rec/async:!<CR>
 nnoremap <Leader>b :<C-u>Unite -start-insert buffer<CR>
 nnoremap <Leader>/ :<C-u>Unite -auto-preview -start-insert grep:.::<C-R><C-w><CR>
-nnoremap <Leader>? :<C-u>Unite -auto-preview -start-insert grep:.::<CR>
+nnoremap <Leader>? :<C-u>Unite -auto-preview -start-insert grep<CR>
 nnoremap <Leader>P :<C-u>Unite -start-insert history/yank<CR>
 nnoremap <Leader>h :<C-u>Unite -start-insert neomru/file<CR>
 nnoremap <Leader>s :<C-u>Unite -auto-preview -input=<C-R><C-w> -start-insert line<CR><right>
@@ -205,6 +206,3 @@ nmap ga <Plug>(EasyAlign)
 
 " Syntastic
 let g:syntastic_hs_checkers=['ghc_mod']
-
-" CamelCaseMotion
-call camelcasemotion#CreateMotionMappings('')

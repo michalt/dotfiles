@@ -139,3 +139,6 @@ bar {
 }
 
 exec /usr/libexec/gnome-settings-daemon
+exec "/usr/bin/xset r rate 220 51"
+exec "/usr/bin/xsetroot -solid '#002b35'"
+exec "/usr/bin/xsetroot -cursor_name left_ptr"

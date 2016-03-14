@@ -231,6 +231,7 @@ layers configuration. You are free to put any user code."
   (setq projectile-completion-system 'helm)
   (spacemacs/set-leader-keys
     "pf"  'projectile-find-file)
+  (global-subword-mode +1)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
