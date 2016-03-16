@@ -21,11 +21,11 @@ Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
 Plug 'easymotion/vim-easymotion'
 Plug 'flazz/vim-colorschemes'
 Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
-Plug 'itchyny/vim-haskell-indent'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'neovimhaskell/haskell-vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'scrooloose/syntastic'
@@ -192,7 +192,7 @@ nnoremap <Leader>P :<C-u>Unite -start-insert history/yank<CR>
 nnoremap <Leader>h :<C-u>Unite -start-insert neomru/file<CR>
 nnoremap <Leader>s :<C-u>Unite -auto-preview -input=<C-R><C-w> -start-insert line<CR><right>
 nnoremap <Leader>S :<C-u>Unite -auto-preview -start-insert line<CR>
-nnoremap <Leader>o :<C-u>Unite -start-insert outline<CR>
+nnoremap <Leader>o :<C-u>Unite -start-insert -auto-preview outline<CR>
 nnoremap <Leader>t :<C-u>Unite -auto-preview -start-insert tag<CR>
 nnoremap <Leader>l :<C-u>UniteResume<CR>
 
