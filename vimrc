@@ -15,13 +15,13 @@ Plug 'Shougo/vimshell'
 Plug 'Valloric/YouCompleteMe'
 Plug 'airblade/vim-rooter'
 Plug 'altercation/vim-colors-solarized'
-Plug 'chaoren/vim-wordmotion'
 Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
 Plug 'easymotion/vim-easymotion'
 Plug 'flazz/vim-colorschemes'
 Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
 Plug 'jiangmiao/auto-pairs'
+Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
@@ -30,8 +30,7 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'scrooloose/syntastic'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'tomtom/tcomment_vim'
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tsukkee/unite-tag'
@@ -137,6 +136,9 @@ autocmd BufEnter * :syntax sync minlines=256
 
 " set leader
 let mapleader=" "
+
+" Ctrl-Backspace
+imap <C-BS> <C-W>
 
 " make it more consistent
 nnoremap Y y$
