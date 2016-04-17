@@ -36,6 +36,7 @@ Plug 'tpope/vim-surround'
 Plug 'tsukkee/unite-tag'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'wellle/targets.vim'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -103,6 +104,9 @@ set colorcolumn=81
 
 " wrapping is convenient
 set wrap
+
+" highlight current line
+set cursorline
 
 " persistent undo
 set undodir=~/.vim/undo
