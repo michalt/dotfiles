@@ -100,7 +100,7 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 12
+                               :size 13
                                :weight semi-bold
                                :width normal
                                :powerline-scale 1.1)
@@ -198,6 +198,7 @@ values."
    dotspacemacs-default-package-repository nil
 
    dotspacemacs-whitespace-cleanup 'changed
+   dotspacemacs-distinguish-gui-tab t
    ))
 
 (defun dotspacemacs/user-init ()
@@ -232,6 +233,7 @@ layers configuration. You are free to put any user code."
   (spacemacs/set-leader-keys
     "pf"  'projectile-find-file)
   (global-subword-mode +1)
+  (setq haskell-tags-on-save nil)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will

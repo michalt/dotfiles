@@ -106,6 +106,10 @@ bindsym $win+minus scratchpad show
 bindsym $win+m [title="^ncmpcpp"] scratchpad show
 bindsym $win+h [title="^htop"] scratchpad show
 
+# shortcuts for growing/shrking a window
+bindsym $win+y resize grow left 240
+bindsym $win+f resize shrink left 240
+
 # reload the configuration file
 bindsym $win+Shift+r reload
 
