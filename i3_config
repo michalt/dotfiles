@@ -134,6 +134,8 @@ mode "resize" {
 
 bindsym $alt+r mode "resize"
 
+for_window [title="vimfzf"] floating enable
+
 # start i3bar
 bar {
   position top
