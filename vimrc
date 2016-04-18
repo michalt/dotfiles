@@ -26,6 +26,8 @@ Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-oblique'
+Plug 'junegunn/vim-pseudocl'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'scrooloose/syntastic'
@@ -162,7 +164,7 @@ nnoremap <Leader>qp :cprev<CR>
 "
 
 " FZF
-nnoremap <Leader>F :<C-u>Files<CR>
+nnoremap <Leader>f :<C-u>Files<CR>
 
 " Use urxvt
 let g:fzf_launcher = 'urxvt -title vimfzf -geometry 100x40 -e sh -c %s'
@@ -191,16 +193,14 @@ call unite#custom#source('file,file/new,buffer,file_rec,line', 'matchers', 'matc
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 
-nnoremap <Leader>f :<C-u>Unite -input= -resume -start-insert file_rec/async:!<CR>
+"nnoremap <Leader>f :<C-u>Unite -input= -resume -start-insert file_rec/async:!<CR>
 nnoremap <Leader>b :<C-u>Unite -start-insert buffer<CR>
 nnoremap <Leader>/ :<C-u>Unite -auto-preview -start-insert grep:.::<C-R><C-A><CR>
 nnoremap <Leader>? :<C-u>Unite -auto-preview -start-insert grep:.<CR>
 nnoremap <Leader>P :<C-u>Unite -start-insert history/yank<CR>
 nnoremap <Leader>h :<C-u>Unite -start-insert neomru/file<CR>
-nnoremap <Leader>s :<C-u>Unite -auto-preview -input=<C-R><C-w> -start-insert line<CR><right>
+nnoremap <Leader>s :<C-u>Unite -auto-preview -input=<C-R><C-A> -start-insert line<CR><right>
 nnoremap <Leader>S :<C-u>Unite -auto-preview -start-insert line:.<CR>
-nnoremap <Leader>o :<C-u>Unite -start-insert -auto-preview outline<CR>
-nnoremap <Leader>t :<C-u>Unite -auto-preview -start-insert tag<CR>
 nnoremap <Leader>l :<C-u>UniteResume<CR>
 
 " YouCompleteMe
