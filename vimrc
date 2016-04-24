@@ -13,7 +13,6 @@ Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Shougo/vimshell'
 Plug 'Valloric/YouCompleteMe'
-Plug 'airblade/vim-rooter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
@@ -169,6 +168,8 @@ nnoremap <Leader>f :<C-u>Files<CR>
 nnoremap <Leader>b :<C-u>Buffers<CR>
 nnoremap <Leader>h :<C-u>History:<CR>
 nnoremap <Leader>c :<C-u>Commands<CR>
+nnoremap <Leader>s :<C-u>BLines<CR>
+nnoremap <Leader>S :<C-u>Lines<CR>
 
 " Use urxvt
 let g:fzf_launcher = 'urxvt -title vimfzf -geometry 100x40 -e sh -c %s'
@@ -199,11 +200,11 @@ call unite#filters#sorter_default#use(['sorter_rank'])
 
 " nnoremap <Leader>f :<C-u>Unite -input= -resume -start-insert file_rec/async:!<CR>
 " nnoremap <Leader>b :<C-u>Unite -start-insert buffer<CR>
-nnoremap <Leader>/ :<C-u>Unite -auto-preview -start-insert grep:.::<C-R><C-A><CR>
+nnoremap <Leader>/ :<C-u>Unite -auto-preview -start-insert grep:.::<C-R><C-W><CR>
 nnoremap <Leader>? :<C-u>Unite -auto-preview -start-insert grep:.<CR>
 nnoremap <Leader>P :<C-u>Unite -start-insert history/yank<CR>
-nnoremap <Leader>s :<C-u>Unite -auto-preview -input=<C-R><C-A> -start-insert line<CR><right>
-nnoremap <Leader>S :<C-u>Unite -auto-preview -start-insert line:.<CR>
+" nnoremap <Leader>s :<C-u>Unite -auto-preview -input=<C-R><C-W> -start-insert line<CR><right>
+" nnoremap <Leader>S :<C-u>Unite -auto-preview -start-insert line:.<CR>
 nnoremap <Leader>l :<C-u>UniteResume<CR>
 
 " YouCompleteMe
