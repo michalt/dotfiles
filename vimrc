@@ -38,6 +38,7 @@ Plug 'tsukkee/unite-tag'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'wellle/targets.vim'
+Plug 'mbbill/undotree'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -157,6 +158,20 @@ nnoremap <Leader>qo :copen<CR>
 nnoremap <Leader>qc :cclose<CR>
 nnoremap <Leader>qn :cnext<CR>
 nnoremap <Leader>qp :cprev<CR>
+
+function! ToggleMovement(firstOp, thenOp)
+  let pos = getpos('.')
+  execute "normal! " . a:firstOp
+  if pos == getpos('.')
+    execute "normal! " . a:thenOp
+  endif
+endfunction
+
+" The original carat 0 swap
+nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
+
+inoremap <C-g> <ESC>
+inoremap <M-g> <ESC>
 
 "
 " Plugin configuration
