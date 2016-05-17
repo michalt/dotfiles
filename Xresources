@@ -139,8 +139,7 @@ xterm*VT100.Translations: #override\n\
 
 !!! URxvt
 
-! Work around some problem with highlighting with tmux...
-!urxvt*termName: rxvt
+urxvt*termName: rxvt-unicode-256color
 
 urxvt*font: xft:Dejavu Sans Mono:size=8
 urxvt*boldFont: xft:Dejavu Sans Mono:size=8:bold
