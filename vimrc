@@ -39,6 +39,7 @@ Plug 'tsukkee/unite-tag'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'wellle/targets.vim'
+Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 
 " Add plugins to &runtimepath
@@ -68,6 +69,9 @@ set fsync
 
 " line numbering
 set number
+set relativenumber
+autocmd FocusLost * :set norelativenumber
+autocmd FocusGained * :set relativenumber
 
 " show the command line
 set showcmd
@@ -233,3 +237,6 @@ nmap ga <Plug>(EasyAlign)
 
 " Syntastic
 let g:syntastic_hs_checkers=['ghc_mod']
+
+" vim-session
+let g:session_autoload = 'no'
