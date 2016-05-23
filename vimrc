@@ -114,6 +114,15 @@ set wrap
 
 " highlight current line
 set cursorline
+function! s:Blink()
+  setlocal nocursorline
+  redraw
+  sleep 50m
+
+  setlocal cursorline
+  redraw
+endfunction
+autocmd FocusGained * call s:Blink()
 
 " persistent undo
 set undodir=~/.vim/undo

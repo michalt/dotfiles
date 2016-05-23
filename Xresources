@@ -140,6 +140,7 @@ xterm*VT100.Translations: #override\n\
 !!! URxvt
 
 urxvt*termName: rxvt-unicode-256color
+urxvt.cursorBlink: 1
 
 urxvt*font: xft:Dejavu Sans Mono:size=8
 urxvt*boldFont: xft:Dejavu Sans Mono:size=8:bold
