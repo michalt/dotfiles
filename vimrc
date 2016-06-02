@@ -39,6 +39,7 @@ Plug 'tsukkee/unite-tag'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'wellle/targets.vim'
+Plug 'wellle/targets.vim'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 
@@ -186,6 +187,11 @@ nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
 
 inoremap <C-g> <ESC>
 inoremap <M-g> <ESC>
+
+nnoremap <C-J> <C-w>j
+nnoremap <C-K> <C-w>k
+nnoremap <C-L> <C-w>l
+nnoremap <C-H> <C-w>h
 
 "
 " Plugin configuration

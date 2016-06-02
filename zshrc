@@ -23,8 +23,8 @@ colors
 compinit
 
 zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' actionformats "$fg[green]%s %b $fg[red]%a %u %c$reset_color"
-zstyle ':vcs_info:*' formats "$fg[green]%s %b $fg[red]%u %c$reset_color"
+zstyle ':vcs_info:*' actionformats "%{$fg[red]%}%a %u%c%{$reset_color%} %{$fg[green]%}%b%{$reset_color%}"
+zstyle ':vcs_info:*' formats "%{$fg[red]%}%a %u%c%{$reset_color%} %{$fg[green]%}%b%{$reset_color%}"
 zstyle ':vcs_info:*' stagedstr 's'
 zstyle ':vcs_info:*' unstagedstr 'u'
 
@@ -75,11 +75,16 @@ case $TERM in
     ;;
 esac
 
-ULCORNER="┌"
-LLCORNER="└"
-HBAR="─"
-PROMPT='%{$fg[red]%}${ULCORNER}%{$reset_color%} %{$fg[yellow]%}%m  %{$fg[cyan]%}%48<..<%~%<<%(1j.  %j  .  )%{$reset_color%}%{$fg[blue]%}${WITHIN_NIX}%{$reset_color%}${vcs_info_msg_0_}
-%{$fg[red]%}${LLCORNER}%{$reset_color%} '
+if [[ -z "$SSH_CLIENT"  ]]; then
+  prompt_host="%{$fg[yellow]%}%m%{$reset_color%}"
+else
+  prompt_host="%{$fg[red]%}%m%{$reset_color%}"
+fi
+prompt_dir="%{$fg[yellow]%}%16<..<%d%<<%{$reset_color%}"
+prompt_time="%{$fg[yellow]%}%T%{$reset_color%}"
+prompt_jobs="%(1j.%{$fg[red]%}.%{$fg[yellow]%})%j%{$reset_color%}"
+RPROMPT='${vcs_info_msg_0_} ${prompt_host} ${prompt_time}'
+PROMPT='${prompt_dir}%{$fg[yellow]%}:%{$reset_color%}${prompt_jobs} '
 
 #
 # Umask
