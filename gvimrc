@@ -1,4 +1,4 @@
-set guifont=Source\ Code\ Pro\ Medium\ 8
+set guifont=Source\ Code\ Pro\ 10
 " Disable menubar
 set guioptions-=m
 " Disable toolbar
