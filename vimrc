@@ -164,6 +164,9 @@ imap <C-BS> <C-W>
 " make it more consistent
 nnoremap Y y$
 
+" select the pasted text
+noremap gV `[v`]
+
 " when syntax highlighting goel wrong
 noremap <C-l> <C-l>:syntax sync fromstart<CR>
 inoremap <C-l> <ESC><C-l>:syntax sync fromstart<CR>a
