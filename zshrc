@@ -75,7 +75,7 @@ case $TERM in
     ;;
 esac
 
-if [[ -z "$SSH_CLIENT"  ]]; then
+if [[ -z "$SSH_CONNECTION"  ]]; then
   prompt_host="%{$fg[yellow]%}%m%{$reset_color%}"
 else
   prompt_host="%{$fg[red]%}%m%{$reset_color%}"
