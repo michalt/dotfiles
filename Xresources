@@ -109,8 +109,9 @@ xterm*pointerColorBackground:S_base01
 xterm*pointerColorForeground:S_base1
 
 xterm*renderFont: true
-xterm*faceName: xft:Droid Sans Mono:size=10
+xterm*faceName: xft:PragmataPro Mono:size=10
 
+xterm*scrollBar: false
 xterm*bellIsUrgent: true
 xterm*visualBell: false
 xterm*minBufSize: 16384
@@ -142,8 +143,10 @@ xterm*VT100.Translations: #override\n\
 urxvt*termName: rxvt-unicode-256color
 urxvt.cursorBlink: 1
 
-urxvt*font: xft:Dejavu Sans Mono:size=8
-urxvt*boldFont: xft:Dejavu Sans Mono:size=8:bold
+urxvt*font: xft:PragmataPro Mono:size=9
+urxvt*boldFont: xft:PragmataPro Mono:size=9:bold
+urxvt.letterSpace: -1
+urxvt.lineSpace: -1
 
 urxvt*scrollBar: false
 urxvt*urgentOnBell: true

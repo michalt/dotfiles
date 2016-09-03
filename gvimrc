@@ -1,4 +1,4 @@
-set guifont=Source\ Code\ Pro\ 10
+set guifont=PragmataPro\ Mono\ 10
 " Disable menubar
 set guioptions-=m
 " Disable toolbar
