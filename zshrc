@@ -92,6 +92,11 @@ PROMPT='${prompt_dir}%{$fg[yellow]%}:%{$reset_color%}${prompt_jobs} '
 
 umask u=rwx,g=rx,o=
 
+#
+# Env
+#
+
+export CPUS=$(nproc)
 
 #
 # Autojump

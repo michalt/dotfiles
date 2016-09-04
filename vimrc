@@ -18,6 +18,7 @@ Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
 Plug 'easymotion/vim-easymotion'
 Plug 'flazz/vim-colorschemes'
+Plug 'honza/vim-snippets'
 Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
 Plug 'itchyny/vim-cursorword'
 Plug 'jiangmiao/auto-pairs'
@@ -31,6 +32,7 @@ Plug 'mbbill/undotree'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'scrooloose/syntastic'
+Plug 'sirver/ultisnips'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-sensible'
