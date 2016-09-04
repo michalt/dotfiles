@@ -209,8 +209,7 @@ nnoremap <Leader>c :<C-u>Commands<CR>
 nnoremap <Leader>s :<C-u>BLines<CR>
 nnoremap <Leader>S :<C-u>Lines<CR>
 nnoremap <Leader>/ :<C-u>call fzf#vim#ag("<C-R><C-W>", { 'options':  '--color hl:9,hl+:9 --preview="/home/michal/code/show_context/show_context.sh {}" --preview-window up:8' })<CR>
-" Use urxvt
-let g:fzf_launcher = 'urxvt -title vimfzf -geometry 100x40 -e sh -c %s'
+" let g:fzf_launcher = 'xterm -title vimfzf -geometry 100x40 -e sh -c %s'
 
 " vim-multiple-cursors
 
