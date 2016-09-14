@@ -14,6 +14,7 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Shougo/vimshell'
 Plug 'Valloric/YouCompleteMe'
 Plug 'altercation/vim-colors-solarized'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
 Plug 'easymotion/vim-easymotion'
@@ -44,6 +45,7 @@ Plug 'wellle/targets.vim'
 Plug 'wellle/targets.vim'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
+
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -193,10 +195,11 @@ nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
 inoremap <C-g> <ESC>
 inoremap <M-g> <ESC>
 
-nnoremap <C-J> <C-w>j
-nnoremap <C-K> <C-w>k
-nnoremap <C-L> <C-w>l
-nnoremap <C-H> <C-w>h
+" Should be handled by vim-tmux-navigator
+" nnoremap <C-J> <C-w>j
+" nnoremap <C-K> <C-w>k
+" nnoremap <C-L> <C-w>l
+" nnoremap <C-H> <C-w>h
 
 "
 " Plugin configuration
