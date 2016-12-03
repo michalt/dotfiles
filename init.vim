@@ -5,8 +5,8 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-" Plug 'Valloric/YouCompleteMe'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'ervandew/supertab'
 Plug 'altercation/vim-colors-solarized'
 Plug 'christoomey/vim-tmux-navigator'
@@ -67,8 +67,6 @@ set fsync
 " line numbering
 set number
 set relativenumber
-autocmd FocusLost * :set norelativenumber
-autocmd FocusGained * :set relativenumber
 
 " show the command line
 set showcmd
@@ -82,9 +80,6 @@ set smartcase
 
 " highlight search
 set hlsearch
-
-" big nice viminfo
-" set viminfo='1000,f1,:1000,/1000,n~/.viminfo
 
 " by default use spaces instead of tabs
 set expandtab
@@ -106,17 +101,8 @@ set colorcolumn=81
 " wrapping is convenient
 set wrap
 
-" highlight current line
-set cursorline
-function! s:Blink()
-  setlocal nocursorline
-  redraw
-  sleep 50m
-
-  setlocal cursorline
-  redraw
-endfunction
-autocmd FocusGained * call s:Blink()
+" don't redraw when executing macros, etc.
+set lazyredraw
 
 " persistent undo
 set undodir=~/.vim/undo
@@ -145,8 +131,20 @@ set novisualbell
 " use clipboard
 set clipboard=unnamedplus
 
+set ttimeoutlen=0
+
 " Syntax highlighting gets confused by long comments
-autocmd BufEnter * :syntax sync minlines=512
+autocmd BufEnter * :syntax sync minlines=1024
+
+" Reload file on change
+autocmd BufEnter,FocusGained * checktime
+
+" only enable the cursor line for the active window
+autocmd WinEnter,FocusGained * setlocal cursorline
+autocmd WinLeave,FocusLost * setlocal nocursorline
+
+" colors
+hi! VertSplit ctermfg=7 ctermbg=7 term=NONE
 
 " set leader
 let mapleader=" "
@@ -184,17 +182,23 @@ nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
 inoremap <C-g> <ESC>
 inoremap <M-g> <ESC>
 
-" Should be handled by vim-tmux-navigator
-" nnoremap <C-J> <C-w>j
-" nnoremap <C-K> <C-w>k
-" nnoremap <C-L> <C-w>l
-" nnoremap <C-H> <C-w>h
-
 "
 " Plugin configuration
 "
 
 " FZF
+
+" File preview using Highlight
+let g:fzf_files_options =
+  \ '--preview "(highlight -O ansi {} || cat {}) 2> /dev/null | head -'.&lines.'"'
+
+" Use ripgrep and highlight the line
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%', '?'),
+  \   <bang>0)
 
 nnoremap <Leader>f :<C-u>Files<CR>
 nnoremap <Leader>b :<C-u>Buffers<CR>
@@ -202,8 +206,7 @@ nnoremap <Leader>h :<C-u>History:<CR>
 nnoremap <Leader>c :<C-u>Commands<CR>
 nnoremap <Leader>s :<C-u>BLines<CR>
 nnoremap <Leader>S :<C-u>Lines<CR>
-nnoremap <Leader>/ :<C-u>call fzf#vim#ag("<C-R><C-W>", { 'options':  '--color hl:9,hl+:9 --preview="/home/michal/code/show_context/show_context.sh {}" --preview-window up:8' })<CR>
-" let g:fzf_launcher = 'xterm -title vimfzf -geometry 100x40 -e sh -c %s'
+nnoremap <Leader>/ :<C-u>Rg <C-R><C-W><CR>
 
 " vim-multiple-cursors
 
@@ -212,31 +215,6 @@ let g:multi_cursor_next_key='<C-n>'
 let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-h>'
 let g:multi_cursor_quit_key='<Esc>'
-
-" Unite
-
-" let g:unite_source_grep_command = 'ag'
-" let g:unite_source_grep_default_opts =
-"   \ '--line-numbers --nocolor --nogroup --hidden --ignore ' .
-"   \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
-" let g:unite_source_grep_recursive_opt = ''
-
-" let g:unite_source_rec_async_command =
-"   \ ['ag', '--follow', '--nocolor', '--nogroup',
-"   \  '--hidden', '-g', '']
-
-" call unite#custom#source('file,file/new,buffer,file_rec,line', 'matchers', 'matcher_fuzzy')
-" call unite#filters#matcher_default#use(['matcher_fuzzy'])
-" call unite#filters#sorter_default#use(['sorter_rank'])
-
-" " nnoremap <Leader>f :<C-u>Unite -input= -resume -start-insert file_rec/async:!<CR>
-" " nnoremap <Leader>b :<C-u>Unite -start-insert buffer<CR>
-" " nnoremap <Leader>/ :<C-u>Unite -auto-preview -start-insert grep:.::<C-R><C-W><CR>
-" nnoremap <Leader>? :<C-u>Unite -auto-preview -start-insert grep:.<CR>
-" nnoremap <Leader>P :<C-u>Unite -start-insert history/yank<CR>
-" " nnoremap <Leader>s :<C-u>Unite -auto-preview -input=<C-R><C-W> -start-insert line<CR><right>
-" " nnoremap <Leader>S :<C-u>Unite -auto-preview -start-insert line:.<CR>
-" nnoremap <Leader>l :<C-u>UniteResume<CR>
 
 " supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
