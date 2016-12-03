@@ -9,7 +9,7 @@ then
     export TERM=xterm-256color
 fi
 
-export EDITOR=vim
+export EDITOR=nvim
 export VIMHOME="${HOME}/.vim"
 export BROWSER=google-chrome-beta
 
@@ -27,6 +27,10 @@ fi
 
 if [ -d ${HOME}/local/src/rust/src ] ; then
     export RUST_SRC_PATH=${HOME}/local/src/rust/src
+fi
+
+if [ -f  /home/michal/.nix-profile/etc/profile.d/nix.sh ] ; then
+    source /home/michal/.nix-profile/etc/profile.d/nix.sh
 fi
 
 [ -f ~/.zshenv_local ] && source $HOME/.zshenv_local
