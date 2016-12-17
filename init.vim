@@ -207,6 +207,7 @@ nnoremap <Leader>c :<C-u>Commands<CR>
 nnoremap <Leader>s :<C-u>BLines<CR>
 nnoremap <Leader>S :<C-u>Lines<CR>
 nnoremap <Leader>/ :<C-u>Rg <C-R><C-W><CR>
+nnoremap <Leader>? :<C-u>Rg 
 
 " vim-multiple-cursors
 
