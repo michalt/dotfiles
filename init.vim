@@ -2,7 +2,7 @@
 " Plugins
 "
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
