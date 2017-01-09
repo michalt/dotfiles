@@ -220,7 +220,8 @@ let g:multi_cursor_quit_key='<Esc>'
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " deoplete
-let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup=1
+let g:deoplete#auto_complete_delay=100
 
 " YouCompleteMe
 
