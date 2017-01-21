@@ -2,17 +2,17 @@
 " Plugins
 "
 
-call plug#begin('~/.local/share/nvim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'ervandew/supertab'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'altercation/vim-colors-solarized'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
 Plug 'easymotion/vim-easymotion'
+Plug 'ervandew/supertab'
 Plug 'flazz/vim-colorschemes'
 Plug 'honza/vim-snippets'
 Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
@@ -25,6 +25,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-oblique'
 Plug 'junegunn/vim-pseudocl'
 Plug 'mbbill/undotree'
+Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'sirver/ultisnips'
@@ -104,7 +105,7 @@ set wrap
 set lazyredraw
 
 " persistent undo
-set undodir=~/.vim/undo
+set undodir=~/.config/nvim/undo
 set undofile
 set undolevels=1000
 
@@ -184,6 +185,17 @@ inoremap <M-g> <ESC>
 "
 " Plugin configuration
 "
+
+" vim-session
+let g:session_directory='~/.config/nvim/sessions'
+
+" haskell-vim
+let g:haskell_indent_case=4
+let g:haskell_indent_where=2
+let g:haskell_indent_do=4
+let g:haskell_indent_guard=4
+let g:haskell_indent_case_alternative=4
+
 
 " FZF
 
