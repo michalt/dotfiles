@@ -25,12 +25,12 @@ Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-oblique'
 Plug 'junegunn/vim-pseudocl'
 Plug 'mbbill/undotree'
+Plug 'neomake/neomake'
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'sirver/ultisnips'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -95,8 +95,8 @@ set hidden
 set showtabline=1
 
 " the line width
-set textwidth=80
-set colorcolumn=81
+set textwidth=100
+set colorcolumn=+1
 
 " wrapping is convenient
 set wrap
@@ -130,8 +130,6 @@ set novisualbell
 
 " use clipboard
 set clipboard=unnamedplus
-
-set ttimeoutlen=0
 
 " Syntax highlighting gets confused by long comments
 autocmd BufEnter * :syntax sync minlines=1024
@@ -195,6 +193,7 @@ let g:haskell_indent_where=2
 let g:haskell_indent_do=4
 let g:haskell_indent_guard=4
 let g:haskell_indent_case_alternative=4
+let g:haskell_indent_disable=1
 
 
 " FZF
@@ -219,14 +218,6 @@ nnoremap <Leader>s :<C-u>BLines<CR>
 nnoremap <Leader>S :<C-u>Lines<CR>
 nnoremap <Leader>/ :<C-u>Rg <C-R><C-W><CR>
 nnoremap <Leader>? :<C-u>Rg 
-
-" vim-multiple-cursors
-
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key='<C-n>'
-let g:multi_cursor_prev_key='<C-p>'
-let g:multi_cursor_skip_key='<C-h>'
-let g:multi_cursor_quit_key='<Esc>'
 
 " supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
