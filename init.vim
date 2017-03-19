@@ -16,6 +16,7 @@ Plug 'ervandew/supertab'
 Plug 'flazz/vim-colorschemes'
 Plug 'honza/vim-snippets'
 Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
+Plug 'itchyny/lightline.vim'
 Plug 'itchyny/vim-cursorword'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jreybert/vimagit'
@@ -32,12 +33,9 @@ Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'sirver/ultisnips'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'wellle/targets.vim'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
-
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -56,7 +54,13 @@ set background=light
 let g:solarized_contrast="high"
 let g:solarized_visibility="high"
 colorscheme solarized
-let g:airline_theme="solarized"
+let g:lightline = {
+  \ 'colorscheme': 'solarized',
+  \ 'component_function': { 'filename': 'LightLineFilename' }
+  \ }
+function! LightLineFilename()
+  return expand('%')
+endfunction
 
 " omnicompletion
 set omnifunc=syntaxcomplete#Complete
