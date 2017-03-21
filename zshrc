@@ -1,11 +1,23 @@
-if [[ -f $HOME/.profile ]] ; then
-  source $HOME/.profile
+if [[ -f "${HOME}/soft/antigen/antigen.zsh" ]] ; then
+  source "${HOME}/soft/antigen/antigen.zsh"
+fi
+
+antigen use oh-my-zsh
+
+antigen bundle git
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+antigen theme pure
+
+antigen apply
+
+if [[ -f "${HOME}/.profile" ]] ; then
+  source "${HOME}/.profile"
 fi
 
 # Set the LS_COLORS variable
 eval $(dircolors --sh)
 
-# Customize to your needs...
 zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
 zstyle ':completion:*' insert-unambiguous true
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
@@ -13,20 +25,12 @@ zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:]
 zstyle ':completion:*' original tre
 zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion:*' menu select
-zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path ~/.zsh/cache
+zstyle ':completion:*' use-cache true
 
 zstyle :compinstall filename "${HOME}/.zshrc"
 
-autoload -Uz compinit colors edit-command-line vcs_info
-colors
+autoload -Uz compinit edit-command-line
 compinit
-
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' actionformats "%{$fg[red]%}%a %u%c%{$reset_color%} %{$fg[green]%}%b%{$reset_color%}"
-zstyle ':vcs_info:*' formats "%{$fg[red]%}%a %u%c%{$reset_color%} %{$fg[green]%}%b%{$reset_color%}"
-zstyle ':vcs_info:*' stagedstr 's'
-zstyle ':vcs_info:*' unstagedstr 'u'
 
 setopt appendhistory
 setopt autocd
@@ -51,40 +55,6 @@ bindkey -M viins '^B' push-line
 
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
-
-case $TERM in
-  termite|*xterm*|rxvt|rxvt-unicode|rxvt-256color|rxvt-unicode-256color|(dt|k|E)term)
-    precmd () {
-      vcs_info
-      print -Pn "\e]0;%M %~\a"
-    }
-    preexec () {
-      print -Pn "\e]0;$1 (%M %~)\a"
-    }
-    ;;
-  screen|screen-256color)
-    precmd () {
-      vcs_info
-      print -Pn "\e]83;title $1\a"
-      print -Pn "\e]0;%M %~\a"
-    }
-    preexec () {
-      print -Pn "\e]83;title $1\a"
-      print -Pn "\e]0;%M %~\a"
-    }
-    ;;
-esac
-
-if [[ -z "$SSH_CONNECTION"  ]]; then
-  prompt_host="%{$fg[yellow]%}%m%{$reset_color%}"
-else
-  prompt_host="%{$fg[red]%}%m%{$reset_color%}"
-fi
-prompt_dir="%{$fg[yellow]%}%16<..<%d%<<%{$reset_color%}"
-prompt_time="%{$fg[yellow]%}%T%{$reset_color%}"
-prompt_jobs="%(1j.%{$fg[red]%}.%{$fg[yellow]%})%j%{$reset_color%}"
-RPROMPT='${vcs_info_msg_0_} ${prompt_host} ${prompt_time}'
-PROMPT='${prompt_dir}%{$fg[yellow]%}:%{$reset_color%}${prompt_jobs} '
 
 #
 # Umask
