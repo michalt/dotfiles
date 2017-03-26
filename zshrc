@@ -1,3 +1,9 @@
+if [[ -f "${HOME}/.profile" ]] ; then
+  source "${HOME}/.profile"
+fi
+
+export PER_DIRECTORY_HISTORY_TOGGLE='^Y'
+
 if [[ -f "${HOME}/soft/antigen/antigen.zsh" ]] ; then
   source "${HOME}/soft/antigen/antigen.zsh"
 fi
@@ -5,15 +11,13 @@ fi
 antigen use oh-my-zsh
 
 antigen bundle git
+antigen bundle per-directory-history
+antigen bundle vi-mode
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 antigen theme pure
 
 antigen apply
-
-if [[ -f "${HOME}/.profile" ]] ; then
-  source "${HOME}/.profile"
-fi
 
 # Set the LS_COLORS variable
 eval $(dircolors --sh)

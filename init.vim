@@ -190,6 +190,7 @@ inoremap <M-g> <ESC>
 
 " vim-session
 let g:session_directory='~/.config/nvim/sessions'
+let g:session_autoload = 'no'
 
 " haskell-vim
 let g:haskell_indent_case=4
@@ -215,6 +216,7 @@ command! -bang -nargs=* Rg
   \   <bang>0)
 
 nnoremap <Leader>f :<C-u>Files<CR>
+nnoremap <Leader>g :<C-u>GFiles<CR>
 nnoremap <Leader>b :<C-u>Buffers<CR>
 nnoremap <Leader>h :<C-u>History:<CR>
 nnoremap <Leader>c :<C-u>Commands<CR>
@@ -230,13 +232,6 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:deoplete#enable_at_startup=1
 let g:deoplete#auto_complete_delay=100
 
-" YouCompleteMe
-
-let g:ycm_semantic_triggers = {'haskell' : ['.']}
-
 " EasyAlign
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
-
-" vim-session
-let g:session_autoload = 'no'
