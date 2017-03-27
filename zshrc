@@ -49,6 +49,7 @@ setopt listpacked
 setopt notify
 setopt prompt_subst
 setopt pushdignoredups
+setopt magic_equal_subst
 
 bindkey -v
 bindkey -M vicmd 't' forward-char
