@@ -11,11 +11,10 @@ fi
 antigen use oh-my-zsh
 
 antigen bundle git
-antigen bundle per-directory-history
 antigen bundle vi-mode
 antigen bundle zsh-users/zsh-syntax-highlighting
 
-antigen theme pure
+antigen theme refined
 
 antigen apply
 
