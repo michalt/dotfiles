@@ -151,6 +151,14 @@ hi! VertSplit ctermfg=7 ctermbg=7 term=NONE
 " set leader
 let mapleader=" "
 
+" terminal movement
+tnoremap <C-l> <C-\><C-n><C-w>l
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-t> <C-\><C-n><C-w><C-p>
+autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
+
 " Ctrl-Backspace
 imap <C-BS> <C-W>
 
@@ -184,6 +192,13 @@ nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
 inoremap <C-g> <ESC>
 inoremap <M-g> <ESC>
 
+" Haskell
+autocmd FileType haskell nnoremap <Leader>hm :GhcModSigCodegen<CR>
+autocmd FileType haskell nnoremap <Leader>hs :GhcModSplitFunCase<CR>
+autocmd FileType haskell nnoremap <Leader>hi :GhcModTypeInsert<CR>
+autocmd FileType haskell nnoremap <Leader>ht :GhcModType<CR>
+autocmd FileType haskell nnoremap <Leader>hc :GhcModCheck<CR>
+
 "
 " Plugin configuration
 "
@@ -207,11 +222,12 @@ let g:haskell_indent_disable=1
 let g:fzf_files_options =
   \ '--preview "(highlight -O ansi {} || cat {}) 2> /dev/null | head -'.&lines.'"'
 
+
 " Use ripgrep and highlight the line
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \   <bang>0 ? fzf#vim#with_preview('up:50%')
   \           : fzf#vim#with_preview('right:50%', '?'),
   \   <bang>0)
 
@@ -222,8 +238,8 @@ nnoremap <Leader>h :<C-u>History:<CR>
 nnoremap <Leader>c :<C-u>Commands<CR>
 nnoremap <Leader>s :<C-u>BLines<CR>
 nnoremap <Leader>S :<C-u>Lines<CR>
-nnoremap <Leader>/ :<C-u>Rg <C-R><C-W><CR>
-nnoremap <Leader>? :<C-u>Rg 
+nnoremap <Leader>/ :<C-u>Rg! <C-R><C-W><CR>
+nnoremap <Leader>? :<C-u>Rg! 
 
 " supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
