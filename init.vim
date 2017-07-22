@@ -30,6 +30,8 @@ Plug 'neomake/neomake'
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'rust-lang/rust.vim'
+Plug 'Shirk/vim-gas'
 Plug 'sirver/ultisnips'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
@@ -70,7 +72,6 @@ set fsync
 
 " line numbering
 set number
-set relativenumber
 
 " show the command line
 set showcmd
@@ -193,6 +194,7 @@ inoremap <C-g> <ESC>
 inoremap <M-g> <ESC>
 
 " Haskell
+autocmd FileType haskell setlocal textwidth=80
 autocmd FileType haskell nnoremap <Leader>hm :GhcModSigCodegen<CR>
 autocmd FileType haskell nnoremap <Leader>hs :GhcModSplitFunCase<CR>
 autocmd FileType haskell nnoremap <Leader>hi :GhcModTypeInsert<CR>

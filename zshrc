@@ -2,8 +2,6 @@ if [[ -f "${HOME}/.profile" ]] ; then
   source "${HOME}/.profile"
 fi
 
-export PER_DIRECTORY_HISTORY_TOGGLE='^Y'
-
 if [[ -f "${HOME}/soft/antigen/antigen.zsh" ]] ; then
   source "${HOME}/soft/antigen/antigen.zsh"
 fi
@@ -86,6 +84,8 @@ export CPUS=$(nproc)
 export FZF_DEFAULT_OPTS='--color=fg+:0,bg+:7,hl:9,hl+:9,info:8,prompt:8,marker:8,pointer:8,spinner:8'
 export FZF_DEFAULT_COMMAND='rg --files'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# This works for fish
+# export FZF_CTRL_T_COMMAND="rg --files \$dir -type f 2> /dev/null | sed '1d; s#^\./##'"
 
 #
 # Nix
