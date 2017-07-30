@@ -247,9 +247,14 @@ nnoremap <Leader>? :<C-u>Rg!
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " deoplete
-let g:deoplete#enable_at_startup=1
-let g:deoplete#auto_complete_delay=100
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_complete_delay = 100
+let g:deoplete#enable_smart_case = 1
+
 
 " EasyAlign
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+
+" Denite
+call denite#custom#var('file_rec', 'command', ['rg', '--files', '--glob', '!.git', ''])

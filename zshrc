@@ -165,6 +165,7 @@ alias vi="nvim"
 alias bc="bc -q"
 alias xsel="xsel -b"
 alias makej='make -j$((${CPUS} + 1))'
+alias makejj='make -j$((${CPUS} * 2))'
 alias mps="ps -o pid,state,ruser,time,rss,command"
 alias tmuxm="tmux new -sm"
 alias tmuxi="tmux new -si"
