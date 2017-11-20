@@ -2,19 +2,8 @@ if [[ -f "${HOME}/.profile" ]] ; then
   source "${HOME}/.profile"
 fi
 
-if [[ -f "${HOME}/soft/antigen/antigen.zsh" ]] ; then
-  source "${HOME}/soft/antigen/antigen.zsh"
-fi
-
-antigen use oh-my-zsh
-
-antigen bundle git
-antigen bundle vi-mode
-antigen bundle zsh-users/zsh-syntax-highlighting
-
-antigen theme refined
-
-antigen apply
+fpath=( "${HOME}/.zsh" $fpath )
+source "${HOME}/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # Set the LS_COLORS variable
 eval $(dircolors --sh)
@@ -33,6 +22,9 @@ zstyle :compinstall filename "${HOME}/.zshrc"
 autoload -Uz compinit edit-command-line
 compinit
 
+autoload -U promptinit; promptinit
+prompt pure
+
 setopt appendhistory
 setopt autocd
 setopt autopushd
@@ -41,7 +33,7 @@ setopt dvorak
 setopt extendedglob
 setopt histexpiredupsfirst
 setopt histignorealldups
-setopt histignoredups
+setopt histfindnodups
 setopt listpacked
 setopt notify
 setopt prompt_subst
@@ -68,6 +60,7 @@ umask u=rwx,g=rx,o=
 # Env
 #
 
+export KEYTIMEOUT=1
 export CPUS=$(nproc)
 
 #
@@ -81,7 +74,7 @@ export CPUS=$(nproc)
 #
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_OPTS='--color=fg+:0,bg+:7,hl:9,hl+:9,info:8,prompt:8,marker:8,pointer:8,spinner:8'
+export FZF_DEFAULT_OPTS='--color=fg+:0,bg+:7,hl:9,hl+:9,info:-1,prompt:-1,marker:-1,pointer:-1,spinner:-1,border:-1,header:-1'
 export FZF_DEFAULT_COMMAND='rg --files'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # This works for fish
@@ -166,6 +159,8 @@ alias bc="bc -q"
 alias xsel="xsel -b"
 alias makej='make -j$((${CPUS} + 1))'
 alias makejj='make -j$((${CPUS} * 2))'
+alias makenj='nice make -j$((${CPUS} + 1))'
+alias makenjj='nice make -j$((${CPUS} * 2))'
 alias mps="ps -o pid,state,ruser,time,rss,command"
 alias tmuxm="tmux new -sm"
 alias tmuxi="tmux new -si"

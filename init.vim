@@ -4,6 +4,7 @@
 
 call plug#begin('~/.config/nvim/plugged')
 
+Plug 'Shirk/vim-gas'
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
@@ -11,7 +12,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
-Plug 'easymotion/vim-easymotion'
+Plug 'justinmk/vim-sneak'
 Plug 'ervandew/supertab'
 Plug 'flazz/vim-colorschemes'
 Plug 'honza/vim-snippets'
@@ -25,15 +26,16 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-oblique'
 Plug 'junegunn/vim-pseudocl'
+Plug 'justinmk/vim-dirvish'
 Plug 'mbbill/undotree'
 Plug 'neomake/neomake'
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'rust-lang/rust.vim'
-Plug 'Shirk/vim-gas'
-Plug 'sirver/ultisnips'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
 Plug 'xolox/vim-misc'
@@ -243,14 +245,19 @@ nnoremap <Leader>S :<C-u>Lines<CR>
 nnoremap <Leader>/ :<C-u>Rg! <C-R><C-W><CR>
 nnoremap <Leader>? :<C-u>Rg! 
 
+" deoplete
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#enable_refresh_always = 1
+let g:deoplete#auto_complete_delay = 100
+call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
+
 " supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
-" deoplete
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_complete_delay = 100
-let g:deoplete#enable_smart_case = 1
-
+" sneak
+nmap f <Plug>Sneak_s
+nmap F <Plug>Sneak_S
 
 " EasyAlign
 xmap ga <Plug>(EasyAlign)
