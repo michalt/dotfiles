@@ -203,6 +203,9 @@ autocmd FileType haskell nnoremap <Leader>hi :GhcModTypeInsert<CR>
 autocmd FileType haskell nnoremap <Leader>ht :GhcModType<CR>
 autocmd FileType haskell nnoremap <Leader>hc :GhcModCheck<CR>
 
+" Rust
+autocmd FileType rust let g:AutoPairs = {'(':')', '[':']', '{':'}','"':'"', '`':'`'}
+
 "
 " Plugin configuration
 "
@@ -256,8 +259,8 @@ call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " sneak
-nmap f <Plug>Sneak_s
-nmap F <Plug>Sneak_S
+nmap t <Plug>Sneak_s
+nmap T <Plug>Sneak_S
 
 " EasyAlign
 xmap ga <Plug>(EasyAlign)
