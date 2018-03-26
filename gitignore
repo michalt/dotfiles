@@ -2,5 +2,7 @@
 *.o
 *.hi
 zlog-*
+zbuild-*
 tags
 TAGS
+config.cache

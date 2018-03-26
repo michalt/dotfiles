@@ -5,15 +5,12 @@
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'Shirk/vim-gas'
-Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'Valloric/YouCompleteMe'
 Plug 'altercation/vim-colors-solarized'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
-Plug 'justinmk/vim-sneak'
-Plug 'ervandew/supertab'
 Plug 'flazz/vim-colorschemes'
 Plug 'honza/vim-snippets'
 Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
@@ -27,9 +24,11 @@ Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-oblique'
 Plug 'junegunn/vim-pseudocl'
 Plug 'justinmk/vim-dirvish'
+Plug 'justinmk/vim-sneak'
 Plug 'mbbill/undotree'
 Plug 'neomake/neomake'
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
+Plug 'mhinz/vim-grepper'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'rust-lang/rust.vim'
@@ -248,15 +247,11 @@ nnoremap <Leader>S :<C-u>Lines<CR>
 nnoremap <Leader>/ :<C-u>Rg! <C-R><C-W><CR>
 nnoremap <Leader>? :<C-u>Rg! 
 
-" deoplete
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#enable_refresh_always = 1
-let g:deoplete#auto_complete_delay = 100
-call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
-
-" supertab
-let g:SuperTabDefaultCompletionType = "<c-n>"
+" YCM
+let g:ycm_semantic_triggers = {'haskell' : ['.']}
+" Disable haskell-vim omnifunc
+let g:haskellmode_completion_ghc = 0
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
 " sneak
 nmap t <Plug>Sneak_s
@@ -266,5 +261,16 @@ nmap T <Plug>Sneak_S
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-" Denite
-call denite#custom#var('file_rec', 'command', ['rg', '--files', '--glob', '!.git', ''])
+let g:neomake_ghcmake_maker = {
+    \ 'exe': 'make',
+    \ 'args': ['-j16', '2'],
+    \ 'errorformat':
+        \ '%-G%\s%#,' .
+        \ '%f:%l:%c:%trror: %m,' .
+        \ '%f:%l:%c:%tarning: %m,'.
+        \ '%f:%l:%c: %trror: %m,' .
+        \ '%f:%l:%c: %tarning: %m,' .
+        \ '%E%f:%l:%c:%m,' .
+        \ '%E%f:%l:%c:,' .
+        \ '%Z%m'
+    \ }
