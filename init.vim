@@ -5,30 +5,24 @@
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'Shirk/vim-gas'
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Valloric/YouCompleteMe'
 Plug 'altercation/vim-colors-solarized'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next', 'do': './install.sh' }
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
-Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
-Plug 'flazz/vim-colorschemes'
-Plug 'honza/vim-snippets'
 Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/vim-cursorword'
 Plug 'jiangmiao/auto-pairs'
-Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'junegunn/vim-oblique'
-Plug 'junegunn/vim-pseudocl'
+Plug 'junegunn/vim-slash'
 Plug 'justinmk/vim-dirvish'
 Plug 'justinmk/vim-sneak'
 Plug 'mbbill/undotree'
 Plug 'neomake/neomake'
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
-Plug 'mhinz/vim-grepper'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'rust-lang/rust.vim'
@@ -36,10 +30,8 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'wellle/targets.vim'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
-
 " Add plugins to &runtimepath
 call plug#end()
 
@@ -101,7 +93,7 @@ set hidden
 set showtabline=1
 
 " the line width
-set textwidth=100
+set textwidth=80
 set colorcolumn=+1
 
 " wrapping is convenient
@@ -136,6 +128,9 @@ set novisualbell
 
 " use clipboard
 set clipboard=unnamedplus
+
+" use mouse in normal mode
+set mouse=n
 
 " Syntax highlighting gets confused by long comments
 autocmd BufEnter * :syntax sync minlines=1024
@@ -221,7 +216,6 @@ let g:haskell_indent_guard=4
 let g:haskell_indent_case_alternative=4
 let g:haskell_indent_disable=1
 
-
 " FZF
 
 " File preview using Highlight
@@ -247,11 +241,11 @@ nnoremap <Leader>S :<C-u>Lines<CR>
 nnoremap <Leader>/ :<C-u>Rg! <C-R><C-W><CR>
 nnoremap <Leader>? :<C-u>Rg! 
 
-" YCM
-let g:ycm_semantic_triggers = {'haskell' : ['.']}
-" Disable haskell-vim omnifunc
-let g:haskellmode_completion_ghc = 0
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+" LSP
+" To debug hie-wrapper add this:
+"   '--debug', '--vomit', '--logfile', '/home/michal/hie.log'
+let g:LanguageClient_serverCommands = { 'haskell': ['hie-wrapper'] }
+let g:LanguageClient_changeThrottle = 0.5
 
 " sneak
 nmap t <Plug>Sneak_s
