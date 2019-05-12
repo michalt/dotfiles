@@ -133,6 +133,20 @@ function nix-zsh2() {
   fi
 }
 
+# GHC hacking
+function hadrian() {
+  if [[ -z "${HADRIAN_FLAVOR}" ]]; then
+    echo "Error: set flavor: export HADRIAN_FLAVOR="
+  else
+    local FLAGS="--flavour=${HADRIAN_FLAVOR} -j $@"
+    local COMMAND="$(git rev-parse --show-toplevel)/hadrian/build.sh"
+    local FULL="${COMMAND} ${FLAGS}"
+    echo ${FULL}
+    eval ${FULL}
+  fi
+}
+
+alias g="git"
 alias pd="pushd"
 alias pp="pushp"
 alias ls="ls --color=auto -F --group-directories-first \

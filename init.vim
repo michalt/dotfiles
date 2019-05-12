@@ -7,9 +7,9 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'Shirk/vim-gas'
 Plug 'Valloric/YouCompleteMe'
 Plug 'altercation/vim-colors-solarized'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next', 'do': './install.sh' }
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': './install.sh' }
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'dyng/ctrlsf.vim'
 Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/vim-cursorword'
@@ -96,6 +96,12 @@ set showtabline=1
 set textwidth=80
 set colorcolumn=+1
 
+" Better display for messages
+set cmdheight=2
+
+" Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=200
+
 " wrapping is convenient
 set wrap
 
@@ -164,10 +170,6 @@ nnoremap Y y$
 
 " select the pasted text
 noremap gV `[v`]
-
-" when syntax highlighting goel wrong
-noremap <C-l> <C-l>:syntax sync fromstart<CR>
-inoremap <C-l> <ESC><C-l>:syntax sync fromstart<CR>a
 
 " quickfix
 nnoremap <Leader>qo :copen<CR>
@@ -238,14 +240,34 @@ nnoremap <Leader>h :<C-u>History:<CR>
 nnoremap <Leader>c :<C-u>Commands<CR>
 nnoremap <Leader>s :<C-u>BLines<CR>
 nnoremap <Leader>S :<C-u>Lines<CR>
-nnoremap <Leader>/ :<C-u>Rg! <C-R><C-W><CR>
 nnoremap <Leader>? :<C-u>Rg! 
+" disabled for now in favor of CtrlSF
+" nnoremap <Leader>/ :<C-u>Rg! <C-R><C-W><CR>
+
+" CtrlSF
+let g:ctrlsf_auto_focus = { "at": "start" }
+let g:ctrlsf_position = 'bottom'
+hi ctrlsfMatch cterm=NONE ctermfg=black ctermbg=grey
+
+nmap <Leader>/ <Plug>CtrlSFCwordPath<CR>
+nnoremap <Leader>t :CtrlSFToggle<CR>
+let g:ctrlsf_mapping = {
+    \ "next": "n",
+    \ "prev": "N",
+    \ }
 
 " LSP
 " To debug hie-wrapper add this:
 "   '--debug', '--vomit', '--logfile', '/home/michal/hie.log'
 let g:LanguageClient_serverCommands = { 'haskell': ['hie-wrapper'] }
-let g:LanguageClient_changeThrottle = 0.5
+let g:LanguageClient_changeThrottle = 0.0
+
+" coc.vim
+" Highlight symbol under cursor on CursorHold
+" autocmd CursorHold * silent call CocActionAsync('highlight')
+hi CocErrorHighlight ctermfg=White ctermbg=Red
+hi CocHighlightText  ctermbg=220
+
 
 " sneak
 nmap t <Plug>Sneak_s
