@@ -5,7 +5,8 @@
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'Shirk/vim-gas'
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
+Plug 'zxqfl/tabnine-vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': './install.sh' }
 Plug 'christoomey/vim-tmux-navigator'
@@ -201,6 +202,7 @@ autocmd FileType haskell nnoremap <Leader>hc :GhcModCheck<CR>
 
 " Rust
 autocmd FileType rust let g:AutoPairs = {'(':')', '[':']', '{':'}','"':'"', '`':'`'}
+let g:rustfmt_autosave=1
 
 "
 " Plugin configuration
@@ -247,7 +249,8 @@ nnoremap <Leader>? :<C-u>Rg!
 " CtrlSF
 let g:ctrlsf_auto_focus = { "at": "start" }
 let g:ctrlsf_position = 'bottom'
-hi ctrlsfMatch cterm=NONE ctermfg=black ctermbg=grey
+hi ctrlsfMatch cterm=NONE ctermfg=black ctermbg=lightgrey
+autocmd FileType ctrlsf DisableWhitespace
 
 nmap <Leader>/ <Plug>CtrlSFCwordPath<CR>
 nnoremap <Leader>t :CtrlSFToggle<CR>
@@ -259,7 +262,10 @@ let g:ctrlsf_mapping = {
 " LSP
 " To debug hie-wrapper add this:
 "   '--debug', '--vomit', '--logfile', '/home/michal/hie.log'
-let g:LanguageClient_serverCommands = { 'haskell': ['hie-wrapper'] }
+let g:LanguageClient_serverCommands = {
+    \ 'haskell': ['hie-wrapper'],
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ }
 let g:LanguageClient_changeThrottle = 0.0
 
 " coc.vim
