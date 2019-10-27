@@ -20,6 +20,10 @@ if [ -z "$(echo ${PATH} | grep '^${HOME}/local/bin')" ] ; then
     export MANPATH="${HOME}/local/man:${MANPATH}"
 fi
 
+if [ -f "${HOME}/.ghcup/env" ]; then
+  source "${HOME}/.ghcup/env"
+fi
+
 # PATH for binaries installed by cabal.
 if [ -z "$(echo ${PATH} | grep '^${HOME}/.cabal/bin')" ] ; then
     export PATH="${HOME}/.cabal/bin:${PATH}"

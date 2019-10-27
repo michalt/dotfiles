@@ -5,10 +5,7 @@
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'Shirk/vim-gas'
-" Plug 'Valloric/YouCompleteMe'
-Plug 'zxqfl/tabnine-vim'
 Plug 'altercation/vim-colors-solarized'
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': './install.sh' }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dyng/ctrlsf.vim'
 Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
@@ -22,17 +19,19 @@ Plug 'junegunn/vim-slash'
 Plug 'justinmk/vim-dirvish'
 Plug 'justinmk/vim-sneak'
 Plug 'mbbill/undotree'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neomake/neomake'
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-session'
+Plug 'wellle/targets.vim'
+Plug 'zxqfl/tabnine-vim'
+
+
 " Add plugins to &runtimepath
 call plug#end()
 
@@ -52,14 +51,18 @@ let g:solarized_visibility="high"
 colorscheme solarized
 let g:lightline = {
   \ 'colorscheme': 'solarized',
-  \ 'component_function': { 'filename': 'LightLineFilename' }
+  \ 'component_function': {
+    \ 'filename': 'LightLineFilename',
+    \ }
   \ }
+    " \   'method': 'NearestMethodOrFunction'
 function! LightLineFilename()
   return expand('%')
 endfunction
 
 " omnicompletion
 set omnifunc=syntaxcomplete#Complete
+set completeopt-=preview
 
 " fsync doesn't hurt on a modern fs :)
 set fsync
@@ -101,7 +104,7 @@ set colorcolumn=+1
 set cmdheight=2
 
 " Smaller updatetime for CursorHold & CursorHoldI
-set updatetime=200
+set updatetime=50
 
 " wrapping is convenient
 set wrap
@@ -208,6 +211,8 @@ let g:rustfmt_autosave=1
 " Plugin configuration
 "
 
+" TabNine
+
 " vim-session
 let g:session_directory='~/.config/nvim/sessions'
 let g:session_autoload = 'no'
@@ -242,9 +247,6 @@ nnoremap <Leader>h :<C-u>History:<CR>
 nnoremap <Leader>c :<C-u>Commands<CR>
 nnoremap <Leader>s :<C-u>BLines<CR>
 nnoremap <Leader>S :<C-u>Lines<CR>
-nnoremap <Leader>? :<C-u>Rg! 
-" disabled for now in favor of CtrlSF
-" nnoremap <Leader>/ :<C-u>Rg! <C-R><C-W><CR>
 
 " CtrlSF
 let g:ctrlsf_auto_focus = { "at": "start" }
@@ -253,27 +255,40 @@ hi ctrlsfMatch cterm=NONE ctermfg=black ctermbg=lightgrey
 autocmd FileType ctrlsf DisableWhitespace
 
 nmap <Leader>/ <Plug>CtrlSFCwordPath<CR>
+nmap <Leader>?  <Plug>CtrlSFPrompt<CR>
 nnoremap <Leader>t :CtrlSFToggle<CR>
 let g:ctrlsf_mapping = {
-    \ "next": "n",
-    \ "prev": "N",
+    \ "next": "J",
+    \ "prev": "K",
     \ }
 
 " LSP
 " To debug hie-wrapper add this:
 "   '--debug', '--vomit', '--logfile', '/home/michal/hie.log'
-let g:LanguageClient_serverCommands = {
-    \ 'haskell': ['hie-wrapper'],
-    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ }
-let g:LanguageClient_changeThrottle = 0.0
+"   \ 'haskell': ['hie-wrapper'],
+" Commented out in case it turns out to be useful
+" let g:LanguageClient_serverCommands = {
+"     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+"     \ 'haskell': ['ghcide', '--lsp'],
+"     \ }
+" let g:LanguageClient_changeThrottle = 0.0
 
 " coc.vim
-" Highlight symbol under cursor on CursorHold
-" autocmd CursorHold * silent call CocActionAsync('highlight')
-hi CocErrorHighlight ctermfg=White ctermbg=Red
-hi CocHighlightText  ctermbg=220
+set signcolumn=yes
 
+hi CocErrorHighlight ctermfg=Red ctermbg=LightGray
+" hi CocHighlightText  ctermbg=220
+
+inoremap <silent><expr> <c-space> coc#refresh()
+nmap <silent> <c-]> <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> g, <Plug>(coc-diagnostic-prev)
+nmap <silent> g. <Plug>(coc-diagnostic-next)
+
+" vim-slash
+noremap <plug>(slash-after) zz
 
 " sneak
 nmap t <Plug>Sneak_s

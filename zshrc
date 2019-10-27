@@ -67,7 +67,8 @@ export CPUS=$(nproc)
 # Autojump
 #
 
-[[ -s /etc/profile.d/autojump.zsh ]] && source /etc/profile.d/autojump.zsh
+[[ -s /usr/share/autojump/autojump.zsh ]] && \
+  source /usr/share/autojump/autojump.zsh
 
 #
 # fzf
