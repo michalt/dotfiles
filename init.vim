@@ -18,6 +18,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-slash'
 Plug 'justinmk/vim-dirvish'
 Plug 'justinmk/vim-sneak'
+Plug 'machakann/vim-highlightedyank'
 Plug 'mbbill/undotree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neomake/neomake'
@@ -68,7 +69,7 @@ set completeopt-=preview
 set fsync
 
 " line numbering
-set number
+set relativenumber number
 
 " show the command line
 set showcmd
@@ -102,6 +103,9 @@ set colorcolumn=+1
 
 " Better display for messages
 set cmdheight=2
+
+" scrolling offset
+set scrolloff=3
 
 " Smaller updatetime for CursorHold & CursorHoldI
 set updatetime=50
@@ -287,8 +291,9 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <silent> g, <Plug>(coc-diagnostic-prev)
 nmap <silent> g. <Plug>(coc-diagnostic-next)
 
-" vim-slash
-noremap <plug>(slash-after) zz
+" vim-highlightedyank
+let g:highlightedyank_highlight_duration=300
+highlight HighlightedyankRegion cterm=reverse gui=reverse
 
 " sneak
 nmap t <Plug>Sneak_s
