@@ -2,7 +2,7 @@
 " Plugins
 "
 
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin()
 
 Plug 'Shirk/vim-gas'
 Plug 'altercation/vim-colors-solarized'
@@ -12,7 +12,7 @@ Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/vim-cursorword'
 Plug 'jiangmiao/auto-pairs'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf-vim', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-slash'

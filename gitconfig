@@ -1,0 +1,34 @@
+[user]
+  email = michal.terepeta@gmail.com
+  name = Michal Terepeta
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+[core]
+  editor = nvim
+  excludesfile = ~/.gitignore
+[push]
+  default = simple
+[diff]
+  renames = copies
+[difftool]
+  prompt = false
+[pager]
+  log = diff-so-fancy | less -R
+  show = diff-so-fancy | less -R
+  diff = diff-so-fancy | less -R
+[alias]
+  b = branch
+  c = checkout
+  comm = commit
+  comma = commit --amend
+  commane = commit --amend --no-edit
+  d = diff
+  dc = diff --cached
+  la = log --abbrev-commit
+  lg = log --abbrev-commit --decorate --graph
+  lgo = log --abbrev-commit --decorate --graph --pretty=oneline
+  lp = log --abbrev-commit --decorate --patch
+  s = status -s
+  pullall = "!f(){ git pull --ff-only \"$@\" && git submodule update --init --recursive; }; f"

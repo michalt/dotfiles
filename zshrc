@@ -1,13 +1,9 @@
-if [[ -f "${HOME}/.profile" ]] ; then
-  source "${HOME}/.profile"
-fi
-
-fpath=( "${HOME}/.zsh" $fpath )
-source "${HOME}/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "${HOME}/.nix-profile/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # Set the LS_COLORS variable
 eval $(dircolors --sh)
 
+zstyle :compinstall filename "${HOME}/.zshrc"
 zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
 zstyle ':completion:*' insert-unambiguous true
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
@@ -16,14 +12,6 @@ zstyle ':completion:*' original tre
 zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion:*' menu select
 zstyle ':completion:*' use-cache true
-
-zstyle :compinstall filename "${HOME}/.zshrc"
-
-autoload -Uz compinit edit-command-line
-compinit
-
-autoload -U promptinit; promptinit
-prompt pure
 
 setopt appendhistory
 setopt autocd
@@ -50,6 +38,20 @@ bindkey -M viins '^B' push-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
+autoload -Uz compinit edit-command-line
+compinit
+
+autoload -U colors && colors
+
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git svn
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:git*' formats '%b %m%u%c %a'
+
+precmd() { vcs_info }
+PROMPT='%{$fg[cyan]%}%n@%M%{$reset_color%}  %{$fg[blue]%}${PWD/#$HOME/~}%{$reset_color%}  %{$fg[magenta]%}${vcs_info_msg_0_}%{$reset_color%}
+%{$fg[red]%}>%{$reset_color%} '
+
 #
 # Umask
 #
@@ -74,12 +76,13 @@ export CPUS=$(nproc)
 # fzf
 #
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f "${HOME}/.nix-profile/share/fzf/completion.zsh" ] && \
+  source "${HOME}/.nix-profile/share/fzf/key-bindings.zsh"
+[ -f "${HOME}/.nix-profile/share/fzf/key-bindings.zsh" ] && \
+  source "${HOME}/.nix-profile/share/fzf/completion.zsh"
 export FZF_DEFAULT_OPTS='--color=fg+:0,bg+:7,hl:9,hl+:9,info:-1,prompt:-1,marker:-1,pointer:-1,spinner:-1,border:-1,header:-1'
 export FZF_DEFAULT_COMMAND='rg --files'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-# This works for fish
-# export FZF_CTRL_T_COMMAND="rg --files \$dir -type f 2> /dev/null | sed '1d; s#^\./##'"
 
 #
 # Nix
@@ -98,39 +101,11 @@ function mkcd() {
   cd "$1"
 }
 
-function sswitch() {
+function stowswitch() {
   if [[ -d "$1" && -d "$2" ]]; then
     stow -D "$1" && stow "$2"
   else
     echo "wrong directories"
-  fi
-}
-
-function nix-zsh() {
-  if [[ -z "$1" ]]; then
-    echo "Usage: nix-zsh <env>"
-  elif [[ ! -z "$WITHIN_NIX" ]]; then
-    echo "Nested nix-shells are not supported"
-  else
-    WITHIN_NIX="n:$1  " \
-      nix-shell --command ${SHELL} -A $1 ${HOME}/default.nix $@[2,-1]
-  fi
-}
-
-function nix-zsh2() {
-  local NIX_PROFILE_PATH="$HOME/.nix-profiles/$1"
-  if [[ -z "$1" ]]; then
-    echo "Usage: nix-source <env>"
-  elif [[ ! -z "$WITHIN_NIX" ]]; then
-    echo "Nested nix-shells are not supported"
-  elif [[ ! -d "$NIX_PROFILE_PATH" ]]; then
-    echo "No directory $NIX_PROFILE_PATH"
-  else
-    PATH="$NIX_PROFILE_PATH/bin:$PATH" \
-    LIBRARY_PATH="$NIX_PROFILE_PATH/lib:$LIBRARY_PATH" \
-    C_INCLUDE_PATH="$NIX_PROFILE_PATH/include:$C_INCLUDE_PATH" \
-    WITHIN_NIX="n:$1  " \
-      $SHELL
   fi
 }
 

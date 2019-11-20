@@ -1,40 +1,41 @@
-export HISTFILE=~/.histfile
+export BROWSER=chromium
+export EDITOR=nvim
+export HISTFILE="${HOME}/.histfile"
 export HISTSIZE=16384
 export SAVEHIST=8192
+# This is apparently needed for nixos
+# https://github.com/Gabriel439/bench/issues/40#issuecomment-542827814
+export LANG=C.UTF-8
+#export LANG=en_US.UTF-8
 
-export LANG=en_US.UTF8
 
-if [ "$TERM" = "xterm" ]
-then
-    export TERM=xterm-256color
+# PATH for ~/.local
+if [[ ! ("${PATH}" =~ ".*${HOME}/.local/bin.*") ]] ; then
+    export PATH="${HOME}/.local/bin:${PATH}"
 fi
 
-export EDITOR=nvim
-export VIMHOME="${HOME}/.vim"
-export BROWSER=google-chrome-beta
+# Currently unused
+# if [[ ! ("${PATH}" =~ ".*${HOME}/.ghcup.*") ]] && \
+#     [ -f "${HOME}/.ghcup/env" ]; then
+#   source "${HOME}/.ghcup/env"
+# fi
 
-# PATH for local bin directory.
-if [ -z "$(echo ${PATH} | grep '^${HOME}/local/bin')" ] ; then
-    export PATH="${HOME}/local/bin:${PATH}"
-    export LD_LIBRARY_PATH="${HOME}/local/lib:${LD_LIBRARY_PATH}"
-    export MANPATH="${HOME}/local/man:${MANPATH}"
-fi
-
-if [ -f "${HOME}/.ghcup/env" ]; then
-  source "${HOME}/.ghcup/env"
-fi
+# Currently unused
+# if [[ ! ("${PATH}" =~ ".*${HOME}/.cargo/bin.*") ]]; then
+#   export PATH="${HOME}/.cargo/bin:${PATH}"
+# fi
 
 # PATH for binaries installed by cabal.
-if [ -z "$(echo ${PATH} | grep '^${HOME}/.cabal/bin')" ] ; then
-    export PATH="${HOME}/.cabal/bin:${PATH}"
+if [[ ! ("${PATH}" =~ ".*/.cabal/bin.*") ]]; then
+  export PATH="${HOME}/.cabal/bin:${PATH}"
 fi
 
-if [ -d ${HOME}/local/src/rust/src ] ; then
-    export RUST_SRC_PATH=${HOME}/local/src/rust/src
+if [[ ! ("${PATH}" =~ ".*/.nix-profile/bin.*") ]] && \
+    [ -f  "${HOME}/.nix-profile/etc/profile.d/nix.sh" ]; then
 fi
 
-if [ -f  /home/michal/.nix-profile/etc/profile.d/nix.sh ] ; then
-    source /home/michal/.nix-profile/etc/profile.d/nix.sh
+if [[ ! ("${LD_LIBRARY_PATH}" =~ ".*/.nix-profile/lib.*") ]]; then
+  export LD_LIBRARY_PATH="${HOME}/.nix-profile/lib:${LD_LIBRARY_PATH}"
 fi
 
-[ -f ~/.zshenv_local ] && source $HOME/.zshenv_local
+[ -f ~/.zshenv_local ] && source "${HOME}/.zshenv_local"
