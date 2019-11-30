@@ -5,7 +5,9 @@
 call plug#begin()
 
 Plug 'Shirk/vim-gas'
+Plug 'Yggdroot/indentLine'
 Plug 'altercation/vim-colors-solarized'
+Plug 'chiel92/vim-autoformat'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dyng/ctrlsf.vim'
 Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
@@ -31,7 +33,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
 Plug 'zxqfl/tabnine-vim'
-
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -291,9 +292,28 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <silent> g, <Plug>(coc-diagnostic-prev)
 nmap <silent> g. <Plug>(coc-diagnostic-next)
 
+" use <tab> for trigger completion and navigate to the next complete item
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~ '\s'
+" endfunction
+
+" inoremap <silent><expr> <Tab>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<Tab>" :
+"       \ coc#refresh()
+
+" vim-autoformat
+let g:formatters_haskell = ['ormolu']
+let g:formatdef_ormolu = '"ormolu"'
+
 " vim-highlightedyank
 let g:highlightedyank_highlight_duration=300
 highlight HighlightedyankRegion cterm=reverse gui=reverse
+
+" indentLine
+let g:indentLine_color_term=254
+let g:indentLine_char = '▏'
 
 " sneak
 nmap t <Plug>Sneak_s
@@ -302,17 +322,3 @@ nmap T <Plug>Sneak_S
 " EasyAlign
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
-
-let g:neomake_ghcmake_maker = {
-    \ 'exe': 'make',
-    \ 'args': ['-j16', '2'],
-    \ 'errorformat':
-        \ '%-G%\s%#,' .
-        \ '%f:%l:%c:%trror: %m,' .
-        \ '%f:%l:%c:%tarning: %m,'.
-        \ '%f:%l:%c: %trror: %m,' .
-        \ '%f:%l:%c: %tarning: %m,' .
-        \ '%E%f:%l:%c:%m,' .
-        \ '%E%f:%l:%c:,' .
-        \ '%Z%m'
-    \ }
