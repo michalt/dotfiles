@@ -53,9 +53,11 @@ compinit
 autoload -U colors && colors
 
 autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git svn
+zstyle ':vcs_info:*' enable git hg
 zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:git*' formats '%b %m%u%c %a'
+zstyle ':vcs_info:*' formats '%b %m%u%c'
+zstyle ':vcs_info:*' actionformats '%b %m%u%c %a'
+
 
 precmd() { vcs_info }
 PROMPT='%{$fg[cyan]%}%n@%M%{$reset_color%}  %{$fg[blue]%}${PWD/#$HOME/~}%{$reset_color%}  %{$fg[magenta]%}${vcs_info_msg_0_}%{$reset_color%}
