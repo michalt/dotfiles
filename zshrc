@@ -13,20 +13,29 @@ zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion:*' menu select
 zstyle ':completion:*' use-cache true
 
-setopt appendhistory
-setopt autocd
-setopt autopushd
-setopt correct
-setopt dvorak
-setopt extendedglob
-setopt histexpiredupsfirst
-setopt histignorealldups
-setopt histfindnodups
-setopt listpacked
-setopt notify
-setopt prompt_subst
-setopt pushdignoredups
-setopt magic_equal_subst
+# zsh history
+export HISTFILE="${HOME}/.zsh_history"
+export HISTSIZE=10000
+export SAVEHIST=8000
+setopt SHARE_HISTORY
+setopt APPEND_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_FIND_NO_DUPS
+setopt HIST_REDUCE_BLANKS
+
+setopt AUTO_CD
+setopt AUTO_PUSHD
+setopt CORRECT
+setopt CORRECT_ALL
+setopt DVORAK
+setopt EXTENDED_GLOB
+setopt HASH_CMDS
+setopt LIST_PACKED
+setopt MAGIC_EQUAL_SUBST
+setopt NOTIFY
+setopt PROMPT_SUBST
+setopt PUSHD_IGNORE_DUPS
 
 bindkey -v
 bindkey -M vicmd 't' forward-char

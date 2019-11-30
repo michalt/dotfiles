@@ -1,8 +1,5 @@
 export BROWSER=chromium
 export EDITOR=nvim
-export HISTFILE="${HOME}/.histfile"
-export HISTSIZE=16384
-export SAVEHIST=8192
 # This is apparently needed for nixos
 # https://github.com/Gabriel439/bench/issues/40#issuecomment-542827814
 export LANG=C.UTF-8
