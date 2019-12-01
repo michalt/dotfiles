@@ -18,9 +18,9 @@ fi
 # fi
 
 # Currently unused
-# if [[ ! ("${PATH}" =~ ".*${HOME}/.cargo/bin.*") ]]; then
-#   export PATH="${HOME}/.cargo/bin:${PATH}"
-# fi
+if [[ ! ("${PATH}" =~ ".*${HOME}/.cargo/bin.*") ]]; then
+  export PATH="${HOME}/.cargo/bin:${PATH}"
+fi
 
 # PATH for binaries installed by cabal.
 if [[ ! ("${PATH}" =~ ".*/.cabal/bin.*") ]]; then

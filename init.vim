@@ -171,6 +171,10 @@ tnoremap <C-k> <C-\><C-n><C-w>k
 tnoremap <C-t> <C-\><C-n><C-w><C-p>
 autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
+" save
+inoremap <C-s> <ESC>:w<CR>a
+nnoremap <C-s> :w<CR>
+
 " Ctrl-Backspace
 imap <C-BS> <C-W>
 
