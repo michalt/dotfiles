@@ -27,7 +27,6 @@ setopt HIST_REDUCE_BLANKS
 setopt AUTO_CD
 setopt AUTO_PUSHD
 setopt CORRECT
-setopt CORRECT_ALL
 setopt DVORAK
 setopt EXTENDED_GLOB
 setopt HASH_CMDS
