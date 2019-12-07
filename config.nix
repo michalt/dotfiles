@@ -9,6 +9,7 @@
         automake
         borgbackup
         cabal-install
+        ccache
         clang_9
         gitAndTools.diff-so-fancy
         dstat
