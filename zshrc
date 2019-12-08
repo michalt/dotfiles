@@ -41,7 +41,7 @@ bindkey -M vicmd 't' forward-char
 bindkey -M viins '^R' history-incremental-pattern-search-backward
 bindkey -M viins '^N' menu-complete
 bindkey -M viins '^P' reverse-menu-complete
-bindkey -M viins '^g' push-line
+bindkey -M viins '^f' push-line
 bindkey -M viins '^b' vi-backward-word
 bindkey -M viins '^w' vi-forward-word
 bindkey -M viins '^e' vi-change

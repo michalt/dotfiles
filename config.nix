@@ -11,6 +11,7 @@
         cabal-install
         ccache
         clang_9
+        cmake
         gitAndTools.diff-so-fancy
         dstat
         detox
@@ -23,6 +24,7 @@
         llvm_9
         ncurses
         neovim
+        ninja
         nodejs
         ripgrep
         rustup
