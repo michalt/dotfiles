@@ -12,7 +12,7 @@
         ccache
         clang_9
         cmake
-        gitAndTools.diff-so-fancy
+        gitAndTools.delta
         dstat
         detox
         fzf

@@ -43,7 +43,7 @@ bindkey -M viins '^N' menu-complete
 bindkey -M viins '^P' reverse-menu-complete
 bindkey -M viins '^f' push-line
 bindkey -M viins '^b' vi-backward-word
-bindkey -M viins '^w' vi-forward-word
+bindkey -M viins '^v' vi-forward-word
 bindkey -M viins '^e' vi-change
 
 zle -N edit-command-line

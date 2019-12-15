@@ -20,6 +20,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-slash'
 Plug 'justinmk/vim-dirvish'
 Plug 'justinmk/vim-sneak'
+Plug 'liuchengxu/vista.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'mbbill/undotree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -51,13 +52,21 @@ set background=light
 let g:solarized_contrast="high"
 let g:solarized_visibility="high"
 colorscheme solarized
+
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
 let g:lightline = {
   \ 'colorscheme': 'solarized',
+  \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'readonly', 'filename', 'modified', 'method' ] ]
+  \ },
   \ 'component_function': {
     \ 'filename': 'LightLineFilename',
-    \ }
+    \ 'method': 'NearestMethodOrFunction',
+  \ },
   \ }
-    " \   'method': 'NearestMethodOrFunction'
 function! LightLineFilename()
   return expand('%')
 endfunction
@@ -158,7 +167,8 @@ autocmd WinEnter,FocusGained * setlocal cursorline
 autocmd WinLeave,FocusLost * setlocal nocursorline
 
 " colors
-hi! VertSplit ctermfg=7 ctermbg=7 term=NONE
+highlight! VertSplit ctermfg=7 ctermbg=7 term=NONE
+highlight! SpecialKey ctermfg=LightGray ctermbg=Black
 
 " set leader
 let mapleader=" "
@@ -182,7 +192,7 @@ imap <C-BS> <C-W>
 nnoremap Y y$
 
 " select the pasted text
-noremap gV `[v`]
+noremap <Leader>V `[v`]
 
 " quickfix
 nnoremap <Leader>qo :copen<CR>
@@ -203,6 +213,9 @@ nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
 
 inoremap <C-g> <ESC>
 inoremap <M-g> <ESC>
+
+" show filename
+nnoremap <Leader>g <C-g>
 
 " Haskell
 autocmd FileType haskell setlocal textwidth=80
@@ -239,7 +252,6 @@ let g:haskell_indent_disable=1
 " File preview using Highlight
 let g:fzf_files_options =
   \ '--preview "(highlight -O ansi {} || cat {}) 2> /dev/null | head -'.&lines.'"'
-
 
 " Use ripgrep and highlight the line
 command! -bang -nargs=* Rg
@@ -306,6 +318,19 @@ nmap <silent> g. <Plug>(coc-diagnostic-next)
 "       \ pumvisible() ? "\<C-n>" :
 "       \ <SID>check_back_space() ? "\<Tab>" :
 "       \ coc#refresh()
+
+" vista.vim
+let g:vista_default_executive='coc'
+let g:vista_sidebar_width=40
+let g:vista_close_on_jump=1
+let g:vista#renderer#enable_icon=0
+" These don't seem to actually work... :/
+" let g:vista_fzf_opt=[$FZF_DEFAULT_OPTS]
+" let g:vista_keep_fzf_colors=1
+
+nnoremap <Leader>v :Vista!!<CR>
+
+autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 
 " vim-autoformat
 let g:formatters_haskell = ['ormolu']

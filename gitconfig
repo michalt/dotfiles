@@ -15,9 +15,9 @@
 [difftool]
   prompt = false
 [pager]
-  log = diff-so-fancy | less -R
-  show = diff-so-fancy | less -R
-  diff = diff-so-fancy | less -R
+  log = delta --light
+  show = delta --light
+  diff = delta --light
 [alias]
   b = branch
   c = checkout
