@@ -7,12 +7,14 @@
       name = "michalt-pkgs";
       paths = [
         automake
+        bat
         borgbackup
         cabal-install
         ccache
         clang_9
         cmake
         gitAndTools.delta
+        gperftools
         dstat
         detox
         fzf
@@ -29,6 +31,7 @@
         ripgrep
         rustup
         stack
+        stow
         tree-sitter
         tokei
         tmux
@@ -36,9 +39,9 @@
         tmuxPlugins.sensible
         tmuxPlugins.tmux-colors-solarized
         tmuxPlugins.vim-tmux-navigator
-        xz
         zsh
         zsh-syntax-highlighting
+        zstd
       ];
     };
   };

@@ -30,10 +30,11 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
-Plug 'zxqfl/tabnine-vim'
+" Plug 'zxqfl/tabnine-vim'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -169,9 +170,14 @@ autocmd WinLeave,FocusLost * setlocal nocursorline
 " colors
 highlight! VertSplit ctermfg=7 ctermbg=7 term=NONE
 highlight! SpecialKey ctermfg=LightGray ctermbg=Black
+highlight! SpecialComment ctermfg=DarkGray
+highlight! Search ctermfg=NONE ctermbg=NONE cterm=reverse
 
 " set leader
 let mapleader=" "
+
+" pane management
+nnoremap <C-t> <C-w><S-h>
 
 " terminal movement
 tnoremap <C-l> <C-\><C-n><C-w>l
@@ -226,6 +232,7 @@ autocmd FileType haskell nnoremap <Leader>ht :GhcModType<CR>
 autocmd FileType haskell nnoremap <Leader>hc :GhcModCheck<CR>
 
 " Rust
+autocmd FileType rust setlocal textwidth=100
 autocmd FileType rust let g:AutoPairs = {'(':')', '[':']', '{':'}','"':'"', '`':'`'}
 let g:rustfmt_autosave=1
 
@@ -233,11 +240,12 @@ let g:rustfmt_autosave=1
 " Plugin configuration
 "
 
-" TabNine
+" Obsession
+let g:sessions_dir = '~/.config/nvim/sessions'
+exec 'nnoremap <Leader>S :Obsession ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
+exec 'nnoremap <Leader>R :so ' . g:sessions_dir. '/*.vim<C-D><BS><BS><BS><BS><BS>'
 
-" vim-session
-let g:session_directory='~/.config/nvim/sessions'
-let g:session_autoload = 'no'
+" TabNine
 
 " haskell-vim
 let g:haskell_indent_case=4
@@ -251,7 +259,7 @@ let g:haskell_indent_disable=1
 
 " File preview using Highlight
 let g:fzf_files_options =
-  \ '--preview "(highlight -O ansi {} || cat {}) 2> /dev/null | head -'.&lines.'"'
+  \ '--preview "(bat --style=numbers --color=always --theme=ansi-light {} || cat {}) 2> /dev/null | head -'.&lines.'"'
 
 " Use ripgrep and highlight the line
 command! -bang -nargs=* Rg
@@ -267,7 +275,6 @@ nnoremap <Leader>b :<C-u>Buffers<CR>
 nnoremap <Leader>h :<C-u>History:<CR>
 nnoremap <Leader>c :<C-u>Commands<CR>
 nnoremap <Leader>s :<C-u>BLines<CR>
-nnoremap <Leader>S :<C-u>Lines<CR>
 
 " CtrlSF
 let g:ctrlsf_auto_focus = { "at": "start" }
@@ -320,6 +327,7 @@ nmap <silent> g. <Plug>(coc-diagnostic-next)
 "       \ coc#refresh()
 
 " vista.vim
+let g:vista_sidebar_position='vertical topleft'
 let g:vista_default_executive='coc'
 let g:vista_sidebar_width=40
 let g:vista_close_on_jump=1
@@ -338,16 +346,20 @@ let g:formatdef_ormolu = '"ormolu"'
 
 " vim-highlightedyank
 let g:highlightedyank_highlight_duration=300
-highlight HighlightedyankRegion cterm=reverse gui=reverse
+highlight link HighlightedyankRegion Visual
 
 " indentLine
 let g:indentLine_color_term=254
 let g:indentLine_char = '▏'
 
 " sneak
+highlight! Sneak ctermfg=NONE ctermbg=NONE cterm=reverse
 nmap t <Plug>Sneak_s
 nmap T <Plug>Sneak_S
 
 " EasyAlign
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+
+" vim-markdown
+let g:vim_markdown_conceal=0

@@ -158,6 +158,7 @@ alias du="du -h"
 alias df="df -h"
 alias di="di -h"
 alias vi="nvim"
+alias bat="bat --theme=ansi-light"
 alias bc="bc -q"
 alias xsel="xsel -b"
 alias makej='make -j$((${CPUS} + 1))'
