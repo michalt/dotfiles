@@ -343,6 +343,7 @@ autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 " vim-autoformat
 let g:formatters_haskell = ['ormolu']
 let g:formatdef_ormolu = '"ormolu"'
+noremap <Leader>F :Autoformat<CR>
 
 " vim-highlightedyank
 let g:highlightedyank_highlight_duration=300

@@ -17,6 +17,12 @@
         "lhs",
         "haskell"
       ]
+    },
+    "rust": {
+      "command": "ra_lsp_server",
+      "filetypes": ["rust"],
+      "rootPatterns": ["Cargo.toml"],
     }
-  }
+  },
+  "rust-analyzer.cargo-watch.enable": true,
 }

@@ -18,7 +18,7 @@
         dstat
         detox
         fzf
-        haskell.compiler.ghc881
+        haskell.compiler.ghc882
         git
         gmp
         gnumake
@@ -32,13 +32,14 @@
         rustup
         stack
         stow
-        tree-sitter
         tokei
         tmux
         tmuxPlugins.fzf-tmux-url
         tmuxPlugins.sensible
         tmuxPlugins.tmux-colors-solarized
         tmuxPlugins.vim-tmux-navigator
+        zlib
+        zlib.dev
         zsh
         zsh-syntax-highlighting
         zstd
