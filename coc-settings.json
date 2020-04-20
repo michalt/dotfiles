@@ -19,10 +19,13 @@
       ]
     },
     "rust": {
-      "command": "ra_lsp_server",
+      "command": "rust-analyzer",
       "filetypes": ["rust"],
-      "rootPatterns": ["Cargo.toml"],
+      "rootPatterns": ["Cargo.lock"],
     }
   },
   "rust-analyzer.cargo-watch.enable": true,
+  "diagnostic.errorSign": "X",
+  "diagnostic.warningSign": "?",
+  "diagnostic.infoSign": ">"
 }

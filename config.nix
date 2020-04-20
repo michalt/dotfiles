@@ -10,6 +10,7 @@
         bat
         borgbackup
         cabal-install
+        cargo-edit
         ccache
         clang_9
         cmake

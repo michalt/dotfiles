@@ -9,7 +9,6 @@ Plug 'Yggdroot/indentLine'
 Plug 'altercation/vim-colors-solarized'
 Plug 'chiel92/vim-autoformat'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'dyng/ctrlsf.vim'
 Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/vim-cursorword'
@@ -34,6 +33,7 @@ Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
+
 " Plug 'zxqfl/tabnine-vim'
 
 " Add plugins to &runtimepath
@@ -101,6 +101,9 @@ set expandtab
 " and make the default indent 2
 set softtabstop=2
 set shiftwidth=2
+
+" disable concealing
+set conceallevel=0
 
 " allow buffers to be hidden
 set hidden
@@ -217,6 +220,10 @@ endfunction
 " The original caret 0 swap
 nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
 
+" Auto-semicolon/-comma
+inoremap ;; <ESC>A;
+inoremap ,, <ESC>A,
+
 inoremap <C-g> <ESC>
 inoremap <M-g> <ESC>
 
@@ -256,18 +263,10 @@ let g:haskell_indent_case_alternative=4
 let g:haskell_indent_disable=1
 
 " FZF
-
-" File preview using Highlight
-let g:fzf_files_options =
-  \ '--preview "(bat --style=numbers --color=always --theme=ansi-light {} || cat {}) 2> /dev/null | head -'.&lines.'"'
-
-" Use ripgrep and highlight the line
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:50%')
-  \           : fzf#vim#with_preview('right:50%', '?'),
-  \   <bang>0)
+let g:fzf_layout = { 'down': '100%' }
+let g:fzf_preview_window='up:50%'
+let g:fzf_buffers_jump=1
+let $BAT_THEME='GitHub'
 
 nnoremap <Leader>f :<C-u>Files<CR>
 nnoremap <Leader>g :<C-u>GFiles<CR>
@@ -275,20 +274,24 @@ nnoremap <Leader>b :<C-u>Buffers<CR>
 nnoremap <Leader>h :<C-u>History:<CR>
 nnoremap <Leader>c :<C-u>Commands<CR>
 nnoremap <Leader>s :<C-u>BLines<CR>
+nnoremap <Leader>l :<C-u>Lines<CR>
+ nnoremap <Leader>/ :<C-u>Rg <C-R><C-W><CR>
+ nnoremap <Leader>? :<C-u>Rg 
+
 
 " CtrlSF
-let g:ctrlsf_auto_focus = { "at": "start" }
-let g:ctrlsf_position = 'bottom'
-hi ctrlsfMatch cterm=NONE ctermfg=black ctermbg=lightgrey
-autocmd FileType ctrlsf DisableWhitespace
+" let g:ctrlsf_auto_focus = { "at": "start" }
+" let g:ctrlsf_position = 'bottom'
+" hi ctrlsfMatch cterm=NONE ctermfg=black ctermbg=lightgrey
+" autocmd FileType ctrlsf DisableWhitespace
 
-nmap <Leader>/ <Plug>CtrlSFCwordPath<CR>
-nmap <Leader>?  <Plug>CtrlSFPrompt<CR>
-nnoremap <Leader>t :CtrlSFToggle<CR>
-let g:ctrlsf_mapping = {
-    \ "next": "J",
-    \ "prev": "K",
-    \ }
+" nmap <Leader>/ <Plug>CtrlSFCwordPath<CR>
+" nmap <Leader>?  <Plug>CtrlSFPrompt<CR>
+" nnoremap <Leader>t :CtrlSFToggle<CR>
+" let g:ctrlsf_mapping = {
+"     \ "next": "J",
+"     \ "prev": "K",
+"     \ }
 
 " LSP
 " To debug hie-wrapper add this:
