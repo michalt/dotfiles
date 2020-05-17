@@ -11,8 +11,8 @@ Plug 'chiel92/vim-autoformat'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
 Plug 'itchyny/lightline.vim'
-Plug 'itchyny/vim-cursorword'
-Plug 'jiangmiao/auto-pairs'
+Plug 'RRethy/vim-illuminate'
+" Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf-vim', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
@@ -33,8 +33,6 @@ Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
-
-" Plug 'zxqfl/tabnine-vim'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -61,7 +59,7 @@ let g:lightline = {
   \ 'colorscheme': 'solarized',
   \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
-    \             [ 'readonly', 'filename', 'modified', 'method' ] ]
+    \             [ 'readonly', 'filename', 'method', 'modified' ] ]
   \ },
   \ 'component_function': {
     \ 'filename': 'LightLineFilename',
@@ -69,7 +67,7 @@ let g:lightline = {
   \ },
   \ }
 function! LightLineFilename()
-  return expand('%')
+  return expand('%f')
 endfunction
 
 " omnicompletion
@@ -169,6 +167,8 @@ autocmd BufEnter,FocusGained * checktime
 " only enable the cursor line for the active window
 autocmd WinEnter,FocusGained * setlocal cursorline
 autocmd WinLeave,FocusLost * setlocal nocursorline
+autocmd FocusGained * hi CursorLineNR cterm=reverse
+autocmd FocusLost * hi CursorLineNR cterm=bold
 
 " colors
 highlight! VertSplit ctermfg=7 ctermbg=7 term=NONE
@@ -221,8 +221,20 @@ endfunction
 nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
 
 " Auto-semicolon/-comma
-inoremap ;; <ESC>A;
-inoremap ,, <ESC>A,
+inoremap ;; <C-o>$;
+inoremap ,, <C-o>$,
+
+" inoremap (( ()<C-G>U<Left>
+" inoremap {{ {}<C-G>U<Left>
+" inoremap << <><C-G>U<Left>
+" inoremap '' {}<C-G>U<Left>
+" inoremap "" {}<C-G>U<Left>
+
+" inoremap )) <ESC>])a
+" inoremap }} <ESC>]}a
+" inoremap >> <ESC>a
+" inoremap '' <ESC>]'a
+" inoremap "" <ESC>]'a
 
 inoremap <C-g> <ESC>
 inoremap <M-g> <ESC>
@@ -240,12 +252,16 @@ autocmd FileType haskell nnoremap <Leader>hc :GhcModCheck<CR>
 
 " Rust
 autocmd FileType rust setlocal textwidth=100
-autocmd FileType rust let g:AutoPairs = {'(':')', '[':']', '{':'}','"':'"', '`':'`'}
+" autocmd FileType rust let g:AutoPairs = {'(':')', '[':']', '{':'}','"':'"', '`':'`', '<':'>'}
+" autocmd FileType rust let g:AutoPairs = {'(':')', '[':']', '{':'}','"':'"', '`':'`', '<':'>'}
 let g:rustfmt_autosave=1
 
 "
 " Plugin configuration
 "
+
+" Illuminate
+let g:Illuminate_delay=200
 
 " Obsession
 let g:sessions_dir = '~/.config/nvim/sessions'
@@ -315,19 +331,24 @@ nmap <silent> <c-]> <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nmap <silent> g, <Plug>(coc-diagnostic-prev)
-nmap <silent> g. <Plug>(coc-diagnostic-next)
+nmap <silent> gp <Plug>(coc-diagnostic-prev)
+nmap <silent> gn <Plug>(coc-diagnostic-next)
+nmap <Leader>rn <Plug>(coc-rename)
+
+" This gives nicer auto-formatting for when opening new block with `{`.
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+      \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " use <tab> for trigger completion and navigate to the next complete item
-" function! s:check_back_space() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~ '\s'
-" endfunction
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
 
-" inoremap <silent><expr> <Tab>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ <SID>check_back_space() ? "\<Tab>" :
-"       \ coc#refresh()
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
 
 " vista.vim
 let g:vista_sidebar_position='vertical topleft'
