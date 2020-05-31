@@ -28,6 +28,7 @@ Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'rust-lang/rust.vim'
+Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-repeat'
