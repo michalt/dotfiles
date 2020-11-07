@@ -12,19 +12,19 @@
         cabal-install
         cargo-edit
         ccache
-        clang_9
+        clang_10
         cmake
         gitAndTools.delta
         gperftools
         dstat
         detox
         fzf
-        haskell.compiler.ghc882
+        haskell.compiler.ghc8102
         git
         gmp
         gnumake
         htop
-        llvm_9
+        llvm_10
         ncurses
         neovim
         ninja

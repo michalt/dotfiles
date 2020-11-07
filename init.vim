@@ -4,25 +4,27 @@
 
 call plug#begin()
 
+Plug 'jiangmiao/auto-pairs'
+Plug 'RRethy/vim-illuminate'
 Plug 'Shirk/vim-gas'
 Plug 'Yggdroot/indentLine'
+Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'chiel92/vim-autoformat'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'dart-lang/dart-vim-plugin'
 Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
 Plug 'itchyny/lightline.vim'
-Plug 'RRethy/vim-illuminate'
-" Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf-vim', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-slash'
 Plug 'justinmk/vim-dirvish'
 Plug 'justinmk/vim-sneak'
-Plug 'liuchengxu/vista.vim'
+" Plug 'liuchengxu/vista.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'mbbill/undotree'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neomake/neomake'
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'ntpeters/vim-better-whitespace'
@@ -30,10 +32,17 @@ Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
+
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }"
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -53,9 +62,10 @@ let g:solarized_contrast="high"
 let g:solarized_visibility="high"
 colorscheme solarized
 
-function! NearestMethodOrFunction() abort
-  return get(b:, 'vista_nearest_method_or_function', '')
-endfunction
+" function! NearestMethodOrFunction() abort
+"   return get(b:, 'vista_nearest_method_or_function', '')
+" endfunction
+
 let g:lightline = {
   \ 'colorscheme': 'solarized',
   \ 'active': {
@@ -64,9 +74,10 @@ let g:lightline = {
   \ },
   \ 'component_function': {
     \ 'filename': 'LightLineFilename',
-    \ 'method': 'NearestMethodOrFunction',
   \ },
   \ }
+    " \ 'method': 'NearestMethodOrFunction',
+
 function! LightLineFilename()
   return expand('%f')
 endfunction
@@ -176,6 +187,8 @@ highlight! VertSplit ctermfg=7 ctermbg=7 term=NONE
 highlight! SpecialKey ctermfg=LightGray ctermbg=Black
 highlight! SpecialComment ctermfg=DarkGray
 highlight! Search ctermfg=NONE ctermbg=NONE cterm=reverse
+" this helps with gitgutter
+highlight! link SignColumn LineNr
 
 " set leader
 let mapleader=" "
@@ -253,7 +266,7 @@ autocmd FileType haskell nnoremap <Leader>hc :GhcModCheck<CR>
 
 " Rust
 autocmd FileType rust setlocal textwidth=100
-" autocmd FileType rust let g:AutoPairs = {'(':')', '[':']', '{':'}','"':'"', '`':'`', '<':'>'}
+autocmd FileType rust let g:AutoPairs = {'(':')', '[':']', '{':'}','"':'"', '`':'`', '<':'>'}
 " autocmd FileType rust let g:AutoPairs = {'(':')', '[':']', '{':'}','"':'"', '`':'`', '<':'>'}
 let g:rustfmt_autosave=1
 
@@ -313,12 +326,18 @@ nnoremap <Leader>l :<C-u>Lines<CR>
 " LSP
 " To debug hie-wrapper add this:
 "   '--debug', '--vomit', '--logfile', '/home/michal/hie.log'
-"   \ 'haskell': ['hie-wrapper'],
 " Commented out in case it turns out to be useful
-" let g:LanguageClient_serverCommands = {
-"     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-"     \ 'haskell': ['ghcide', '--lsp'],
-"     \ }
+let g:LanguageClient_serverCommands = {
+  \ 'rust': ['rust-analyzer'],
+  \ 'haskell': ['ghcide', '--lsp'],
+  \ 'dart': ['/home/michal/soft/dart-sdk/bin/dart', '/home/michal/soft/dart-sdk/bin/snapshots/analysis_server.dart.snapshot', '--lsp'],
+  \ }
+nnoremap <silent> <c-]> :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> gn :call LanguageClient#diagnosticsNext()<CR>
+nnoremap <silent> gp :call LanguageClient#diagnosticsPrevious()<CR>
+
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#source('LanguageClient', 'min_pattern_length', 2)
 " let g:LanguageClient_changeThrottle = 0.0
 
 " coc.vim
@@ -327,18 +346,18 @@ set signcolumn=yes
 hi CocErrorHighlight ctermfg=Red ctermbg=LightGray
 " hi CocHighlightText  ctermbg=220
 
-inoremap <silent><expr> <c-space> coc#refresh()
-nmap <silent> <c-]> <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gp <Plug>(coc-diagnostic-prev)
-nmap <silent> gn <Plug>(coc-diagnostic-next)
-nmap <Leader>rn <Plug>(coc-rename)
+" inoremap <silent><expr> <c-space> coc#refresh()
+" nmap <silent> <c-]> <Plug>(coc-definition)
+" nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gr <Plug>(coc-references)
+" nmap <silent> gp <Plug>(coc-diagnostic-prev)
+" nmap <silent> gn <Plug>(coc-diagnostic-next)
+" nmap <Leader>rn <Plug>(coc-rename)
 
 " This gives nicer auto-formatting for when opening new block with `{`.
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-      \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+"       \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
@@ -363,11 +382,13 @@ let g:vista#renderer#enable_icon=0
 
 nnoremap <Leader>v :Vista!!<CR>
 
-autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+" autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 
 " vim-autoformat
 let g:formatters_haskell = ['ormolu']
 let g:formatdef_ormolu = '"ormolu"'
+autocmd BufWrite *.dart :Autoformat
+" autocmd BufWrite * :Autoformat
 noremap <Leader>F :Autoformat<CR>
 
 " vim-highlightedyank
@@ -382,6 +403,7 @@ let g:indentLine_char = '▏'
 highlight! Sneak ctermfg=NONE ctermbg=NONE cterm=reverse
 nmap t <Plug>Sneak_s
 nmap T <Plug>Sneak_S
+
 
 " EasyAlign
 xmap ga <Plug>(EasyAlign)

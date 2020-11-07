@@ -22,6 +22,11 @@
       "command": "rust-analyzer",
       "filetypes": ["rust"],
       "rootPatterns": ["Cargo.lock"],
+    },
+    "dart": {
+      "command": "dart",
+      "args": ["/home/michal/soft/dart-sdk/bin/snapshots/analysis_server.dart.snapshot", "--lsp"],
+      "filetypes": ["dart"],
     }
   },
   "rust-analyzer.cargo-watch.enable": true,
