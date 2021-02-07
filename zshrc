@@ -17,12 +17,12 @@ zstyle ':completion:*' use-cache true
 export HISTFILE="${HOME}/.zsh_history"
 export HISTSIZE=10000
 export SAVEHIST=8000
-setopt SHARE_HISTORY
 setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_FIND_NO_DUPS
 setopt HIST_REDUCE_BLANKS
+# setopt SHARE_HISTORY
 
 setopt AUTO_CD
 setopt AUTO_PUSHD
@@ -94,7 +94,7 @@ export CPUS=$(nproc)
   source "${HOME}/.nix-profile/share/fzf/key-bindings.zsh"
 [ -f "${HOME}/.nix-profile/share/fzf/key-bindings.zsh" ] && \
   source "${HOME}/.nix-profile/share/fzf/completion.zsh"
-export FZF_DEFAULT_OPTS='--color=fg+:0,bg+:7,hl:9,hl+:9,info:-1,prompt:-1,marker:-1,pointer:-1,spinner:-1,border:-1,header:-1'
+export FZF_DEFAULT_OPTS='--color=bg+:7,hl:9,hl+:9,info:-1,prompt:-1,marker:-1,pointer:-1,spinner:-1,border:-1,header:-1'
 export FZF_DEFAULT_COMMAND='rg --files'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
@@ -181,5 +181,6 @@ alias bcreate="borg create --progress --stats --compression zstd"
 alias reboot="sudo /sbin/reboot"
 alias poweroff="sudo /sbin/poweroff"
 alias shutdown="sudo /sbin/shutdown"
+alias rehis="fc -W && fc -R"
 
 [ -f ~/.zshrc_local ] && source $HOME/.zshrc_local

@@ -1,0 +1,188 @@
+{
+    // Window/Workbench
+    "window.zoomLevel": 2,
+    "window.enableMenuBarMnemonics": false,
+    "window.customMenuBarAltFocus": false,
+    "window.menuBarVisibility": "hidden",
+    "workbench.colorTheme": "Default Light+",
+    "workbench.colorCustomizations": {
+        "editor.background": "#fdfaf0",
+        "editor.foreground": "#303030",
+        "terminal.foreground": "#303030",
+    },
+    "workbench.editor.showTabs": false,
+    "workbench.panel.defaultLocation": "left",
+    // Editor
+    "editor.fontSize": 15,
+    "editor.fontFamily": "'PragmataPro Mono'",
+    "editor.rulers": [
+        80,
+        100,
+        120
+    ],
+    "editor.minimap.showSlider": "always",
+    "editor.lineNumbers": "relative",
+    "editor.scrollbar.horizontal": "hidden",
+    "editor.scrollbar.vertical": "hidden",
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    // Search
+    // Semes it doesn't work with seedWithNearestWord, etc.
+    // "search.mode": "reuseEditor",
+    "search.smartCase": true,
+    "search.seedWithNearestWord": true,
+    "search.seedOnFocus": true,
+    "search.quickOpen.includeHistory": false,
+    "search.searchEditor.defaultNumberOfContextLines": 2,
+    // Terminal
+    "terminal.integrated.shell.linux": "/bin/zsh",
+    "terminal.integrated.lineHeight": 1.1,
+    "terminal.integrated.fontSize": 15,
+    // Dart
+    "dart.autoImportCompletions": false,
+    "dart.sdkPath": "/home/michal/soft/dart-sdk",
+    // Python
+    "python.languageServer": "Pylance",
+    "python.analysis.typeCheckingMode": "basic",
+    "[dart]": {
+        "editor.defaultFormatter": "Dart-Code.dart-code",
+        "editor.formatOnSave": true,
+    },
+    // Rust analyzer
+    "rust-analyzer.serverPath": "/home/michal/.cargo/bin/rust-analyzer",
+    // Vim
+    "vim.leader": " ",
+    "vim.easymotion": true,
+    "vim.useSystemClipboard": true,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                ";",
+                ";"
+            ],
+            "after": [
+                "<ESC>",
+                "A",
+                ";",
+            ]
+        },
+        {
+            "before": [
+                ",",
+                ","
+            ],
+            "after": [
+                "<ESC>",
+                "A",
+                ",",
+            ]
+        },
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<leader>",
+                "s"
+            ],
+            "commands": [
+                "workbench.action.toggleSidebarVisibility"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "h"
+            ],
+            "commands": [
+                "workbench.action.quickOpen"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "n"
+            ],
+            "commands": [
+                "editor.action.marker.next"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "p"
+            ],
+            "commands": [
+                "editor.action.marker.prev"
+            ]
+        },
+        {
+            "before": [
+                "<C-w>",
+                "H"
+            ],
+            "commands": [
+                "workbench.action.moveActiveEditorGroupLeft"
+            ]
+        },
+        {
+            "before": [
+                "<C-w>",
+                "L"
+            ],
+            "commands": [
+                "workbench.action.moveActiveEditorGroupRight"
+            ]
+        },
+        {
+            "before": [
+                "<C-w>",
+                "J"
+            ],
+            "commands": [
+                "workbench.action.moveActiveEditorGroupDown"
+            ]
+        },
+        {
+            "before": [
+                "<C-w>",
+                "K"
+            ],
+            "commands": [
+                "workbench.action.moveActiveEditorGroupUp"
+            ]
+        },
+        {
+            "before": [
+                "<C-s>"
+            ],
+            "commands": [
+                "workbench.action.files.save"
+            ]
+        },
+        // Just in case https://github.com/VSCodeVim/Vim/issues/2007 hits.
+        {
+            "before": [
+                "u"
+            ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "undo"
+                }
+            ]
+        },
+        {
+            "before": [
+                "<C-r>"
+            ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "redo"
+                }
+            ]
+        }
+
+
+    ],
+}

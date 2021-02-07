@@ -4,31 +4,16 @@
 
 call plug#begin()
 
-Plug 'jiangmiao/auto-pairs'
-Plug 'RRethy/vim-illuminate'
-Plug 'Shirk/vim-gas'
-Plug 'Yggdroot/indentLine'
-Plug 'airblade/vim-gitgutter'
-Plug 'altercation/vim-colors-solarized'
-Plug 'chiel92/vim-autoformat'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
-Plug 'itchyny/lightline.vim'
+Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf-vim', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-slash'
 Plug 'justinmk/vim-dirvish'
 Plug 'justinmk/vim-sneak'
-" Plug 'liuchengxu/vista.vim'
-Plug 'machakann/vim-highlightedyank'
-Plug 'mbbill/undotree'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neomake/neomake'
-Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
@@ -36,13 +21,24 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'wellle/targets.vim'
+" Plug 'RRethy/vim-illuminate'
+" Plug 'Shirk/vim-gas'
+" Plug 'chiel92/vim-autoformat'
+" Plug 'itchyny/lightline.vim'
+" Plug 'liuchengxu/vista.vim'
+" Plug 'machakann/vim-highlightedyank'
+" Plug 'mbbill/undotree'
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
+" Plug 'ntpeters/vim-better-whitespace'
+" Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+" Plug 'wellle/targets.vim'
 
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }"
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'autozimu/LanguageClient-neovim', {
+"     \ 'branch': 'next',
+"     \ 'do': 'bash install.sh',
+"     \ }"
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -60,23 +56,18 @@ syntax enable
 set background=light
 let g:solarized_contrast="high"
 let g:solarized_visibility="high"
-colorscheme solarized
+colorscheme desert
 
-" function! NearestMethodOrFunction() abort
-"   return get(b:, 'vista_nearest_method_or_function', '')
-" endfunction
-
-let g:lightline = {
-  \ 'colorscheme': 'solarized',
-  \ 'active': {
-    \   'left': [ [ 'mode', 'paste' ],
-    \             [ 'readonly', 'filename', 'method', 'modified' ] ]
-  \ },
-  \ 'component_function': {
-    \ 'filename': 'LightLineFilename',
-  \ },
-  \ }
-    " \ 'method': 'NearestMethodOrFunction',
+" let g:lightline = {
+"   \ 'colorscheme': 'solarized',
+"   \ 'active': {
+"     \   'left': [ [ 'mode', 'paste' ],
+"     \             [ 'readonly', 'filename', 'method', 'modified' ] ]
+"   \ },
+"   \ 'component_function': {
+"     \ 'filename': 'LightLineFilename',
+"   \ },
+"   \ }
 
 function! LightLineFilename()
   return expand('%f')
@@ -123,7 +114,8 @@ set showtabline=1
 
 " the line width
 set textwidth=80
-set colorcolumn=+1
+" set colorcolumn=+1
+" highlight ColorColumn ctermbg=7 guibg=lightgrey
 
 " Better display for messages
 set cmdheight=2
@@ -308,36 +300,21 @@ nnoremap <Leader>l :<C-u>Lines<CR>
  nnoremap <Leader>/ :<C-u>Rg <C-R><C-W><CR>
  nnoremap <Leader>? :<C-u>Rg 
 
-
-" CtrlSF
-" let g:ctrlsf_auto_focus = { "at": "start" }
-" let g:ctrlsf_position = 'bottom'
-" hi ctrlsfMatch cterm=NONE ctermfg=black ctermbg=lightgrey
-" autocmd FileType ctrlsf DisableWhitespace
-
-" nmap <Leader>/ <Plug>CtrlSFCwordPath<CR>
-" nmap <Leader>?  <Plug>CtrlSFPrompt<CR>
-" nnoremap <Leader>t :CtrlSFToggle<CR>
-" let g:ctrlsf_mapping = {
-"     \ "next": "J",
-"     \ "prev": "K",
-"     \ }
-
 " LSP
 " To debug hie-wrapper add this:
 "   '--debug', '--vomit', '--logfile', '/home/michal/hie.log'
 " Commented out in case it turns out to be useful
-let g:LanguageClient_serverCommands = {
-  \ 'rust': ['rust-analyzer'],
-  \ 'haskell': ['ghcide', '--lsp'],
-  \ 'dart': ['/home/michal/soft/dart-sdk/bin/dart', '/home/michal/soft/dart-sdk/bin/snapshots/analysis_server.dart.snapshot', '--lsp'],
-  \ }
-nnoremap <silent> <c-]> :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> gn :call LanguageClient#diagnosticsNext()<CR>
-nnoremap <silent> gp :call LanguageClient#diagnosticsPrevious()<CR>
+" let g:LanguageClient_serverCommands = {
+"   \ 'rust': ['rust-analyzer'],
+"   \ 'haskell': ['ghcide', '--lsp'],
+"   \ 'dart': ['/home/michal/soft/dart-sdk/bin/dart', '/home/michal/soft/dart-sdk/bin/snapshots/analysis_server.dart.snapshot', '--lsp'],
+"   \ }
+" nnoremap <silent> <c-]> :call LanguageClient#textDocument_definition()<CR>
+" nnoremap <silent> gn :call LanguageClient#diagnosticsNext()<CR>
+" nnoremap <silent> gp :call LanguageClient#diagnosticsPrevious()<CR>
 
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#source('LanguageClient', 'min_pattern_length', 2)
+" let g:deoplete#enable_at_startup = 1
+" call deoplete#custom#source('LanguageClient', 'min_pattern_length', 2)
 " let g:LanguageClient_changeThrottle = 0.0
 
 " coc.vim
@@ -370,19 +347,7 @@ inoremap <silent><expr> <Tab>
       \ <SID>check_back_space() ? "\<Tab>" :
       \ coc#refresh()
 
-" vista.vim
-let g:vista_sidebar_position='vertical topleft'
-let g:vista_default_executive='coc'
-let g:vista_sidebar_width=40
-let g:vista_close_on_jump=1
-let g:vista#renderer#enable_icon=0
-" These don't seem to actually work... :/
-" let g:vista_fzf_opt=[$FZF_DEFAULT_OPTS]
-" let g:vista_keep_fzf_colors=1
-
 nnoremap <Leader>v :Vista!!<CR>
-
-" autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 
 " vim-autoformat
 let g:formatters_haskell = ['ormolu']
