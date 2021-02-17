@@ -17,12 +17,10 @@ zstyle ':completion:*' use-cache true
 export HISTFILE="${HOME}/.zsh_history"
 export HISTSIZE=10000
 export SAVEHIST=8000
-setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_FIND_NO_DUPS
 setopt HIST_REDUCE_BLANKS
-# setopt SHARE_HISTORY
 
 setopt AUTO_CD
 setopt AUTO_PUSHD
@@ -182,6 +180,6 @@ alias bcreate="borg create --progress --stats --compression zstd"
 alias reboot="sudo /sbin/reboot"
 alias poweroff="sudo /sbin/poweroff"
 alias shutdown="sudo /sbin/shutdown"
-alias rehis="fc -W && fc -R"
+alias rehis="fc -R"
 
 [ -f ~/.zshrc_local ] && source $HOME/.zshrc_local
