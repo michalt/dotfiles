@@ -1,4 +1,6 @@
-source "${HOME}/.nix-profile/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fpath=("$HOME/.zsh.d" $fpath)
+
+source "/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # Set the LS_COLORS variable
 eval $(dircolors --sh)
@@ -7,7 +9,7 @@ zstyle :compinstall filename "${HOME}/.zshrc"
 zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
 zstyle ':completion:*' insert-unambiguous true
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{-}={_}' 'r:|[._-]=** r:|=**'
+zstyle ':completion:*' matcher-list '' 'm:{-}={_}' 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|[._-]=** r:|=**'
 zstyle ':completion:*' original tre
 zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion:*' menu select
@@ -53,15 +55,15 @@ compinit
 
 autoload -U colors && colors
 
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git hg
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' formats '%b %m%u%c'
-zstyle ':vcs_info:*' actionformats '%b %m%u%c %a'
+# autoload -Uz vcs_info
+# zstyle ':vcs_info:*' enable git
+# zstyle ':vcs_info:*' enable hg
+# zstyle ':vcs_info:*' check-for-changes true
+# zstyle ':vcs_info:*' formats '%b %m%u%c'
+# zstyle ':vcs_info:*' actionformats '%b %m%u%c %a'
 
-
-precmd() { vcs_info }
-PROMPT='%{$fg[cyan]%}%n@%M%{$reset_color%}  %{$fg[blue]%}${PWD/#$HOME/~}%{$reset_color%}  %{$fg[magenta]%}${vcs_info_msg_0_}%{$reset_color%}
+# precmd() { vcs_info }
+PROMPT='%{$fg[red]%}# %{$fg[green]%}%* %{$fg[cyan]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%}  %{$fg[blue]%}${PWD/#$HOME/~}%{$reset_color%}  %{$fg[magenta]%}${vcs_info_msg_0_}%{$reset_color%}
 %{$fg[red]%}>%{$reset_color%} '
 
 #
@@ -88,13 +90,12 @@ export CPUS=$(nproc)
 # fzf
 #
 
-[ -f "${HOME}/.nix-profile/share/fzf/completion.zsh" ] && \
-  source "${HOME}/.nix-profile/share/fzf/key-bindings.zsh"
-[ -f "${HOME}/.nix-profile/share/fzf/key-bindings.zsh" ] && \
-  source "${HOME}/.nix-profile/share/fzf/completion.zsh"
-# export FZF_DEFAULT_OPTS='--color=fg+:0,bg+:7,hl:9,hl+:9,info:-1,prompt:-1,marker:-1,pointer:-1,spinner:-1,border:-1,header:-1'
+
+[ -f "/usr/share/fzf/shell/key-bindings.zsh" ] && \
+  source "/usr/share/fzf/shell/key-bindings.zsh"
 export FZF_DEFAULT_OPTS='--color=fg+:-1,bg+:7,hl:9,hl+:9,info:-1,prompt:-1,marker:-1,pointer:-1,spinner:-1,border:-1,header:-1'
 export FZF_DEFAULT_COMMAND='rg --files'
+export FZF_COMPLETION_TRIGGER='//'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 #
@@ -135,6 +136,13 @@ function hadrian() {
   fi
 }
 
+function hd() {
+  chg diff --color=always --git $@ | delta --light --width variable | less -RFX
+}
+
+alias h="chg"
+alias hg="chg"
+# alias hd="chg diff --color=always --git | diff-so-fancy | less -RFX"
 alias g="git"
 alias pd="pushd"
 alias pp="pushp"

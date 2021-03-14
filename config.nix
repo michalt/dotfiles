@@ -7,24 +7,21 @@
       name = "michalt-pkgs";
       paths = [
         automake
-        bat
         borgbackup
         cabal-install
         cargo-edit
         ccache
-        clang_10
         cmake
         gitAndTools.delta
         gperftools
         dstat
         detox
-        fzf
-        haskell.compiler.ghc8102
+        haskell.compiler.ghc8103
         git
         gmp
         gnumake
         htop
-        llvm_10
+        ormolu
         ncurses
         neovim
         ninja
@@ -35,14 +32,11 @@
         stow
         tokei
         tmux
-        tmuxPlugins.fzf-tmux-url
         tmuxPlugins.sensible
         tmuxPlugins.tmux-colors-solarized
         tmuxPlugins.vim-tmux-navigator
         zlib
         zlib.dev
-        zsh
-        zsh-syntax-highlighting
         zstd
       ];
     };
